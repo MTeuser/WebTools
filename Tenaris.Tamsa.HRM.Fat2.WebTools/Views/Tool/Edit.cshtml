@@ -1,0 +1,85 @@
+﻿@model Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.Tool_Tool
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Tool_Tool</legend>
+
+        @Html.HiddenFor(model => model.idTool)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Tag)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Tag)
+            @Html.ValidationMessageFor(model => model.Tag)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.idSuplier)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("idSuplier", String.Empty)
+            @Html.ValidationMessageFor(model => model.idSuplier)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.idType, "Tool_Type")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("idType", String.Empty)
+            @Html.ValidationMessageFor(model => model.idType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.idUser, "User")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("idUser", String.Empty)
+            @Html.ValidationMessageFor(model => model.idUser)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Active)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Active)
+            @Html.ValidationMessageFor(model => model.Active)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.InsDateTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.InsDateTime)
+            @Html.ValidationMessageFor(model => model.InsDateTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UpdDateTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UpdDateTime)
+            @Html.ValidationMessageFor(model => model.UpdDateTime)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

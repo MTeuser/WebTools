@@ -1,0 +1,64 @@
+﻿@model Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.Tool_Tool
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Tool_Tool</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Tag)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Tag)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Tool_Supplier.Code)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Tool_Supplier.Code)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Tool_Type.Code)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Tool_Type.Code)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.User.Identification)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User.Identification)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Active)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Active)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.InsDateTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.InsDateTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdDateTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdDateTime)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.idTool }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

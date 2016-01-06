@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Herramientas</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    <style>
+        #contenedor
+        {
+            width: 100%;
+            margin: 0;
+            float:left;
+        }
+        #col_der
+        {
+            display: block;
+            width: 33%;
+            float:left;
+        }
+        #col_izq
+        {
+            display: block;
+            width: 33%;
+            float:left;
+        }
+        #col_cen
+        {
+            display: block;
+            width: 33%;
+            vertical-align: top;
+            float:left;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="content-wrapper">
+            <div id="col_izq">
+                <p class="site-title">@Html.ActionLink(" ", "Index", "Home")</p>
+            </div>
+            <div id="col_cen">
+                <div class="title-legend">
+                    HERRAMIENTAS
+                </div>
+            </div>
+            <div id="col_der">
+                <section id="login">
+                    @Html.Partial("_LoginPartial")
+                </section>
+                <nav>
+                    <ul id="menu">
+                          @*  <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+                             
+                        </ul>
+                       @*Html.MvcSiteMap().Menu(false)*@
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div id="body">
+        <div style="background-color:Green; color:White;">
+            <div  class="content-wrapper">@Html.MvcSiteMap().SiteMapPath()</div>
+        </div>
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>
+                    &copy; @DateTime.Now.Year - Tenaris Tamsa Laco 2 Herramientas</p>
+            </div>
+        </div>
+    </footer>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

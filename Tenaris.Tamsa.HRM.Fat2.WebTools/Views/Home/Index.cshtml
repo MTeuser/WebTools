@@ -1,0 +1,96 @@
+﻿<script>
+
+    $(document).ready(function () {
+        $('div table')
+             .button()             
+             .click(function () {
+                  //alert(this.id);
+                  location.href = "http://" + self.location.host + "/Tool/Create?type=" + this.id;
+        });
+    });
+</script>
+<style>
+    .ulmenu
+    {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+    
+     .ulmenu li
+    {
+        float: left;
+    }
+    
+     .ulmenu li a
+    {
+        display: block;
+        padding: 8px;
+        background-color: #dddddd;
+    }
+    
+    .mbtn
+    {
+        width:215px;
+        
+        }
+</style>
+<ul class="ulmenu">
+    <li>
+        <div class='mbtn'>
+            <table id="Mandriles" style="background-color:White;">
+                <tr>
+                    <td>
+                        <img src='images/Mandril_84891-8107635.jpg' width="50" height="50" alt="Mandriles" />
+                    </td>
+                    <td>
+                        Mandriles
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </li>
+    <li>
+        <div class='mbtn'>
+            <table id="Puntas">
+                <tr>
+                    <td>
+                        <img alt="Puntas" height="50" src='images/Punta_368x310_10041164e0bcba6.jpg' width="50" />
+                    </td>
+                    <td>
+                        Puntas
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </li>
+    <li>
+        <div class='mbtn'>
+            <table id="Lineales">
+                <tr>
+                    <td>
+                        <img src='images/Lineal_ebc5ed02-d273-4f5b-859c-9054fede53be.jpg' width="50" height="50" alt="Lineales" />
+                    </td>
+                    <td>
+                        Lineales
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </li>
+    <li>
+        <div class='mbtn'>
+            <table id="Cilindros">
+                <tr>
+                    <td>
+                        <img src='images/cilindros-de-acero-templado-industriales-en-taller-industria-54297583.jpg' width="50" height="50" alt="Cilindros" />
+                    </td>
+                    <td>
+                        Cilindros
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </li>
+</ul>

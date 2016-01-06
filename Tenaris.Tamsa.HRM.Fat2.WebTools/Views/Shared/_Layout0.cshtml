@@ -1,0 +1,330 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<link href="@Url.Content("~/Content/Iconos/Index.ico")" rel='icon' type='image/x-icon'/>
+	@*<title>Txt9102)</title>*@
+	<title>Tenaris Production System</title>
+	<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Telerik/telerik.WebBlue.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Telerik/telerik.common.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Telerik/telerik.rtl.css")" rel="stylesheet" type="text/css" />
+
+       
+            <style type="text/css"> 
+
+
+                    #contenedor{ 
+                        padding:1px; 
+                        overflow:hidden; 
+                    } 
+
+                    #izquierda{ 
+                        float:left ;   /*tambien puede poner float:right, para que se alineé a la derecha */ 
+                        padding:1px; 
+                        color:inherit; 
+                        width:160px; 
+                        height:55px;
+                        vertical-align :top  ;
+                        top :0;
+                    } 
+
+                    #derecha{ 
+                        float:right;      /*tambien puede poner float:right, para que se alineé a la derecha */ 
+                        padding:1px; 
+                        color:inherit ;
+                        width:380px; 
+                        height:55px;
+                        vertical-align :bottom ;
+                        right :0;
+                    } 
+                    
+                     #izquierda-footer{ 
+                        float:left ;   /*tambien puede poner float:right, para que se alineé a la derecha */ 
+                        padding:1px; 
+                        color:inherit; 
+                        width:300px; 
+                        height:20px;
+                        vertical-align :top  ;
+                        top :0;
+                    } 
+                    
+                    #derecha-footer{ 
+                        float:right ;   /*tambien puede poner float:right, para que se alineé a la derecha */ 
+                        padding:1px; 
+                        color:inherit; 
+                        width:300px; 
+                        height:20px;
+                        vertical-align :top  ;
+                        top :0;
+                    } 
+
+
+            </style>     
+
+@*Html.Telerik().ScriptRegistrar().Globalization(true).DefaultGroup(group => group
+                                                                                .Add("jquery-ui-1.10.3.custom.js")
+                                                                            .Combined(true).Compress(true)))</body>*@
+                    
+</head>
+
+<body>
+
+	<div class="page">
+        <div id="header" >
+		@*<div class="header">   *@
+           
+	      @RenderPage("~/Views/Shared/_title.cshtml")
+	
+           @*(Html.Telerik().Menu().Name("menu")
+                                    .HtmlAttributes(new { @style = "text-align:left; position: absolute; width: 100%;" }).Items(menu =>
+                    {
+                        menu.Add()
+                        .Text("::").LinkHtmlAttributes(new { @style = " color:#3A6196;" });
+
+                    }))*@
+@*
+Html.Telerik().Menu().Name("menu2")
+                                    .HtmlAttributes(new { @class="menu", @style = " float: right; position: relative; width: 11%;" }).Items(menu =>
+                    {
+                        menu.Add().Text("01.01.2013").LinkHtmlAttributes(new { @style = "text-align:right !important; width: 100%" });
+
+                    }))
+*@
+        </div>
+		<div id="main">
+            @RenderPage("~/Views/Shared/Dialogs/_ConfirmDialog.cshtml")
+            @RenderPage("~/Views/Shared/Dialogs/_MessageDialog.cshtml")
+            @RenderBody()
+			@*Menú system manager*@
+            @*----------------------------------------------------------------------------------------------*@
+
+            <center><div style="width:100%;">
+            <ul class="menu">
+              <li>
+                <em>
+                   <table class="t-card" cellpadding="0" cellspacing="0" border="1" onclick="javascript:SystemManager()">
+                       @*<tr><td class="div-header"></td></tr>*@
+                       <tr><td class="t-card-td"><div class="t-card-content">
+                           <img src="@Url.Content("~/Content/Imagenes/vbo/System-Manager.jpg")"  class="tabla-window-menu-principal-image"  /> <!-- width="130" height="83" alt="" -->
+                       </div></td></tr>
+                       <tr><td class="div-footer">LabelSystemManager</td></tr>
+                 </table> 
+                </em>
+              </li>
+              <li>
+                <em>
+                  <table class="t-card" cellpadding="0" cellspacing="5" border="1" onclick="javascript:MillEngineering()">
+                       @*<tr><td class="div-header"></td></tr>*@
+                       <tr><td class="t-card-td"><div class="t-card-content">
+                           <img src="@Url.Content("~/Content/Imagenes/vbo/Ingenieria-Planta.jpg")" class="tabla-window-menu-principal-image"   /> <!-- width="130" height="83" alt="" -->
+                       </div></td></tr>
+                       <tr><td class="div-footer">LabelMillEngineering</td></tr>
+                  </table>
+                </em>
+              </li>
+              <li>
+                <em>
+                  <table class="t-card" cellpadding="0" cellspacing="5" border="1" onclick="javascript:ProductEngineering()">
+                       @*<tr><td class="div-header"></td></tr>*@
+                       <tr><td class="t-card-td"><div class="t-card-content">
+                           <img src="@Url.Content("~/Content/Imagenes/vbo/Ingenieria-Producto.jpg")" class="tabla-window-menu-principal-image"  /> <!-- width="130" height="83" alt="" -->
+                       </div></td></tr>
+                       <tr><td class="div-footer">LabelProductEngineering</td></tr>
+                  </table>
+                </em>
+              </li>
+              <li>
+                <em>
+                  <table class="t-card" cellpadding="0" cellspacing="5" border="1" onclick="javascript:ProcessEngineering()">
+                       @*<tr><td class="div-header"></td></tr>*@
+                       <tr><td class="t-card-td"><div class="t-card-content">
+                           <img src="@Url.Content("~/Content/Imagenes/vbo/Ingenieria-Procesos.jpg")" class="tabla-window-menu-principal-image"   /> <!-- width="130" height="83" alt="" -->
+                       </div></td></tr>
+                       <tr><td class="div-footer">LabelProcessEngineering</td></tr>
+                  </table>
+                </em>
+              </li>
+              <li>
+                <em>
+                  <table class="t-card" cellpadding="0" cellspacing="5" border="1" onclick="javascript:IndustrialEngineering()">
+                       @*<tr><td class="div-header"></td></tr>*@
+                       <tr><td class="t-card-td"><div class="t-card-content">
+                           <img src="@Url.Content("~/Content/Imagenes/vbo/Ingenieria-Industrial.jpg")" class="tabla-window-menu-principal-image"  /> <!-- width="130" height="83" alt="" -->
+                       </div></td></tr>
+                       <tr><td class="div-footer">LabelIndustrialEngineering</td></tr>
+                  </table>
+                </em>
+              </li>
+              <li>
+                <em>
+                  <table class="t-card" cellpadding="0" cellspacing="5" border="1" onclick="javascript:Programming()">
+                       @*<tr><td class="div-header"></td></tr>*@
+                       <tr><td class="t-card-td"><div class="t-card-content">
+                           <img src="@Url.Content("~/Content/Imagenes/vbo/Programacion.jpg")" class="tabla-window-menu-principal-image" /> <!-- width="130" height="83" alt="" -->
+                       </div></td></tr>
+                       <tr><td class="div-footer">LabelProgramming</td></tr>
+                  </table>
+                </em>
+              </li>
+              <li>
+                <em>
+                 <table class="t-card" cellpadding="0" cellspacing="5" border="1" onclick="javascript:ProductionControl()">
+                       @*<tr><td class="div-header"></td></tr>*@
+                       <tr><td class="t-card-td"><div class="t-card-content">
+                           <img src="@Url.Content("~/Content/Imagenes/vbo/Control-Produccion.jpg")" class="tabla-window-menu-principal-image" />  <!-- width="130" height="83" alt="" -->
+                       </div></td></tr>
+                       <tr><td class="div-footer">LabelProductionControl</td></tr>
+                 </table>
+                </em>
+              </li>
+              <li>
+                <em>
+                   <table class="t-card" cellpadding="0" cellspacing="5" border="1" onclick="javascript:Laboratory()">
+                       @*<tr><td class="div-header"></td></tr>*@
+                       <tr><td class="t-card-td"><div class="t-card-content">
+                           <img src="@Url.Content("~/Content/Imagenes/vbo/Laboratorio.jpg")" class="tabla-window-menu-principal-image"   /> <!-- width="130" height="83" alt="" -->
+                       </div></td></tr>
+                       <tr><td class="div-footer">LabelLaboratory</td></tr>
+                   </table>
+                </em>
+              </li>
+              @*
+              <li  style="visibility:hidden">
+                <em  style="visibility:hidden">
+                  <table cellpadding="0" cellspacing="0" border="1" style="visibility:hidden">
+                       <tr><td class="div-header" style="visibility:hidden"> </td></tr>
+                       <tr><td class="tabla-window-menu-principal" style="visibility:hidden">
+                          <!-- ESTE SE VA VACIO, SOLO PARA AGREGAR UN ESPACIO EN BLANCO EN EL ANTEPENULTIMO
+                                Y QUEDEN LOS DOS ULTIMOS CENTRADOS
+                                 -->
+                       </td></tr>
+                       <tr><td class="div-footer" style="visibility:hidden"></td></tr>
+                  </table>
+                </em>
+              </li>
+              *@
+              <li>
+                <em>
+                  <table class="t-card" cellpadding="0" cellspacing="5" border="1" onclick="javascript:Costs()">
+                       @*<tr><td class="div-header"></td></tr>*@
+                       <tr><td class="t-card-td"><div class="t-card-content">
+                           <img src="@Url.Content("~/Content/Imagenes/vbo/Costos.jpg")" class="tabla-window-menu-principal-image"  /> <!-- width="130" height="83" alt="" --> 
+                       </div></td></tr>
+                       <tr><td class="div-footer">LabelCosts</td></tr>
+                  </table>
+                </em>
+              </li>
+              <li>
+                <em>
+                  <table class="t-card" cellpadding="0" cellspacing="5" border="1" onclick="javascript:Dispatches()">
+                       @*<tr><td class="div-header"></td></tr>*@
+                       <tr><td class="t-card-td"><div class="t-card-content">
+                           <img src="@Url.Content("~/Content/Imagenes/vbo/Despachos.jpg")" class="tabla-window-menu-principal-image"  /> <!-- width="130" height="83" alt="" -->
+                       </div></td></tr>
+                       <tr><td class="div-footer">LabelDispatches</td></tr>
+                  </table>
+                </em>
+              </li>
+            </ul>
+
+            </div></center>
+            <div class="body-line"></div>
+		</div>
+        @RenderPage("_footer.cshtml")
+	</div>
+
+
+
+</body>
+	
+
+    
+
+ @*-------------------------------------------------------------------------*@
+ @*Informar si se generó algún error al usuario*@
+ @*<script src="@Url.Content("~/Scripts/2011.3.1115/jquery-1.6.4.min.js")"></script>*@
+<script src="@Url.Content("~/Scripts/2011.3.1115/jquery-ui-1.10.3.custom.js")"></script>
+<link href="@Url.Content("~/Content/2011.3.1115/jquery-ui-1.10.3.custom.css")" rel="stylesheet">
+
+ @if (@ViewData["Error"] != null)
+ {
+      <script type="text/javascript" languaje="javascript">
+          $(function () {
+              $("#dialog-modal").dialog({
+                  height: 300,
+                  width: 350,
+                  modal: true,
+                  visible: true,
+                  buttons: {
+                      Ok: function () {
+                          $(this).dialog("close");
+                          $(this).visible = false;
+                      }
+                  }
+              });
+          });
+      </script>
+     <div id="dialog-modal" class="ui-dialog"  title="Error TPS" >
+      <p>
+        @ViewData["Error"]
+      </p>
+    </div>
+ }
+
+<div class="ScriptsJS">
+    @RenderSection("ScriptsJS", required:false)
+</div>
+<script type="text/javascript">
+    function SystemManager() {
+        window.location.href = 'Url.Action("IndexSystemManager", "Home"))';
+    }
+
+    function IngenieriaPlanta() {
+        window.location.href = 'Url.Action("IndexIngenieriaPlanta", "Home"))';
+    }
+
+    function ProductionControl() {
+        window.location.href = 'Url.Action("IndexProductionControl", "Home"))';
+    }
+
+    function MillEngineering() {
+        window.location.href = 'Url.Action("IndexMillEngineering", "Home"))';
+    }
+
+    function Programming() {
+        window.location.href = 'Url.Action("IndexProgramming", "Home"))';
+    }
+
+    function Costs() {
+        window.location.href = 'Url.Action("IndexCosts", "Home"))';
+    }
+
+    function ProcessEngineering() {
+        window.location.href = 'Url.Action("IndexProcessEngineering", "Home"))';
+    }
+
+    function ProductEngineering() {
+        window.location.href = 'Url.Action("IndexProductEngineering", "Home"))';
+    }
+
+    function Dispatches() {
+        window.location.href = 'Url.Action("IndexDispatches", "Home"))';
+    }
+
+    function IndustrialEngineering() {
+        window.location.href = 'Url.Action("IndexIndustrialEngineering", "Home"))';
+    }
+
+    function Laboratory() {
+        window.location.href = 'Url.Action("IndexLaboratory", "Home"))';
+    }
+</script>
+
+    @RenderPage("~/Views/Shared/_LanguageFooter.cshtml")
+</html>
+
+
