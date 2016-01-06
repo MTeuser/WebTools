@@ -60,6 +60,18 @@
     <Compile Include="MetaData\Tool_UserGroupMetadata.cs" />
     <Compile Include="MetaData\Tool_UserMetadata.cs" />
     <Compile Include="Models\Application.cs" />
+    <Compile Include="Models\ApplicationCommand.cs" />
+    <Compile Include="Models\Group.cs" />
+    <Compile Include="Models\GroupPolicy.cs" />
+    <Compile Include="Models\HeatHistory.cs" />
+    <Compile Include="Models\Tool_Production.cs" />
+    <Compile Include="Models\Tool_Property.cs" />
+    <Compile Include="Models\Tool_Supplier.cs" />
+    <Compile Include="Models\Tool_Tool.cs" />
+    <Compile Include="Models\Tool_ToolDetail.cs" />
+    <Compile Include="Models\Tool_Type.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
