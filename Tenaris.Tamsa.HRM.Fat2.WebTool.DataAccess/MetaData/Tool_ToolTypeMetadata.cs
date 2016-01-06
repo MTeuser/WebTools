@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1
+namespace Tenaris.Tamsa.HRM.Fat2.WebTool.DataAccess.Models
 {
     using System;
     using System.ComponentModel.DataAnnotations;
