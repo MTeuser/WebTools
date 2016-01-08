@@ -31,19 +31,19 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1
      public partial class Tool_Production { }
 
      [MetadataType(typeof(Tool_PropertyMetadata))]
-     public partial class Tool_Property { }
+     public partial class Property { }
 
      [MetadataType(typeof(Tool_SupplierMetadata))]
-     public partial class Tool_Supplier { }
+     public partial class Supplier { }
 
      [MetadataType(typeof(Tool_ToolDetailMetadata))]
-     public partial class Tool_ToolDetail { }
+     public partial class ToolDetail { }
 
      [MetadataType(typeof(Tool_ToolMetadata))]
-     public partial class Tool_Tool { }
+     public partial class Tool { }
 
      [MetadataType(typeof(Tool_ToolTypeMetadata))]
-     public partial class Tool_Type { }
+     public partial class Type { }
 
      [MetadataType(typeof(Tool_UserGroupMetadata))]
      public partial class Tool_UserGroup { }

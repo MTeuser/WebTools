@@ -7,61 +7,41 @@
     <Schema Namespace="AusV1_Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="AusV1_ModelStoreContainer">
           <EntitySet Name="Application" EntityType="AusV1_Model.Store.Application" store:Type="Tables" Schema="Common" />
-          <EntitySet Name="Tool_Production" EntityType="AusV1_Model.Store.Tool_Production" store:Type="Tables" Schema="dbo" Table="Tool.Production" />
-          <EntitySet Name="Tool_Property" EntityType="AusV1_Model.Store.Tool_Property" store:Type="Tables" Schema="dbo" Table="Tool.Property" />
-          <EntitySet Name="Tool_Supplier" EntityType="AusV1_Model.Store.Tool_Supplier" store:Type="Tables" Schema="dbo" Table="Tool.Supplier" />
-          <EntitySet Name="Tool_Tool" EntityType="AusV1_Model.Store.Tool_Tool" store:Type="Tables" Schema="dbo" Table="Tool.Tool" />
-          <EntitySet Name="Tool_ToolDetail" EntityType="AusV1_Model.Store.Tool_ToolDetail" store:Type="Tables" Schema="dbo" Table="Tool.ToolDetail" />
-          <EntitySet Name="Tool_Type" EntityType="AusV1_Model.Store.Tool_Type" store:Type="Tables" Schema="dbo" Table="Tool.Type" />
           <EntitySet Name="HeatHistory" EntityType="AusV1_Model.Store.HeatHistory" store:Type="Tables" Schema="ProductionTamsa" />
           <EntitySet Name="ApplicationCommand" EntityType="AusV1_Model.Store.ApplicationCommand" store:Type="Tables" Schema="Security" />
           <EntitySet Name="Group" EntityType="AusV1_Model.Store.Group" store:Type="Tables" Schema="Security" />
           <EntitySet Name="GroupPolicy" EntityType="AusV1_Model.Store.GroupPolicy" store:Type="Tables" Schema="Security" />
           <EntitySet Name="User" EntityType="AusV1_Model.Store.User" store:Type="Tables" Schema="Security" />
           <EntitySet Name="UserGroup" EntityType="AusV1_Model.Store.UserGroup" store:Type="Tables" Schema="Security" />
-          <AssociationSet Name="FK_ApplicationCommand_Application" Association="AusV1_Model.Store.FK_ApplicationCommand_Application">
-            <End Role="Application" EntitySet="Application" />
-            <End Role="ApplicationCommand" EntitySet="ApplicationCommand" />
-          </AssociationSet>
+          <EntitySet Name="Production" EntityType="AusV1_Model.Store.Production" store:Type="Tables" Schema="Tool" />
+          <EntitySet Name="Property" EntityType="AusV1_Model.Store.Property" store:Type="Tables" Schema="Tool" />
+          <EntitySet Name="Supplier" EntityType="AusV1_Model.Store.Supplier" store:Type="Tables" Schema="Tool" />
+          <EntitySet Name="Tool" EntityType="AusV1_Model.Store.Tool" store:Type="Tables" Schema="Tool" />
+          <EntitySet Name="ToolDetail" EntityType="AusV1_Model.Store.ToolDetail" store:Type="Tables" Schema="Tool" />
+          <EntitySet Name="Type" EntityType="AusV1_Model.Store.Type" store:Type="Tables" Schema="Tool" />
           <AssociationSet Name="FK_GroupPolicy_ApplicationCommand" Association="AusV1_Model.Store.FK_GroupPolicy_ApplicationCommand">
             <End Role="ApplicationCommand" EntitySet="ApplicationCommand" />
             <End Role="GroupPolicy" EntitySet="GroupPolicy" />
           </AssociationSet>
-          <AssociationSet Name="FK_GroupPolicy_Group" Association="AusV1_Model.Store.FK_GroupPolicy_Group">
-            <End Role="Group" EntitySet="Group" />
-            <End Role="GroupPolicy" EntitySet="GroupPolicy" />
+          <AssociationSet Name="FK_Production_Tool" Association="AusV1_Model.Store.FK_Production_Tool">
+            <End Role="Tool" EntitySet="Tool" />
+            <End Role="Production" EntitySet="Production" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tool_Production_Tool_Tool" Association="AusV1_Model.Store.FK_Tool_Production_Tool_Tool">
-            <End Role="Tool_Tool" EntitySet="Tool_Tool" />
-            <End Role="Tool_Production" EntitySet="Tool_Production" />
+          <AssociationSet Name="FK_Supplier" Association="AusV1_Model.Store.FK_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="Tool" EntitySet="Tool" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tool_Tool_Tool_Supplier" Association="AusV1_Model.Store.FK_Tool_Tool_Tool_Supplier">
-            <End Role="Tool_Supplier" EntitySet="Tool_Supplier" />
-            <End Role="Tool_Tool" EntitySet="Tool_Tool" />
+          <AssociationSet Name="FK_ToolDetail_Property" Association="AusV1_Model.Store.FK_ToolDetail_Property">
+            <End Role="Property" EntitySet="Property" />
+            <End Role="ToolDetail" EntitySet="ToolDetail" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tool_Tool_Tool_Type" Association="AusV1_Model.Store.FK_Tool_Tool_Tool_Type">
-            <End Role="Tool_Type" EntitySet="Tool_Type" />
-            <End Role="Tool_Tool" EntitySet="Tool_Tool" />
+          <AssociationSet Name="FK_ToolDetail_Tool" Association="AusV1_Model.Store.FK_ToolDetail_Tool">
+            <End Role="Tool" EntitySet="Tool" />
+            <End Role="ToolDetail" EntitySet="ToolDetail" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tool_Tool_User" Association="AusV1_Model.Store.FK_Tool_Tool_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Tool_Tool" EntitySet="Tool_Tool" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tool_ToolDetail_Tool_Property" Association="AusV1_Model.Store.FK_Tool_ToolDetail_Tool_Property">
-            <End Role="Tool_Property" EntitySet="Tool_Property" />
-            <End Role="Tool_ToolDetail" EntitySet="Tool_ToolDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tool_ToolDetail_Tool_Tool" Association="AusV1_Model.Store.FK_Tool_ToolDetail_Tool_Tool">
-            <End Role="Tool_Tool" EntitySet="Tool_Tool" />
-            <End Role="Tool_ToolDetail" EntitySet="Tool_ToolDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserGroup_Group" Association="AusV1_Model.Store.FK_UserGroup_Group">
-            <End Role="Group" EntitySet="Group" />
-            <End Role="UserGroup" EntitySet="UserGroup" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserGroup_User" Association="AusV1_Model.Store.FK_UserGroup_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="UserGroup" EntitySet="UserGroup" />
+          <AssociationSet Name="FK_Type" Association="AusV1_Model.Store.FK_Type">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="Tool" EntitySet="Tool" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Application">
@@ -77,69 +57,6 @@
           <Property Name="Active" Type="bit" Nullable="false" />
           <Property Name="InsDateTime" Type="datetimeoffset" Nullable="false" />
           <Property Name="UpdDateTime" Type="datetimeoffset" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Tool_Production">
-          <Key>
-            <PropertyRef Name="idProduction" />
-          </Key>
-          <Property Name="idProduction" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="idTool" Type="int" />
-          <Property Name="weight" Type="float" />
-          <Property Name="pieces" Type="int" />
-          <Property Name="idHeatHistory" Type="int" Nullable="false" />
-          <Property Name="Active" Type="bit" Nullable="false" />
-          <Property Name="InsDateTime" Type="datetimeoffset" Nullable="false" />
-          <Property Name="UpdDateTime" Type="datetimeoffset" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Tool_Property">
-          <Key>
-            <PropertyRef Name="idProperty" />
-          </Key>
-          <Property Name="idProperty" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="varchar" MaxLength="10" />
-          <Property Name="dataType" Type="int" />
-          <Property Name="Value" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="Tool_Supplier">
-          <Key>
-            <PropertyRef Name="idSupplier" />
-          </Key>
-          <Property Name="idSupplier" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Code" Type="nchar" MaxLength="10" />
-          <Property Name="Name" Type="nchar" MaxLength="10" />
-          <Property Name="Active" Type="bit" Nullable="false" />
-          <Property Name="InsDateTime" Type="datetimeoffset" Nullable="false" />
-          <Property Name="UpdDateTime" Type="datetimeoffset" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Tool_Tool">
-          <Key>
-            <PropertyRef Name="idTool" />
-          </Key>
-          <Property Name="idTool" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Tag" Type="nchar" MaxLength="12" />
-          <Property Name="idSuplier" Type="int" />
-          <Property Name="idType" Type="int" />
-          <Property Name="idUser" Type="int" />
-          <Property Name="Active" Type="bit" Nullable="false" />
-          <Property Name="InsDateTime" Type="datetimeoffset" Nullable="false" />
-          <Property Name="UpdDateTime" Type="datetimeoffset" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Tool_ToolDetail">
-          <Key>
-            <PropertyRef Name="idToolDetail" />
-          </Key>
-          <Property Name="idToolDetail" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="idProperty" Type="int" />
-          <Property Name="idTool" Type="int" />
-        </EntityType>
-        <EntityType Name="Tool_Type">
-          <Key>
-            <PropertyRef Name="idType" />
-          </Key>
-          <Property Name="idType" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Code" Type="nvarchar" Nullable="false" MaxLength="20" />
-          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="HeatHistory">
           <Key>
@@ -212,18 +129,69 @@
           <Property Name="InsDateTime" Type="datetimeoffset" Nullable="false" />
           <Property Name="UpdDateTime" Type="datetimeoffset" Nullable="false" />
         </EntityType>
-        <Association Name="FK_ApplicationCommand_Application">
-          <End Role="Application" Type="AusV1_Model.Store.Application" Multiplicity="1" />
-          <End Role="ApplicationCommand" Type="AusV1_Model.Store.ApplicationCommand" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Application">
-              <PropertyRef Name="idApplication" />
-            </Principal>
-            <Dependent Role="ApplicationCommand">
-              <PropertyRef Name="idApplication" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="Production">
+          <Key>
+            <PropertyRef Name="idProduction" />
+          </Key>
+          <Property Name="idProduction" Type="int" Nullable="false" />
+          <Property Name="idTool" Type="int" />
+          <Property Name="weight" Type="float" />
+          <Property Name="pieces" Type="int" />
+          <Property Name="idHeatHistory" Type="int" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="InsDateTime" Type="datetimeoffset" Nullable="false" />
+          <Property Name="UpdDateTime" Type="datetimeoffset" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Property">
+          <Key>
+            <PropertyRef Name="idProperty" />
+          </Key>
+          <Property Name="idProperty" Type="int" Nullable="false" />
+          <Property Name="dataType" Type="int" />
+          <Property Name="Value" Type="varchar" MaxLength="50" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="idSupplier" />
+          </Key>
+          <Property Name="idSupplier" Type="int" Nullable="false" />
+          <Property Name="Code" Type="nchar" MaxLength="10" />
+          <Property Name="Name" Type="nchar" MaxLength="10" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="InsDateTime" Type="datetimeoffset" Nullable="false" />
+          <Property Name="UpdDateTime" Type="datetimeoffset" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tool">
+          <Key>
+            <PropertyRef Name="idTool" />
+          </Key>
+          <Property Name="idTool" Type="int" Nullable="false" />
+          <Property Name="Tag" Type="nchar" MaxLength="12" />
+          <Property Name="idSuplier" Type="int" />
+          <Property Name="idType" Type="int" />
+          <Property Name="idUser" Type="int" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="InsDateTime" Type="datetimeoffset" Nullable="false" />
+          <Property Name="UpdDateTime" Type="datetimeoffset" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ToolDetail">
+          <Key>
+            <PropertyRef Name="idToolDetail" />
+          </Key>
+          <Property Name="idToolDetail" Type="int" Nullable="false" />
+          <Property Name="idProperty" Type="int" />
+          <Property Name="idTool" Type="int" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="idType" />
+          </Key>
+          <Property Name="idType" Type="int" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
         <Association Name="FK_GroupPolicy_ApplicationCommand">
           <End Role="ApplicationCommand" Type="AusV1_Model.Store.ApplicationCommand" Multiplicity="1" />
           <End Role="GroupPolicy" Type="AusV1_Model.Store.GroupPolicy" Multiplicity="*" />
@@ -236,111 +204,63 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_GroupPolicy_Group">
-          <End Role="Group" Type="AusV1_Model.Store.Group" Multiplicity="1" />
-          <End Role="GroupPolicy" Type="AusV1_Model.Store.GroupPolicy" Multiplicity="*" />
+        <Association Name="FK_Production_Tool">
+          <End Role="Tool" Type="AusV1_Model.Store.Tool" Multiplicity="0..1" />
+          <End Role="Production" Type="AusV1_Model.Store.Production" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Group">
-              <PropertyRef Name="idGroup" />
-            </Principal>
-            <Dependent Role="GroupPolicy">
-              <PropertyRef Name="idGroup" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Tool_Production_Tool_Tool">
-          <End Role="Tool_Tool" Type="AusV1_Model.Store.Tool_Tool" Multiplicity="0..1" />
-          <End Role="Tool_Production" Type="AusV1_Model.Store.Tool_Production" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tool_Tool">
+            <Principal Role="Tool">
               <PropertyRef Name="idTool" />
             </Principal>
-            <Dependent Role="Tool_Production">
+            <Dependent Role="Production">
               <PropertyRef Name="idTool" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tool_Tool_Tool_Supplier">
-          <End Role="Tool_Supplier" Type="AusV1_Model.Store.Tool_Supplier" Multiplicity="0..1" />
-          <End Role="Tool_Tool" Type="AusV1_Model.Store.Tool_Tool" Multiplicity="*" />
+        <Association Name="FK_Supplier">
+          <End Role="Supplier" Type="AusV1_Model.Store.Supplier" Multiplicity="0..1" />
+          <End Role="Tool" Type="AusV1_Model.Store.Tool" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Tool_Supplier">
+            <Principal Role="Supplier">
               <PropertyRef Name="idSupplier" />
             </Principal>
-            <Dependent Role="Tool_Tool">
+            <Dependent Role="Tool">
               <PropertyRef Name="idSuplier" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tool_Tool_Tool_Type">
-          <End Role="Tool_Type" Type="AusV1_Model.Store.Tool_Type" Multiplicity="0..1" />
-          <End Role="Tool_Tool" Type="AusV1_Model.Store.Tool_Tool" Multiplicity="*" />
+        <Association Name="FK_ToolDetail_Property">
+          <End Role="Property" Type="AusV1_Model.Store.Property" Multiplicity="0..1" />
+          <End Role="ToolDetail" Type="AusV1_Model.Store.ToolDetail" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Tool_Type">
-              <PropertyRef Name="idType" />
-            </Principal>
-            <Dependent Role="Tool_Tool">
-              <PropertyRef Name="idType" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Tool_Tool_User">
-          <End Role="User" Type="AusV1_Model.Store.User" Multiplicity="0..1" />
-          <End Role="Tool_Tool" Type="AusV1_Model.Store.Tool_Tool" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="idUser" />
-            </Principal>
-            <Dependent Role="Tool_Tool">
-              <PropertyRef Name="idUser" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Tool_ToolDetail_Tool_Property">
-          <End Role="Tool_Property" Type="AusV1_Model.Store.Tool_Property" Multiplicity="0..1" />
-          <End Role="Tool_ToolDetail" Type="AusV1_Model.Store.Tool_ToolDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tool_Property">
+            <Principal Role="Property">
               <PropertyRef Name="idProperty" />
             </Principal>
-            <Dependent Role="Tool_ToolDetail">
+            <Dependent Role="ToolDetail">
               <PropertyRef Name="idProperty" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tool_ToolDetail_Tool_Tool">
-          <End Role="Tool_Tool" Type="AusV1_Model.Store.Tool_Tool" Multiplicity="0..1" />
-          <End Role="Tool_ToolDetail" Type="AusV1_Model.Store.Tool_ToolDetail" Multiplicity="*" />
+        <Association Name="FK_ToolDetail_Tool">
+          <End Role="Tool" Type="AusV1_Model.Store.Tool" Multiplicity="0..1" />
+          <End Role="ToolDetail" Type="AusV1_Model.Store.ToolDetail" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Tool_Tool">
+            <Principal Role="Tool">
               <PropertyRef Name="idTool" />
             </Principal>
-            <Dependent Role="Tool_ToolDetail">
+            <Dependent Role="ToolDetail">
               <PropertyRef Name="idTool" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserGroup_Group">
-          <End Role="Group" Type="AusV1_Model.Store.Group" Multiplicity="1" />
-          <End Role="UserGroup" Type="AusV1_Model.Store.UserGroup" Multiplicity="*" />
+        <Association Name="FK_Type">
+          <End Role="Type" Type="AusV1_Model.Store.Type" Multiplicity="0..1" />
+          <End Role="Tool" Type="AusV1_Model.Store.Tool" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Group">
-              <PropertyRef Name="idGroup" />
+            <Principal Role="Type">
+              <PropertyRef Name="idType" />
             </Principal>
-            <Dependent Role="UserGroup">
-              <PropertyRef Name="idGroup" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserGroup_User">
-          <End Role="User" Type="AusV1_Model.Store.User" Multiplicity="1" />
-          <End Role="UserGroup" Type="AusV1_Model.Store.UserGroup" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="idUser" />
-            </Principal>
-            <Dependent Role="UserGroup">
-              <PropertyRef Name="idUser" />
+            <Dependent Role="Tool">
+              <PropertyRef Name="idType" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -349,42 +269,12 @@
     <edmx:ConceptualModels>
       <Schema Namespace="AusV1_Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="AusV1_Entities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Tool_Production" EntityType="AusV1_Model.Tool_Production" />
-          <EntitySet Name="Tool_Property" EntityType="AusV1_Model.Tool_Property" />
-          <EntitySet Name="Tool_Supplier" EntityType="AusV1_Model.Tool_Supplier" />
-          <EntitySet Name="Tool_Tool" EntityType="AusV1_Model.Tool_Tool" />
-          <EntitySet Name="Tool_ToolDetail" EntityType="AusV1_Model.Tool_ToolDetail" />
-          <EntitySet Name="Tool_Type" EntityType="AusV1_Model.Tool_Type" />
           <EntitySet Name="HeatHistories" EntityType="AusV1_Model.HeatHistory" />
           <EntitySet Name="ApplicationCommands" EntityType="AusV1_Model.ApplicationCommand" />
           <EntitySet Name="Groups" EntityType="AusV1_Model.Group" />
           <EntitySet Name="GroupPolicies" EntityType="AusV1_Model.GroupPolicy" />
           <EntitySet Name="Users" EntityType="AusV1_Model.User" />
           <EntitySet Name="UserGroups" EntityType="AusV1_Model.UserGroup" />
-          <AssociationSet Name="FK_Tool_Production_Tool_Tool" Association="AusV1_Model.FK_Tool_Production_Tool_Tool">
-            <End Role="Tool_Tool" EntitySet="Tool_Tool" />
-            <End Role="Tool_Production" EntitySet="Tool_Production" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tool_ToolDetail_Tool_Property" Association="AusV1_Model.FK_Tool_ToolDetail_Tool_Property">
-            <End Role="Tool_Property" EntitySet="Tool_Property" />
-            <End Role="Tool_ToolDetail" EntitySet="Tool_ToolDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tool_Tool_Tool_Supplier" Association="AusV1_Model.FK_Tool_Tool_Tool_Supplier">
-            <End Role="Tool_Supplier" EntitySet="Tool_Supplier" />
-            <End Role="Tool_Tool" EntitySet="Tool_Tool" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tool_Tool_Tool_Type" Association="AusV1_Model.FK_Tool_Tool_Tool_Type">
-            <End Role="Tool_Type" EntitySet="Tool_Type" />
-            <End Role="Tool_Tool" EntitySet="Tool_Tool" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tool_Tool_User" Association="AusV1_Model.FK_Tool_Tool_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Tool_Tool" EntitySet="Tool_Tool" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tool_ToolDetail_Tool_Tool" Association="AusV1_Model.FK_Tool_ToolDetail_Tool_Tool">
-            <End Role="Tool_Tool" EntitySet="Tool_Tool" />
-            <End Role="Tool_ToolDetail" EntitySet="Tool_ToolDetail" />
-          </AssociationSet>
           <AssociationSet Name="FK_GroupPolicy_ApplicationCommand" Association="AusV1_Model.FK_GroupPolicy_ApplicationCommand">
             <End Role="ApplicationCommand" EntitySet="ApplicationCommands" />
             <End Role="GroupPolicy" EntitySet="GroupPolicies" />
@@ -406,81 +296,33 @@
             <End Role="Application" EntitySet="Applications" />
             <End Role="ApplicationCommand" EntitySet="ApplicationCommands" />
           </AssociationSet>
+          <EntitySet Name="Productions" EntityType="AusV1_Model.Production" />
+          <EntitySet Name="Properties" EntityType="AusV1_Model.Property" />
+          <EntitySet Name="Suppliers" EntityType="AusV1_Model.Supplier" />
+          <EntitySet Name="Tools" EntityType="AusV1_Model.Tool" />
+          <EntitySet Name="ToolDetails" EntityType="AusV1_Model.ToolDetail" />
+          <EntitySet Name="Types" EntityType="AusV1_Model.Type" />
+          <AssociationSet Name="FK_Production_Tool" Association="AusV1_Model.FK_Production_Tool">
+            <End Role="Tool" EntitySet="Tools" />
+            <End Role="Production" EntitySet="Productions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToolDetail_Property" Association="AusV1_Model.FK_ToolDetail_Property">
+            <End Role="Property" EntitySet="Properties" />
+            <End Role="ToolDetail" EntitySet="ToolDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supplier" Association="AusV1_Model.FK_Supplier">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Tool" EntitySet="Tools" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToolDetail_Tool" Association="AusV1_Model.FK_ToolDetail_Tool">
+            <End Role="Tool" EntitySet="Tools" />
+            <End Role="ToolDetail" EntitySet="ToolDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Type" Association="AusV1_Model.FK_Type">
+            <End Role="Type" EntitySet="Types" />
+            <End Role="Tool" EntitySet="Tools" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Tool_Production">
-          <Key>
-            <PropertyRef Name="idProduction" />
-          </Key>
-          <Property Name="idProduction" Type="Int32" Nullable="false" />
-          <Property Name="idTool" Type="Int32" />
-          <Property Name="weight" Type="Double" />
-          <Property Name="pieces" Type="Int32" />
-          <Property Name="idHeatHistory" Type="Int32" Nullable="false" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
-          <Property Name="InsDateTime" Type="DateTimeOffset" Nullable="false" />
-          <Property Name="UpdDateTime" Type="DateTimeOffset" Nullable="false" />
-          <NavigationProperty Name="Tool_Tool" Relationship="AusV1_Model.FK_Tool_Production_Tool_Tool" FromRole="Tool_Production" ToRole="Tool_Tool" />
-        </EntityType>
-        <EntityType Name="Tool_Property">
-          <Key>
-            <PropertyRef Name="idProperty" />
-          </Key>
-          <Property Name="idProperty" Type="Int32" Nullable="false" />
-          <Property Name="dataType" Type="Int32" />
-          <NavigationProperty Name="Tool_ToolDetail" Relationship="AusV1_Model.FK_Tool_ToolDetail_Tool_Property" FromRole="Tool_Property" ToRole="Tool_ToolDetail" />
-          <Property Type="String" Name="Value" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="name" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Tool_Supplier">
-          <Key>
-            <PropertyRef Name="idSupplier" />
-          </Key>
-          <Property Name="idSupplier" Type="Int32" Nullable="false" />
-          <Property Name="Code" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
-          <Property Name="Name" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
-          <Property Name="InsDateTime" Type="DateTimeOffset" Nullable="false" />
-          <Property Name="UpdDateTime" Type="DateTimeOffset" Nullable="false" />
-          <NavigationProperty Name="Tool_Tool" Relationship="AusV1_Model.FK_Tool_Tool_Tool_Supplier" FromRole="Tool_Supplier" ToRole="Tool_Tool" />
-        </EntityType>
-        <EntityType Name="Tool_Tool">
-          <Key>
-            <PropertyRef Name="idTool" />
-          </Key>
-          <Property Name="idTool" Type="Int32" Nullable="false" />
-          <Property Name="Tag" Type="String" MaxLength="12" Unicode="true" FixedLength="true" />
-          <Property Name="idSuplier" Type="Int32" />
-          <Property Name="idType" Type="Int32" />
-          <Property Name="idUser" Type="Int32" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
-          <Property Name="InsDateTime" Type="DateTimeOffset" Nullable="false" />
-          <Property Name="UpdDateTime" Type="DateTimeOffset" Nullable="false" />
-          <NavigationProperty Name="Tool_Production" Relationship="AusV1_Model.FK_Tool_Production_Tool_Tool" FromRole="Tool_Tool" ToRole="Tool_Production" />
-          <NavigationProperty Name="Tool_Supplier" Relationship="AusV1_Model.FK_Tool_Tool_Tool_Supplier" FromRole="Tool_Tool" ToRole="Tool_Supplier" />
-          <NavigationProperty Name="Tool_Type" Relationship="AusV1_Model.FK_Tool_Tool_Tool_Type" FromRole="Tool_Tool" ToRole="Tool_Type" />
-          <NavigationProperty Name="User" Relationship="AusV1_Model.FK_Tool_Tool_User" FromRole="Tool_Tool" ToRole="User" />
-          <NavigationProperty Name="Tool_ToolDetail" Relationship="AusV1_Model.FK_Tool_ToolDetail_Tool_Tool" FromRole="Tool_Tool" ToRole="Tool_ToolDetail" />
-        </EntityType>
-        <EntityType Name="Tool_ToolDetail">
-          <Key>
-            <PropertyRef Name="idToolDetail" />
-          </Key>
-          <Property Name="idToolDetail" Type="Int32" Nullable="false" />
-          <Property Name="idProperty" Type="Int32" />
-          <Property Name="idTool" Type="Int32" />
-          <NavigationProperty Name="Tool_Property" Relationship="AusV1_Model.FK_Tool_ToolDetail_Tool_Property" FromRole="Tool_ToolDetail" ToRole="Tool_Property" />
-          <NavigationProperty Name="Tool_Tool" Relationship="AusV1_Model.FK_Tool_ToolDetail_Tool_Tool" FromRole="Tool_ToolDetail" ToRole="Tool_Tool" />
-        </EntityType>
-        <EntityType Name="Tool_Type">
-          <Key>
-            <PropertyRef Name="idType" />
-          </Key>
-          <Property Name="idType" Type="Int32" Nullable="false" />
-          <Property Name="Code" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="Description" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Tool_Tool" Relationship="AusV1_Model.FK_Tool_Tool_Tool_Type" FromRole="Tool_Type" ToRole="Tool_Tool" />
-        </EntityType>
         <EntityType Name="HeatHistory">
           <Key>
             <PropertyRef Name="idHeatHistory" />
@@ -545,7 +387,6 @@
           <Property Name="Active" Type="Boolean" Nullable="false" />
           <Property Name="InsDateTime" Type="DateTimeOffset" Nullable="false" />
           <Property Name="UpdDateTime" Type="DateTimeOffset" Nullable="false" />
-          <NavigationProperty Name="Tool_Tool" Relationship="AusV1_Model.FK_Tool_Tool_User" FromRole="User" ToRole="Tool_Tool" />
           <NavigationProperty Name="UserGroups" Relationship="AusV1_Model.FK_UserGroup_User" FromRole="User" ToRole="UserGroup" />
         </EntityType>
         <EntityType Name="UserGroup">
@@ -562,78 +403,6 @@
           <NavigationProperty Name="Group" Relationship="AusV1_Model.FK_UserGroup_Group" FromRole="UserGroup" ToRole="Group" />
           <NavigationProperty Name="User" Relationship="AusV1_Model.FK_UserGroup_User" FromRole="UserGroup" ToRole="User" />
         </EntityType>
-        <Association Name="FK_Tool_Production_Tool_Tool">
-          <End Role="Tool_Tool" Type="AusV1_Model.Tool_Tool" Multiplicity="0..1" />
-          <End Role="Tool_Production" Type="AusV1_Model.Tool_Production" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tool_Tool">
-              <PropertyRef Name="idTool" />
-            </Principal>
-            <Dependent Role="Tool_Production">
-              <PropertyRef Name="idTool" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Tool_ToolDetail_Tool_Property">
-          <End Role="Tool_Property" Type="AusV1_Model.Tool_Property" Multiplicity="0..1" />
-          <End Role="Tool_ToolDetail" Type="AusV1_Model.Tool_ToolDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tool_Property">
-              <PropertyRef Name="idProperty" />
-            </Principal>
-            <Dependent Role="Tool_ToolDetail">
-              <PropertyRef Name="idProperty" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Tool_Tool_Tool_Supplier">
-          <End Role="Tool_Supplier" Type="AusV1_Model.Tool_Supplier" Multiplicity="0..1" />
-          <End Role="Tool_Tool" Type="AusV1_Model.Tool_Tool" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tool_Supplier">
-              <PropertyRef Name="idSupplier" />
-            </Principal>
-            <Dependent Role="Tool_Tool">
-              <PropertyRef Name="idSuplier" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Tool_Tool_Tool_Type">
-          <End Role="Tool_Type" Type="AusV1_Model.Tool_Type" Multiplicity="0..1" />
-          <End Role="Tool_Tool" Type="AusV1_Model.Tool_Tool" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tool_Type">
-              <PropertyRef Name="idType" />
-            </Principal>
-            <Dependent Role="Tool_Tool">
-              <PropertyRef Name="idType" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Tool_Tool_User">
-          <End Role="User" Type="AusV1_Model.User" Multiplicity="0..1" />
-          <End Role="Tool_Tool" Type="AusV1_Model.Tool_Tool" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="idUser" />
-            </Principal>
-            <Dependent Role="Tool_Tool">
-              <PropertyRef Name="idUser" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Tool_ToolDetail_Tool_Tool">
-          <End Role="Tool_Tool" Type="AusV1_Model.Tool_Tool" Multiplicity="0..1" />
-          <End Role="Tool_ToolDetail" Type="AusV1_Model.Tool_ToolDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tool_Tool">
-              <PropertyRef Name="idTool" />
-            </Principal>
-            <Dependent Role="Tool_ToolDetail">
-              <PropertyRef Name="idTool" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_GroupPolicy_ApplicationCommand">
           <End Role="ApplicationCommand" Type="AusV1_Model.ApplicationCommand" Multiplicity="1" />
           <End Role="GroupPolicy" Type="AusV1_Model.GroupPolicy" Multiplicity="*" />
@@ -709,81 +478,145 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Production">
+          <Key>
+            <PropertyRef Name="idProduction" />
+          </Key>
+          <Property Type="Int32" Name="idProduction" Nullable="false" />
+          <Property Type="Int32" Name="idTool" />
+          <Property Type="Double" Name="weight" />
+          <Property Type="Int32" Name="pieces" />
+          <Property Type="Int32" Name="idHeatHistory" Nullable="false" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
+          <Property Type="DateTimeOffset" Name="InsDateTime" Nullable="false" />
+          <Property Type="DateTimeOffset" Name="UpdDateTime" Nullable="false" />
+          <NavigationProperty Name="Tool" Relationship="AusV1_Model.FK_Production_Tool" FromRole="Production" ToRole="Tool" />
+        </EntityType>
+        <EntityType Name="Property">
+          <Key>
+            <PropertyRef Name="idProperty" />
+          </Key>
+          <Property Type="Int32" Name="idProperty" Nullable="false" />
+          <Property Type="Int32" Name="dataType" />
+          <Property Type="String" Name="Value" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ToolDetails" Relationship="AusV1_Model.FK_ToolDetail_Property" FromRole="Property" ToRole="ToolDetail" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="idSupplier" />
+          </Key>
+          <Property Type="Int32" Name="idSupplier" Nullable="false" />
+          <Property Type="String" Name="Code" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Name" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
+          <Property Type="DateTimeOffset" Name="InsDateTime" Nullable="false" />
+          <Property Type="DateTimeOffset" Name="UpdDateTime" Nullable="false" />
+          <NavigationProperty Name="Tools" Relationship="AusV1_Model.FK_Supplier" FromRole="Supplier" ToRole="Tool" />
+        </EntityType>
+        <EntityType Name="Tool">
+          <Key>
+            <PropertyRef Name="idTool" />
+          </Key>
+          <Property Type="Int32" Name="idTool" Nullable="false" />
+          <Property Type="String" Name="Tag" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Type="Int32" Name="idSuplier" />
+          <Property Type="Int32" Name="idType" />
+          <Property Type="Int32" Name="idUser" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
+          <Property Type="DateTimeOffset" Name="InsDateTime" Nullable="false" />
+          <Property Type="DateTimeOffset" Name="UpdDateTime" Nullable="false" />
+          <NavigationProperty Name="Productions" Relationship="AusV1_Model.FK_Production_Tool" FromRole="Tool" ToRole="Production" />
+          <NavigationProperty Name="Supplier" Relationship="AusV1_Model.FK_Supplier" FromRole="Tool" ToRole="Supplier" />
+          <NavigationProperty Name="ToolDetails" Relationship="AusV1_Model.FK_ToolDetail_Tool" FromRole="Tool" ToRole="ToolDetail" />
+          <NavigationProperty Name="Type" Relationship="AusV1_Model.FK_Type" FromRole="Tool" ToRole="Type" />
+        </EntityType>
+        <EntityType Name="ToolDetail">
+          <Key>
+            <PropertyRef Name="idToolDetail" />
+          </Key>
+          <Property Type="Int32" Name="idToolDetail" Nullable="false" />
+          <Property Type="Int32" Name="idProperty" />
+          <Property Type="Int32" Name="idTool" />
+          <NavigationProperty Name="Property" Relationship="AusV1_Model.FK_ToolDetail_Property" FromRole="ToolDetail" ToRole="Property" />
+          <NavigationProperty Name="Tool" Relationship="AusV1_Model.FK_ToolDetail_Tool" FromRole="ToolDetail" ToRole="Tool" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="idType" />
+          </Key>
+          <Property Type="Int32" Name="idType" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tools" Relationship="AusV1_Model.FK_Type" FromRole="Type" ToRole="Tool" />
+        </EntityType>
+        <Association Name="FK_Production_Tool">
+          <End Type="AusV1_Model.Tool" Role="Tool" Multiplicity="0..1" />
+          <End Type="AusV1_Model.Production" Role="Production" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tool">
+              <PropertyRef Name="idTool" />
+            </Principal>
+            <Dependent Role="Production">
+              <PropertyRef Name="idTool" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToolDetail_Property">
+          <End Type="AusV1_Model.Property" Role="Property" Multiplicity="0..1" />
+          <End Type="AusV1_Model.ToolDetail" Role="ToolDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="idProperty" />
+            </Principal>
+            <Dependent Role="ToolDetail">
+              <PropertyRef Name="idProperty" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supplier">
+          <End Type="AusV1_Model.Supplier" Role="Supplier" Multiplicity="0..1" />
+          <End Type="AusV1_Model.Tool" Role="Tool" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="idSupplier" />
+            </Principal>
+            <Dependent Role="Tool">
+              <PropertyRef Name="idSuplier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToolDetail_Tool">
+          <End Type="AusV1_Model.Tool" Role="Tool" Multiplicity="0..1" />
+          <End Type="AusV1_Model.ToolDetail" Role="ToolDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tool">
+              <PropertyRef Name="idTool" />
+            </Principal>
+            <Dependent Role="ToolDetail">
+              <PropertyRef Name="idTool" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Type">
+          <End Type="AusV1_Model.Type" Role="Type" Multiplicity="0..1" />
+          <End Type="AusV1_Model.Tool" Role="Tool" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="idType" />
+            </Principal>
+            <Dependent Role="Tool">
+              <PropertyRef Name="idType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="AusV1_ModelStoreContainer" CdmEntityContainer="AusV1_Entities1">
-          <EntitySetMapping Name="Tool_Production">
-            <EntityTypeMapping TypeName="AusV1_Model.Tool_Production">
-              <MappingFragment StoreEntitySet="Tool_Production">
-                <ScalarProperty Name="idProduction" ColumnName="idProduction" />
-                <ScalarProperty Name="idTool" ColumnName="idTool" />
-                <ScalarProperty Name="weight" ColumnName="weight" />
-                <ScalarProperty Name="pieces" ColumnName="pieces" />
-                <ScalarProperty Name="idHeatHistory" ColumnName="idHeatHistory" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="InsDateTime" ColumnName="InsDateTime" />
-                <ScalarProperty Name="UpdDateTime" ColumnName="UpdDateTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tool_Property">
-            <EntityTypeMapping TypeName="AusV1_Model.Tool_Property">
-              <MappingFragment StoreEntitySet="Tool_Property">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-                <ScalarProperty Name="idProperty" ColumnName="idProperty" />
-                <ScalarProperty Name="dataType" ColumnName="dataType" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tool_Supplier">
-            <EntityTypeMapping TypeName="AusV1_Model.Tool_Supplier">
-              <MappingFragment StoreEntitySet="Tool_Supplier">
-                <ScalarProperty Name="idSupplier" ColumnName="idSupplier" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="InsDateTime" ColumnName="InsDateTime" />
-                <ScalarProperty Name="UpdDateTime" ColumnName="UpdDateTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tool_Tool">
-            <EntityTypeMapping TypeName="AusV1_Model.Tool_Tool">
-              <MappingFragment StoreEntitySet="Tool_Tool">
-                <ScalarProperty Name="idTool" ColumnName="idTool" />
-                <ScalarProperty Name="Tag" ColumnName="Tag" />
-                <ScalarProperty Name="idSuplier" ColumnName="idSuplier" />
-                <ScalarProperty Name="idType" ColumnName="idType" />
-                <ScalarProperty Name="idUser" ColumnName="idUser" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="InsDateTime" ColumnName="InsDateTime" />
-                <ScalarProperty Name="UpdDateTime" ColumnName="UpdDateTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tool_ToolDetail">
-            <EntityTypeMapping TypeName="AusV1_Model.Tool_ToolDetail">
-              <MappingFragment StoreEntitySet="Tool_ToolDetail">
-                <ScalarProperty Name="idToolDetail" ColumnName="idToolDetail" />
-                <ScalarProperty Name="idProperty" ColumnName="idProperty" />
-                <ScalarProperty Name="idTool" ColumnName="idTool" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tool_Type">
-            <EntityTypeMapping TypeName="AusV1_Model.Tool_Type">
-              <MappingFragment StoreEntitySet="Tool_Type">
-                <ScalarProperty Name="idType" ColumnName="idType" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="HeatHistories">
             <EntityTypeMapping TypeName="AusV1_Model.HeatHistory">
               <MappingFragment StoreEntitySet="HeatHistory">
@@ -876,6 +709,75 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Productions">
+            <EntityTypeMapping TypeName="AusV1_Model.Production">
+              <MappingFragment StoreEntitySet="Production">
+                <ScalarProperty Name="UpdDateTime" ColumnName="UpdDateTime" />
+                <ScalarProperty Name="InsDateTime" ColumnName="InsDateTime" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="idHeatHistory" ColumnName="idHeatHistory" />
+                <ScalarProperty Name="pieces" ColumnName="pieces" />
+                <ScalarProperty Name="weight" ColumnName="weight" />
+                <ScalarProperty Name="idTool" ColumnName="idTool" />
+                <ScalarProperty Name="idProduction" ColumnName="idProduction" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Properties">
+            <EntityTypeMapping TypeName="AusV1_Model.Property">
+              <MappingFragment StoreEntitySet="Property">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="dataType" ColumnName="dataType" />
+                <ScalarProperty Name="idProperty" ColumnName="idProperty" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="AusV1_Model.Supplier">
+              <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="UpdDateTime" ColumnName="UpdDateTime" />
+                <ScalarProperty Name="InsDateTime" ColumnName="InsDateTime" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="idSupplier" ColumnName="idSupplier" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tools">
+            <EntityTypeMapping TypeName="AusV1_Model.Tool">
+              <MappingFragment StoreEntitySet="Tool">
+                <ScalarProperty Name="UpdDateTime" ColumnName="UpdDateTime" />
+                <ScalarProperty Name="InsDateTime" ColumnName="InsDateTime" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="idType" ColumnName="idType" />
+                <ScalarProperty Name="idSuplier" ColumnName="idSuplier" />
+                <ScalarProperty Name="Tag" ColumnName="Tag" />
+                <ScalarProperty Name="idTool" ColumnName="idTool" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ToolDetails">
+            <EntityTypeMapping TypeName="AusV1_Model.ToolDetail">
+              <MappingFragment StoreEntitySet="ToolDetail">
+                <ScalarProperty Name="idTool" ColumnName="idTool" />
+                <ScalarProperty Name="idProperty" ColumnName="idProperty" />
+                <ScalarProperty Name="idToolDetail" ColumnName="idToolDetail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Types">
+            <EntityTypeMapping TypeName="AusV1_Model.Type">
+              <MappingFragment StoreEntitySet="Type">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="idType" ColumnName="idType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -897,91 +799,72 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="AusV1_Model">
-        <EntityTypeShape EntityType="AusV1_Model.Tool_Production" Width="1.5" PointX="5.25" PointY="10.625" Height="2.7494921874999996" IsExpanded="true" />
-        <EntityTypeShape EntityType="AusV1_Model.Tool_Property" Width="1.5" PointX="6.125" PointY="4" Height="1.5956835937499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="AusV1_Model.Tool_Supplier" Width="1.5" PointX="0.75" PointY="2.5" Height="2.3648893229166656" IsExpanded="true" />
-        <EntityTypeShape EntityType="AusV1_Model.Tool_Tool" Width="1.5" PointX="3" PointY="6.25" Height="3.5186979166666648" IsExpanded="true" />
-        <EntityTypeShape EntityType="AusV1_Model.Tool_ToolDetail" Width="1.5" PointX="8.25" PointY="7" Height="1.9802864583333317" IsExpanded="true" />
-        <EntityTypeShape EntityType="AusV1_Model.Tool_Type" Width="1.5" PointX="0.75" PointY="10.625" Height="1.9802864583333317" IsExpanded="true" />
         <EntityTypeShape EntityType="AusV1_Model.HeatHistory" Width="1.5" PointX="8.75" PointY="3" Height="1.9802864583333317" IsExpanded="true" />
         <EntityTypeShape EntityType="AusV1_Model.ApplicationCommand" Width="1.5" PointX="3.75" PointY="15" Height="2.1725878906249978" IsExpanded="true" />
         <EntityTypeShape EntityType="AusV1_Model.Group" Width="1.5" PointX="3" PointY="2.25" Height="2.9417936197916674" IsExpanded="true" />
         <EntityTypeShape EntityType="AusV1_Model.GroupPolicy" Width="1.5" PointX="6" PointY="0.75" Height="2.5571907552083353" IsExpanded="true" />
         <EntityTypeShape EntityType="AusV1_Model.User" Width="1.5" PointX="0.75" PointY="6.375" Height="3.3263964843750031" IsExpanded="true" />
         <EntityTypeShape EntityType="AusV1_Model.UserGroup" Width="1.5" PointX="6" PointY="6.625" Height="2.7494921875000031" IsExpanded="true" />
-        <AssociationConnector Association="AusV1_Model.FK_Tool_Production_Tool_Tool" ManuallyRouted="false">
-          <ConnectorPoint PointX="3.75" PointY="9.7686979166666639" />
-          <ConnectorPoint PointX="3.75" PointY="11.99974609375" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="11.99974609375" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="11.99974609375" />
-          <ConnectorPoint PointX="5.25" PointY="11.99974609375" />
-        </AssociationConnector>
-        <AssociationConnector Association="AusV1_Model.FK_Tool_ToolDetail_Tool_Property" ManuallyRouted="false">
-          <ConnectorPoint PointX="7.625" PointY="5.3192350260416656" />
-          <ConnectorPoint PointX="8.46875" PointY="5.3192350260416656" />
-          <ConnectorPoint PointX="8.46875" PointY="7" />
-        </AssociationConnector>
-        <AssociationConnector Association="AusV1_Model.FK_Tool_Tool_Tool_Supplier" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.5" PointY="4.8648893229166656" />
-          <ConnectorPoint PointX="1.5" PointY="6.125" />
-          <ConnectorPoint PointX="2.5" PointY="6.125" />
-          <ConnectorPoint PointX="2.5" PointY="8.0093489583333319" />
-          <ConnectorPoint PointX="3" PointY="8.0093489583333319" />
-        </AssociationConnector>
-        <AssociationConnector Association="AusV1_Model.FK_Tool_Tool_Tool_Type" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="11.312373046874999" />
-          <ConnectorPoint PointX="3.3437475" PointY="11.312373046874999" />
-          <ConnectorPoint PointX="3.3437475" PointY="9.7686979166666639" />
-        </AssociationConnector>
-        <AssociationConnector Association="AusV1_Model.FK_Tool_Tool_User" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="8.9178727213541684" />
-          <ConnectorPoint PointX="3" PointY="8.9178727213541684" />
-        </AssociationConnector>
-        <AssociationConnector Association="AusV1_Model.FK_Tool_ToolDetail_Tool_Tool" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="9.6028450520833335" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="9.6028450520833335" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="9.6028450520833335" />
-          <ConnectorPoint PointX="5.666666666666667" PointY="9.6028450520833335" />
-          <ConnectorPoint PointX="5.833333333333333" PointY="9.6028450520833335" />
-          <ConnectorPoint PointX="9" PointY="9.6028450520833335" />
-          <ConnectorPoint PointX="9" PointY="8.9802864583333317" />
-        </AssociationConnector>
         <AssociationConnector Association="AusV1_Model.FK_GroupPolicy_ApplicationCommand" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.875" PointY="15" />
-          <ConnectorPoint PointX="4.875" PointY="1.46875" />
+          <ConnectorPoint PointX="4.90625" PointY="15" />
+          <ConnectorPoint PointX="4.90625" PointY="1.46875" />
           <ConnectorPoint PointX="6" PointY="1.46875" />
         </AssociationConnector>
         <AssociationConnector Association="AusV1_Model.FK_GroupPolicy_Group" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="2.7785953776041676" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="2.7785953776041672" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="2.7785953776041676" />
+          <ConnectorPoint PointX="4.822916666666667" PointY="2.7785953776041672" />
+          <ConnectorPoint PointX="4.989583333333333" PointY="2.7785953776041676" />
           <ConnectorPoint PointX="6" PointY="2.7785953776041676" />
         </AssociationConnector>
         <AssociationConnector Association="AusV1_Model.FK_UserGroup_Group" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="5.1294849274839747" />
-          <ConnectorPoint PointX="4.8160744349011217" PointY="5.4455593623850955" />
-          <ConnectorPoint PointX="4.9339255650988791" PointY="5.5634104925828538" />
-          <ConnectorPoint PointX="5.1875" PointY="5.8169849274839747" />
-          <ConnectorPoint PointX="5.1875" PointY="7.2811210468750005" />
-          <ConnectorPoint PointX="6" PointY="7.2811210468750005" />
+          <ConnectorPoint PointX="4.5" PointY="5.1917936197916674" />
+          <ConnectorPoint PointX="4.8473244349011217" PointY="5.5391180546927883" />
+          <ConnectorPoint PointX="4.9651755650988791" PointY="5.6569691848905466" />
+          <ConnectorPoint PointX="5.125" PointY="5.8167936197916674" />
+          <ConnectorPoint PointX="5.125" PointY="7.9997460937500016" />
+          <ConnectorPoint PointX="6" PointY="7.9997460937500016" />
         </AssociationConnector>
         <AssociationConnector Association="AusV1_Model.FK_UserGroup_User" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.5" PointY="9.7013964843750031" />
-          <ConnectorPoint PointX="1.5" PointY="10.201396484375003" />
-          <ConnectorPoint PointX="3.2604141666666666" PointY="10.201396484375003" />
-          <ConnectorPoint PointX="3.4270808333333336" PointY="10.201396484375003" />
-          <ConnectorPoint PointX="3.6666666666666665" PointY="10.201396484375003" />
-          <ConnectorPoint PointX="3.8333333333333335" PointY="10.201396484375003" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="10.201396484375003" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="10.201396484375003" />
-          <ConnectorPoint PointX="5.75" PointY="10.201396484375003" />
-          <ConnectorPoint PointX="5.75" PointY="7.9997460937500016" />
-          <ConnectorPoint PointX="6" PointY="7.9997460937500016" />
+          <ConnectorPoint PointX="2.25" PointY="7.2498730468750008" />
+          <ConnectorPoint PointX="4.822916666666667" PointY="7.249873046875" />
+          <ConnectorPoint PointX="4.989583333333333" PointY="7.2498730468750008" />
+          <ConnectorPoint PointX="5.041666666666667" PointY="7.249873046875" />
+          <ConnectorPoint PointX="5.208333333333333" PointY="7.2498730468750008" />
+          <ConnectorPoint PointX="6" PointY="7.2498730468750008" />
         </AssociationConnector>
         <EntityTypeShape EntityType="AusV1_Model.Application" Width="1.5" PointX="1.5" PointY="14.75" Height="2.9417936197916674" />
         <AssociationConnector Association="AusV1_Model.FK_ApplicationCommand_Application" >
           <ConnectorPoint PointX="3" PointY="16.182444661458334" />
           <ConnectorPoint PointX="3.75" PointY="16.182444661458334" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="AusV1_Model.Production" Width="1.5" PointX="12.875" PointY="11.5" Height="2.7494921875000031" />
+        <EntityTypeShape EntityType="AusV1_Model.Property" Width="1.5" PointX="13.625" PointY="7.875" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="AusV1_Model.Supplier" Width="1.5" PointX="8.375" PointY="11.625" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="AusV1_Model.Tool" Width="1.5" PointX="10.625" PointY="11.125" Height="3.3263964843750031" />
+        <EntityTypeShape EntityType="AusV1_Model.ToolDetail" Width="1.5" PointX="15.875" PointY="11.875" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="AusV1_Model.Type" Width="1.5" PointX="8.375" PointY="14.875" Height="1.9802864583333388" />
+        <AssociationConnector Association="AusV1_Model.FK_Production_Tool" >
+          <ConnectorPoint PointX="12.125" PointY="12.874746093750002" />
+          <ConnectorPoint PointX="12.875" PointY="12.874746093750002" />
+        </AssociationConnector>
+        <AssociationConnector Association="AusV1_Model.FK_ToolDetail_Property" >
+          <ConnectorPoint PointX="15.125" PointY="8.86514322916667" />
+          <ConnectorPoint PointX="16.625" PointY="8.86514322916667" />
+          <ConnectorPoint PointX="16.625" PointY="11.875" />
+        </AssociationConnector>
+        <AssociationConnector Association="AusV1_Model.FK_Supplier" >
+          <ConnectorPoint PointX="9.875" PointY="12.807444661458334" />
+          <ConnectorPoint PointX="10.625" PointY="12.807444661458334" />
+        </AssociationConnector>
+        <AssociationConnector Association="AusV1_Model.FK_ToolDetail_Tool" >
+          <ConnectorPoint PointX="12.125" PointY="14.381694335937503" />
+          <ConnectorPoint PointX="16.625" PointY="14.381694335937503" />
+          <ConnectorPoint PointX="16.625" PointY="13.855286458333339" />
+        </AssociationConnector>
+        <AssociationConnector Association="AusV1_Model.FK_Type" >
+          <ConnectorPoint PointX="9.875" PointY="15.865143229166669" />
+          <ConnectorPoint PointX="11.375" PointY="15.865143229166669" />
+          <ConnectorPoint PointX="11.375" PointY="14.451396484375003" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>
