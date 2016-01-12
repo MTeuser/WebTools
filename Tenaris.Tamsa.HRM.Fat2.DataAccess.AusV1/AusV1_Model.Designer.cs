@@ -19,17 +19,16 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("AusV1_Model", "FK_Tool_Production_Tool_Tool", "Tool_Tool", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.Tool_Tool), "Tool_Production", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.Tool_Production), true)]
-[assembly: EdmRelationshipAttribute("AusV1_Model", "FK_Tool_ToolDetail_Tool_Property", "Tool_Property", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.Tool_Property), "Tool_ToolDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.Tool_ToolDetail), true)]
-[assembly: EdmRelationshipAttribute("AusV1_Model", "FK_Tool_Tool_Tool_Supplier", "Tool_Supplier", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.Tool_Supplier), "Tool_Tool", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.Tool_Tool), true)]
-[assembly: EdmRelationshipAttribute("AusV1_Model", "FK_Tool_Tool_Tool_Type", "Tool_Type", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.Tool_Type), "Tool_Tool", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.Tool_Tool), true)]
-[assembly: EdmRelationshipAttribute("AusV1_Model", "FK_Tool_Tool_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.User), "Tool_Tool", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.Tool_Tool), true)]
-[assembly: EdmRelationshipAttribute("AusV1_Model", "FK_Tool_ToolDetail_Tool_Tool", "Tool_Tool", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.Tool_Tool), "Tool_ToolDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.Tool_ToolDetail), true)]
 [assembly: EdmRelationshipAttribute("AusV1_Model", "FK_GroupPolicy_ApplicationCommand", "ApplicationCommand", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.ApplicationCommand), "GroupPolicy", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.GroupPolicy), true)]
 [assembly: EdmRelationshipAttribute("AusV1_Model", "FK_GroupPolicy_Group", "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.Group), "GroupPolicy", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.GroupPolicy), true)]
 [assembly: EdmRelationshipAttribute("AusV1_Model", "FK_UserGroup_Group", "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.Group), "UserGroup", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.UserGroup), true)]
 [assembly: EdmRelationshipAttribute("AusV1_Model", "FK_UserGroup_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.User), "UserGroup", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.UserGroup), true)]
 [assembly: EdmRelationshipAttribute("AusV1_Model", "FK_ApplicationCommand_Application", "Application", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.Application), "ApplicationCommand", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.ApplicationCommand), true)]
+[assembly: EdmRelationshipAttribute("AusV1_Model", "FK_Production_Tool", "Tool", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.Tool), "Production", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.Production), true)]
+[assembly: EdmRelationshipAttribute("AusV1_Model", "FK_ToolDetail_Property", "Property", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.Property), "ToolDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.ToolDetail), true)]
+[assembly: EdmRelationshipAttribute("AusV1_Model", "FK_Supplier", "Supplier", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.Supplier), "Tool", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.Tool), true)]
+[assembly: EdmRelationshipAttribute("AusV1_Model", "FK_ToolDetail_Tool", "Tool", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.Tool), "ToolDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.ToolDetail), true)]
+[assembly: EdmRelationshipAttribute("AusV1_Model", "FK_Type", "Type", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.Type), "Tool", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.Tool), true)]
 
 #endregion
 
@@ -80,102 +79,6 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1
         #endregion
     
         #region ObjectSet Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Tool_Production> Tool_Production
-        {
-            get
-            {
-                if ((_Tool_Production == null))
-                {
-                    _Tool_Production = base.CreateObjectSet<Tool_Production>("Tool_Production");
-                }
-                return _Tool_Production;
-            }
-        }
-        private ObjectSet<Tool_Production> _Tool_Production;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Tool_Property> Tool_Property
-        {
-            get
-            {
-                if ((_Tool_Property == null))
-                {
-                    _Tool_Property = base.CreateObjectSet<Tool_Property>("Tool_Property");
-                }
-                return _Tool_Property;
-            }
-        }
-        private ObjectSet<Tool_Property> _Tool_Property;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Tool_Supplier> Tool_Supplier
-        {
-            get
-            {
-                if ((_Tool_Supplier == null))
-                {
-                    _Tool_Supplier = base.CreateObjectSet<Tool_Supplier>("Tool_Supplier");
-                }
-                return _Tool_Supplier;
-            }
-        }
-        private ObjectSet<Tool_Supplier> _Tool_Supplier;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Tool_Tool> Tool_Tool
-        {
-            get
-            {
-                if ((_Tool_Tool == null))
-                {
-                    _Tool_Tool = base.CreateObjectSet<Tool_Tool>("Tool_Tool");
-                }
-                return _Tool_Tool;
-            }
-        }
-        private ObjectSet<Tool_Tool> _Tool_Tool;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Tool_ToolDetail> Tool_ToolDetail
-        {
-            get
-            {
-                if ((_Tool_ToolDetail == null))
-                {
-                    _Tool_ToolDetail = base.CreateObjectSet<Tool_ToolDetail>("Tool_ToolDetail");
-                }
-                return _Tool_ToolDetail;
-            }
-        }
-        private ObjectSet<Tool_ToolDetail> _Tool_ToolDetail;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Tool_Type> Tool_Type
-        {
-            get
-            {
-                if ((_Tool_Type == null))
-                {
-                    _Tool_Type = base.CreateObjectSet<Tool_Type>("Tool_Type");
-                }
-                return _Tool_Type;
-            }
-        }
-        private ObjectSet<Tool_Type> _Tool_Type;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -288,58 +191,106 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1
             }
         }
         private ObjectSet<Application> _Applications;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Production> Productions
+        {
+            get
+            {
+                if ((_Productions == null))
+                {
+                    _Productions = base.CreateObjectSet<Production>("Productions");
+                }
+                return _Productions;
+            }
+        }
+        private ObjectSet<Production> _Productions;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Property> Properties
+        {
+            get
+            {
+                if ((_Properties == null))
+                {
+                    _Properties = base.CreateObjectSet<Property>("Properties");
+                }
+                return _Properties;
+            }
+        }
+        private ObjectSet<Property> _Properties;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Supplier> Suppliers
+        {
+            get
+            {
+                if ((_Suppliers == null))
+                {
+                    _Suppliers = base.CreateObjectSet<Supplier>("Suppliers");
+                }
+                return _Suppliers;
+            }
+        }
+        private ObjectSet<Supplier> _Suppliers;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Tool> Tools
+        {
+            get
+            {
+                if ((_Tools == null))
+                {
+                    _Tools = base.CreateObjectSet<Tool>("Tools");
+                }
+                return _Tools;
+            }
+        }
+        private ObjectSet<Tool> _Tools;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ToolDetail> ToolDetails
+        {
+            get
+            {
+                if ((_ToolDetails == null))
+                {
+                    _ToolDetails = base.CreateObjectSet<ToolDetail>("ToolDetails");
+                }
+                return _ToolDetails;
+            }
+        }
+        private ObjectSet<ToolDetail> _ToolDetails;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Type> Types
+        {
+            get
+            {
+                if ((_Types == null))
+                {
+                    _Types = base.CreateObjectSet<Type>("Types");
+                }
+                return _Types;
+            }
+        }
+        private ObjectSet<Type> _Types;
 
         #endregion
 
         #region AddTo Methods
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Tool_Production EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToTool_Production(Tool_Production tool_Production)
-        {
-            base.AddObject("Tool_Production", tool_Production);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Tool_Property EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToTool_Property(Tool_Property tool_Property)
-        {
-            base.AddObject("Tool_Property", tool_Property);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Tool_Supplier EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToTool_Supplier(Tool_Supplier tool_Supplier)
-        {
-            base.AddObject("Tool_Supplier", tool_Supplier);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Tool_Tool EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToTool_Tool(Tool_Tool tool_Tool)
-        {
-            base.AddObject("Tool_Tool", tool_Tool);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Tool_ToolDetail EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToTool_ToolDetail(Tool_ToolDetail tool_ToolDetail)
-        {
-            base.AddObject("Tool_ToolDetail", tool_ToolDetail);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Tool_Type EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToTool_Type(Tool_Type tool_Type)
-        {
-            base.AddObject("Tool_Type", tool_Type);
-        }
     
         /// <summary>
         /// Deprecated Method for adding a new object to the HeatHistories EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
@@ -395,6 +346,54 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1
         public void AddToApplications(Application application)
         {
             base.AddObject("Applications", application);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Productions EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToProductions(Production production)
+        {
+            base.AddObject("Productions", production);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Properties EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToProperties(Property property)
+        {
+            base.AddObject("Properties", property);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Suppliers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToSuppliers(Supplier supplier)
+        {
+            base.AddObject("Suppliers", supplier);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Tools EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToTools(Tool tool)
+        {
+            base.AddObject("Tools", tool);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ToolDetails EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToToolDetails(ToolDetail toolDetail)
+        {
+            base.AddObject("ToolDetails", toolDetail);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Types EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToTypes(Type type)
+        {
+            base.AddObject("Types", type);
         }
 
         #endregion
@@ -1635,30 +1634,30 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="AusV1_Model", Name="Tool_Production")]
+    [EdmEntityTypeAttribute(NamespaceName="AusV1_Model", Name="Production")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Tool_Production : EntityObject
+    public partial class Production : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Tool_Production object.
+        /// Create a new Production object.
         /// </summary>
         /// <param name="idProduction">Initial value of the idProduction property.</param>
         /// <param name="idHeatHistory">Initial value of the idHeatHistory property.</param>
         /// <param name="active">Initial value of the Active property.</param>
         /// <param name="insDateTime">Initial value of the InsDateTime property.</param>
         /// <param name="updDateTime">Initial value of the UpdDateTime property.</param>
-        public static Tool_Production CreateTool_Production(global::System.Int32 idProduction, global::System.Int32 idHeatHistory, global::System.Boolean active, global::System.DateTimeOffset insDateTime, global::System.DateTimeOffset updDateTime)
+        public static Production CreateProduction(global::System.Int32 idProduction, global::System.Int32 idHeatHistory, global::System.Boolean active, global::System.DateTimeOffset insDateTime, global::System.DateTimeOffset updDateTime)
         {
-            Tool_Production tool_Production = new Tool_Production();
-            tool_Production.idProduction = idProduction;
-            tool_Production.idHeatHistory = idHeatHistory;
-            tool_Production.Active = active;
-            tool_Production.InsDateTime = insDateTime;
-            tool_Production.UpdDateTime = updDateTime;
-            return tool_Production;
+            Production production = new Production();
+            production.idProduction = idProduction;
+            production.idHeatHistory = idHeatHistory;
+            production.Active = active;
+            production.InsDateTime = insDateTime;
+            production.UpdDateTime = updDateTime;
+            return production;
         }
 
         #endregion
@@ -1871,16 +1870,16 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("AusV1_Model", "FK_Tool_Production_Tool_Tool", "Tool_Tool")]
-        public Tool_Tool Tool_Tool
+        [EdmRelationshipNavigationPropertyAttribute("AusV1_Model", "FK_Production_Tool", "Tool")]
+        public Tool Tool
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Tool_Tool>("AusV1_Model.FK_Tool_Production_Tool_Tool", "Tool_Tool").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Tool>("AusV1_Model.FK_Production_Tool", "Tool").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Tool_Tool>("AusV1_Model.FK_Tool_Production_Tool_Tool", "Tool_Tool").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Tool>("AusV1_Model.FK_Production_Tool", "Tool").Value = value;
             }
         }
         /// <summary>
@@ -1888,17 +1887,17 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Tool_Tool> Tool_ToolReference
+        public EntityReference<Tool> ToolReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Tool_Tool>("AusV1_Model.FK_Tool_Production_Tool_Tool", "Tool_Tool");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Tool>("AusV1_Model.FK_Production_Tool", "Tool");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Tool_Tool>("AusV1_Model.FK_Tool_Production_Tool_Tool", "Tool_Tool", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Tool>("AusV1_Model.FK_Production_Tool", "Tool", value);
                 }
             }
         }
@@ -1910,24 +1909,24 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="AusV1_Model", Name="Tool_Property")]
+    [EdmEntityTypeAttribute(NamespaceName="AusV1_Model", Name="Property")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Tool_Property : EntityObject
+    public partial class Property : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Tool_Property object.
+        /// Create a new Property object.
         /// </summary>
         /// <param name="idProperty">Initial value of the idProperty property.</param>
         /// <param name="name">Initial value of the name property.</param>
-        public static Tool_Property CreateTool_Property(global::System.Int32 idProperty, global::System.String name)
+        public static Property CreateProperty(global::System.Int32 idProperty, global::System.String name)
         {
-            Tool_Property tool_Property = new Tool_Property();
-            tool_Property.idProperty = idProperty;
-            tool_Property.name = name;
-            return tool_Property;
+            Property property = new Property();
+            property.idProperty = idProperty;
+            property.name = name;
+            return property;
         }
 
         #endregion
@@ -2044,18 +2043,18 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("AusV1_Model", "FK_Tool_ToolDetail_Tool_Property", "Tool_ToolDetail")]
-        public EntityCollection<Tool_ToolDetail> Tool_ToolDetail
+        [EdmRelationshipNavigationPropertyAttribute("AusV1_Model", "FK_ToolDetail_Property", "ToolDetail")]
+        public EntityCollection<ToolDetail> ToolDetails
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Tool_ToolDetail>("AusV1_Model.FK_Tool_ToolDetail_Tool_Property", "Tool_ToolDetail");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ToolDetail>("AusV1_Model.FK_ToolDetail_Property", "ToolDetail");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Tool_ToolDetail>("AusV1_Model.FK_Tool_ToolDetail_Tool_Property", "Tool_ToolDetail", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ToolDetail>("AusV1_Model.FK_ToolDetail_Property", "ToolDetail", value);
                 }
             }
         }
@@ -2067,28 +2066,28 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="AusV1_Model", Name="Tool_Supplier")]
+    [EdmEntityTypeAttribute(NamespaceName="AusV1_Model", Name="Supplier")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Tool_Supplier : EntityObject
+    public partial class Supplier : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Tool_Supplier object.
+        /// Create a new Supplier object.
         /// </summary>
         /// <param name="idSupplier">Initial value of the idSupplier property.</param>
         /// <param name="active">Initial value of the Active property.</param>
         /// <param name="insDateTime">Initial value of the InsDateTime property.</param>
         /// <param name="updDateTime">Initial value of the UpdDateTime property.</param>
-        public static Tool_Supplier CreateTool_Supplier(global::System.Int32 idSupplier, global::System.Boolean active, global::System.DateTimeOffset insDateTime, global::System.DateTimeOffset updDateTime)
+        public static Supplier CreateSupplier(global::System.Int32 idSupplier, global::System.Boolean active, global::System.DateTimeOffset insDateTime, global::System.DateTimeOffset updDateTime)
         {
-            Tool_Supplier tool_Supplier = new Tool_Supplier();
-            tool_Supplier.idSupplier = idSupplier;
-            tool_Supplier.Active = active;
-            tool_Supplier.InsDateTime = insDateTime;
-            tool_Supplier.UpdDateTime = updDateTime;
-            return tool_Supplier;
+            Supplier supplier = new Supplier();
+            supplier.idSupplier = idSupplier;
+            supplier.Active = active;
+            supplier.InsDateTime = insDateTime;
+            supplier.UpdDateTime = updDateTime;
+            return supplier;
         }
 
         #endregion
@@ -2253,18 +2252,18 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("AusV1_Model", "FK_Tool_Tool_Tool_Supplier", "Tool_Tool")]
-        public EntityCollection<Tool_Tool> Tool_Tool
+        [EdmRelationshipNavigationPropertyAttribute("AusV1_Model", "FK_Supplier", "Tool")]
+        public EntityCollection<Tool> Tools
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Tool_Tool>("AusV1_Model.FK_Tool_Tool_Tool_Supplier", "Tool_Tool");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Tool>("AusV1_Model.FK_Supplier", "Tool");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Tool_Tool>("AusV1_Model.FK_Tool_Tool_Tool_Supplier", "Tool_Tool", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Tool>("AusV1_Model.FK_Supplier", "Tool", value);
                 }
             }
         }
@@ -2276,28 +2275,28 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="AusV1_Model", Name="Tool_Tool")]
+    [EdmEntityTypeAttribute(NamespaceName="AusV1_Model", Name="Tool")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Tool_Tool : EntityObject
+    public partial class Tool : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Tool_Tool object.
+        /// Create a new Tool object.
         /// </summary>
         /// <param name="idTool">Initial value of the idTool property.</param>
         /// <param name="active">Initial value of the Active property.</param>
         /// <param name="insDateTime">Initial value of the InsDateTime property.</param>
         /// <param name="updDateTime">Initial value of the UpdDateTime property.</param>
-        public static Tool_Tool CreateTool_Tool(global::System.Int32 idTool, global::System.Boolean active, global::System.DateTimeOffset insDateTime, global::System.DateTimeOffset updDateTime)
+        public static Tool CreateTool(global::System.Int32 idTool, global::System.Boolean active, global::System.DateTimeOffset insDateTime, global::System.DateTimeOffset updDateTime)
         {
-            Tool_Tool tool_Tool = new Tool_Tool();
-            tool_Tool.idTool = idTool;
-            tool_Tool.Active = active;
-            tool_Tool.InsDateTime = insDateTime;
-            tool_Tool.UpdDateTime = updDateTime;
-            return tool_Tool;
+            Tool tool = new Tool();
+            tool.idTool = idTool;
+            tool.Active = active;
+            tool.InsDateTime = insDateTime;
+            tool.UpdDateTime = updDateTime;
+            return tool;
         }
 
         #endregion
@@ -2510,18 +2509,18 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("AusV1_Model", "FK_Tool_Production_Tool_Tool", "Tool_Production")]
-        public EntityCollection<Tool_Production> Tool_Production
+        [EdmRelationshipNavigationPropertyAttribute("AusV1_Model", "FK_Production_Tool", "Production")]
+        public EntityCollection<Production> Productions
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Tool_Production>("AusV1_Model.FK_Tool_Production_Tool_Tool", "Tool_Production");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Production>("AusV1_Model.FK_Production_Tool", "Production");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Tool_Production>("AusV1_Model.FK_Tool_Production_Tool_Tool", "Tool_Production", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Production>("AusV1_Model.FK_Production_Tool", "Production", value);
                 }
             }
         }
@@ -2532,16 +2531,16 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("AusV1_Model", "FK_Tool_Tool_Tool_Supplier", "Tool_Supplier")]
-        public Tool_Supplier Tool_Supplier
+        [EdmRelationshipNavigationPropertyAttribute("AusV1_Model", "FK_Supplier", "Supplier")]
+        public Supplier Supplier
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Tool_Supplier>("AusV1_Model.FK_Tool_Tool_Tool_Supplier", "Tool_Supplier").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Supplier>("AusV1_Model.FK_Supplier", "Supplier").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Tool_Supplier>("AusV1_Model.FK_Tool_Tool_Tool_Supplier", "Tool_Supplier").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Supplier>("AusV1_Model.FK_Supplier", "Supplier").Value = value;
             }
         }
         /// <summary>
@@ -2549,17 +2548,17 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Tool_Supplier> Tool_SupplierReference
+        public EntityReference<Supplier> SupplierReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Tool_Supplier>("AusV1_Model.FK_Tool_Tool_Tool_Supplier", "Tool_Supplier");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Supplier>("AusV1_Model.FK_Supplier", "Supplier");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Tool_Supplier>("AusV1_Model.FK_Tool_Tool_Tool_Supplier", "Tool_Supplier", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Supplier>("AusV1_Model.FK_Supplier", "Supplier", value);
                 }
             }
         }
@@ -2570,16 +2569,38 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("AusV1_Model", "FK_Tool_Tool_Tool_Type", "Tool_Type")]
-        public Tool_Type Tool_Type
+        [EdmRelationshipNavigationPropertyAttribute("AusV1_Model", "FK_ToolDetail_Tool", "ToolDetail")]
+        public EntityCollection<ToolDetail> ToolDetails
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Tool_Type>("AusV1_Model.FK_Tool_Tool_Tool_Type", "Tool_Type").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ToolDetail>("AusV1_Model.FK_ToolDetail_Tool", "ToolDetail");
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Tool_Type>("AusV1_Model.FK_Tool_Tool_Tool_Type", "Tool_Type").Value = value;
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ToolDetail>("AusV1_Model.FK_ToolDetail_Tool", "ToolDetail", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("AusV1_Model", "FK_Type", "Type")]
+        public Type Type
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Type>("AusV1_Model.FK_Type", "Type").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Type>("AusV1_Model.FK_Type", "Type").Value = value;
             }
         }
         /// <summary>
@@ -2587,77 +2608,17 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Tool_Type> Tool_TypeReference
+        public EntityReference<Type> TypeReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Tool_Type>("AusV1_Model.FK_Tool_Tool_Tool_Type", "Tool_Type");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Type>("AusV1_Model.FK_Type", "Type");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Tool_Type>("AusV1_Model.FK_Tool_Tool_Tool_Type", "Tool_Type", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("AusV1_Model", "FK_Tool_Tool_User", "User")]
-        public User User
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("AusV1_Model.FK_Tool_Tool_User", "User").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("AusV1_Model.FK_Tool_Tool_User", "User").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<User> UserReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("AusV1_Model.FK_Tool_Tool_User", "User");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("AusV1_Model.FK_Tool_Tool_User", "User", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("AusV1_Model", "FK_Tool_ToolDetail_Tool_Tool", "Tool_ToolDetail")]
-        public EntityCollection<Tool_ToolDetail> Tool_ToolDetail
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Tool_ToolDetail>("AusV1_Model.FK_Tool_ToolDetail_Tool_Tool", "Tool_ToolDetail");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Tool_ToolDetail>("AusV1_Model.FK_Tool_ToolDetail_Tool_Tool", "Tool_ToolDetail", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Type>("AusV1_Model.FK_Type", "Type", value);
                 }
             }
         }
@@ -2669,22 +2630,22 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="AusV1_Model", Name="Tool_ToolDetail")]
+    [EdmEntityTypeAttribute(NamespaceName="AusV1_Model", Name="ToolDetail")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Tool_ToolDetail : EntityObject
+    public partial class ToolDetail : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Tool_ToolDetail object.
+        /// Create a new ToolDetail object.
         /// </summary>
         /// <param name="idToolDetail">Initial value of the idToolDetail property.</param>
-        public static Tool_ToolDetail CreateTool_ToolDetail(global::System.Int32 idToolDetail)
+        public static ToolDetail CreateToolDetail(global::System.Int32 idToolDetail)
         {
-            Tool_ToolDetail tool_ToolDetail = new Tool_ToolDetail();
-            tool_ToolDetail.idToolDetail = idToolDetail;
-            return tool_ToolDetail;
+            ToolDetail toolDetail = new ToolDetail();
+            toolDetail.idToolDetail = idToolDetail;
+            return toolDetail;
         }
 
         #endregion
@@ -2777,16 +2738,16 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("AusV1_Model", "FK_Tool_ToolDetail_Tool_Property", "Tool_Property")]
-        public Tool_Property Tool_Property
+        [EdmRelationshipNavigationPropertyAttribute("AusV1_Model", "FK_ToolDetail_Property", "Property")]
+        public Property Property
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Tool_Property>("AusV1_Model.FK_Tool_ToolDetail_Tool_Property", "Tool_Property").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Property>("AusV1_Model.FK_ToolDetail_Property", "Property").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Tool_Property>("AusV1_Model.FK_Tool_ToolDetail_Tool_Property", "Tool_Property").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Property>("AusV1_Model.FK_ToolDetail_Property", "Property").Value = value;
             }
         }
         /// <summary>
@@ -2794,17 +2755,17 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Tool_Property> Tool_PropertyReference
+        public EntityReference<Property> PropertyReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Tool_Property>("AusV1_Model.FK_Tool_ToolDetail_Tool_Property", "Tool_Property");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Property>("AusV1_Model.FK_ToolDetail_Property", "Property");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Tool_Property>("AusV1_Model.FK_Tool_ToolDetail_Tool_Property", "Tool_Property", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Property>("AusV1_Model.FK_ToolDetail_Property", "Property", value);
                 }
             }
         }
@@ -2815,16 +2776,16 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("AusV1_Model", "FK_Tool_ToolDetail_Tool_Tool", "Tool_Tool")]
-        public Tool_Tool Tool_Tool
+        [EdmRelationshipNavigationPropertyAttribute("AusV1_Model", "FK_ToolDetail_Tool", "Tool")]
+        public Tool Tool
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Tool_Tool>("AusV1_Model.FK_Tool_ToolDetail_Tool_Tool", "Tool_Tool").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Tool>("AusV1_Model.FK_ToolDetail_Tool", "Tool").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Tool_Tool>("AusV1_Model.FK_Tool_ToolDetail_Tool_Tool", "Tool_Tool").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Tool>("AusV1_Model.FK_ToolDetail_Tool", "Tool").Value = value;
             }
         }
         /// <summary>
@@ -2832,17 +2793,17 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Tool_Tool> Tool_ToolReference
+        public EntityReference<Tool> ToolReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Tool_Tool>("AusV1_Model.FK_Tool_ToolDetail_Tool_Tool", "Tool_Tool");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Tool>("AusV1_Model.FK_ToolDetail_Tool", "Tool");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Tool_Tool>("AusV1_Model.FK_Tool_ToolDetail_Tool_Tool", "Tool_Tool", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Tool>("AusV1_Model.FK_ToolDetail_Tool", "Tool", value);
                 }
             }
         }
@@ -2854,26 +2815,26 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="AusV1_Model", Name="Tool_Type")]
+    [EdmEntityTypeAttribute(NamespaceName="AusV1_Model", Name="Type")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Tool_Type : EntityObject
+    public partial class Type : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Tool_Type object.
+        /// Create a new Type object.
         /// </summary>
         /// <param name="idType">Initial value of the idType property.</param>
         /// <param name="code">Initial value of the Code property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        public static Tool_Type CreateTool_Type(global::System.Int32 idType, global::System.String code, global::System.String name)
+        public static Type CreateType(global::System.Int32 idType, global::System.String code, global::System.String name)
         {
-            Tool_Type tool_Type = new Tool_Type();
-            tool_Type.idType = idType;
-            tool_Type.Code = code;
-            tool_Type.Name = name;
-            return tool_Type;
+            Type type = new Type();
+            type.idType = idType;
+            type.Code = code;
+            type.Name = name;
+            return type;
         }
 
         #endregion
@@ -2990,18 +2951,18 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("AusV1_Model", "FK_Tool_Tool_Tool_Type", "Tool_Tool")]
-        public EntityCollection<Tool_Tool> Tool_Tool
+        [EdmRelationshipNavigationPropertyAttribute("AusV1_Model", "FK_Type", "Tool")]
+        public EntityCollection<Tool> Tools
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Tool_Tool>("AusV1_Model.FK_Tool_Tool_Tool_Type", "Tool_Tool");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Tool>("AusV1_Model.FK_Type", "Tool");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Tool_Tool>("AusV1_Model.FK_Tool_Tool_Tool_Type", "Tool_Tool", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Tool>("AusV1_Model.FK_Type", "Tool", value);
                 }
             }
         }
@@ -3290,28 +3251,6 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1
 
     
         #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("AusV1_Model", "FK_Tool_Tool_User", "Tool_Tool")]
-        public EntityCollection<Tool_Tool> Tool_Tool
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Tool_Tool>("AusV1_Model.FK_Tool_Tool_User", "Tool_Tool");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Tool_Tool>("AusV1_Model.FK_Tool_Tool_User", "Tool_Tool", value);
-                }
-            }
-        }
     
         /// <summary>
         /// No Metadata Documentation available.

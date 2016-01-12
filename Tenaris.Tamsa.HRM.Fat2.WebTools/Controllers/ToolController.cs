@@ -31,7 +31,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            Tool_Tool tool_tool = db.GetTools(t => t.idTool == id).FirstOrDefault();
+            Tool tool_tool = db.GetTools(t => t.idTool == id).FirstOrDefault();
             if (tool_tool == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
             if (type.ToUpper().Equals("CILINDROS")) { idType = 3; }
             if (type.ToUpper().Equals("LINEALES")) { idType = 4; }
 
-            ViewBag.idSuplier = new SelectList(db.GetSuppliers(s => s.Tool_Tool.Where(t => t.idTool == idType).ToList().Count > 0), "idSupplier", "Code");
+            ViewBag.idSuplier = new SelectList(db.GetSuppliers(s => s.Tools.Where(t => t.idTool == idType).ToList().Count > 0), "idSupplier", "Code");
             //ViewBag.idType = new SelectList(db.GetToolTypes(), "idType", "Code");
             //ViewBag.idUser = new SelectList(db.GetUsers(), "idUser", "Identification");
             ViewBag.Diameters = new SelectList(db.GetDiameters(idType));
@@ -69,7 +69,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
         // POST: /Tool/Create
 
         [HttpPost]
-        public ActionResult Create(Tool_Tool tool_tool)
+        public ActionResult Create(Tool tool_tool)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +89,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            Tool_Tool tool_tool = db.GetTools(t => t.idTool == id).Single();
+            Tool tool_tool = db.GetTools(t => t.idTool == id).Single();
             if (tool_tool == null)
             {
                 return HttpNotFound();
@@ -104,7 +104,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
         // POST: /Tool/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Tool_Tool tool_tool)
+        public ActionResult Edit(Tool tool_tool)
         {
             if (ModelState.IsValid)
             {
@@ -123,7 +123,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            Tool_Tool tool_tool = db.GetTools(t => t.idTool == id).Single();
+            Tool tool_tool = db.GetTools(t => t.idTool == id).Single();
             if (tool_tool == null)
             {
                 return HttpNotFound();
@@ -137,7 +137,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Tool_Tool tool_tool = db.GetTools(t => t.idTool == id).Single();            
+            Tool tool_tool = db.GetTools(t => t.idTool == id).Single();            
             return RedirectToAction("Index");
         }
 
