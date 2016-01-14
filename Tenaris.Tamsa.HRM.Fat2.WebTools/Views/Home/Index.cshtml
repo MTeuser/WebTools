@@ -8,6 +8,11 @@
                   location.href = "http://" + self.location.host + "/Tool/Create?type=" + this.id;
         });
     });
+
+    function Types() {
+        location.href = "@Html.Action("Types","Home")";
+    }
+
 </script>
 <style>
     .ulmenu
@@ -36,6 +41,13 @@
         
         }
 </style>
+<table>
+    <tr>
+        <td>
+            <input type="button" name="btnTypes" onclick="Types();" />
+        </td>
+    </tr>
+</table>
 <ul class="ulmenu">
     <li>
         <div class='mbtn'>
