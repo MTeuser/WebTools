@@ -42,9 +42,15 @@
     <Reference Include="Tenaris.Library.DbClient">
       <HintPath>..\packages\Tenaris.Library.DbClient.dll</HintPath>
     </Reference>
+    <Reference Include="Tenaris.Library.Framework">
+      <HintPath>..\packages\Tenaris.Library.Framework.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccess.cs" />
+    <Compile Include="DataTableToModel.cs" />
+    <Compile Include="Evaluator.cs" />
+    <Compile Include="ExpQueryTranslator.cs" />
     <Compile Include="MetaData\PartialClasses.cs" />
     <Compile Include="MetaData\Tool_ApplicationCommandMetadata.cs" />
     <Compile Include="MetaData\Tool_ApplicationMetadata.cs" />
@@ -74,6 +80,7 @@
     <Compile Include="Models\UserGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StoredProcedures.cs" />
+    <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

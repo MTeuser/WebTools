@@ -1,13 +1,15 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tenaris.Tamsa.HRM.Fat2.WebTools", "Tenaris.Tamsa.HRM.Fat2.WebTools\Tenaris.Tamsa.HRM.Fat2.WebTools.csproj", "{EFF6D6C8-0D0B-48B2-A714-2FA476DFD37C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tenaris.Tamsa.HRM.Fat2.WebTools.Tests", "Tenaris.Tamsa.HRM.Fat2.WebTools.Tests\Tenaris.Tamsa.HRM.Fat2.WebTools.Tests.csproj", "{A75FCB2C-BBF8-4829-98E3-402FC6828B2E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1", "Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1\Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.csproj", "{70EE1078-2602-46AE-BD33-0602D5FF2CC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tenaris.Tamsa.HRM.Fat2.WebTool.DataAccess", "Tenaris.Tamsa.HRM.Fat2.WebTool.DataAccess\Tenaris.Tamsa.HRM.Fat2.WebTool.DataAccess.csproj", "{61817475-06E0-4BD8-80B1-010E16182981}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tenaris.Tamsa.HRM.Fat2.DataAccess", "Tenaris.Tamsa.HRM.Fat2.WebTool.DataAccess\Tenaris.Tamsa.HRM.Fat2.DataAccess.csproj", "{61817475-06E0-4BD8-80B1-010E16182981}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -67,7 +67,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1
 
         public Tool Create(Tool Tooltool)
         {
-            ausv1Context.Tools.AddObject(Tooltool);
+            ausv1Context.Tools.AddObject(Tooltool);          
             ausv1Context.SaveChanges();
             return Tooltool;
         }

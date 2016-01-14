@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Tenaris.Tamsa.HRM.Fat2.WebTool.DataAccess.Models
+namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.Models
 {
     using System;
     using System.Collections.Generic;
@@ -25,7 +25,10 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTool.DataAccess.Models
             {
                 return _idApplication;
             }
-            
+            set
+            {
+                _idApplication = value;
+            }
         }
 
         private global::System.Int32 _idApplication;        
