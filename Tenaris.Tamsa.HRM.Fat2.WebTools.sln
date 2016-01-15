@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tenaris.Tamsa.HRM.Fat2.WebT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1", "Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1\Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.csproj", "{70EE1078-2602-46AE-BD33-0602D5FF2CC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tenaris.Tamsa.HRM.Fat2.DataAccess", "Tenaris.Tamsa.HRM.Fat2.WebTool.DataAccess\Tenaris.Tamsa.HRM.Fat2.DataAccess.csproj", "{61817475-06E0-4BD8-80B1-010E16182981}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tenaris.Tamsa.HRM.Fat2.DataAccess", "Tenaris.Tamsa.HRM.Fat2.DataAccess\Tenaris.Tamsa.HRM.Fat2.DataAccess.csproj", "{61817475-06E0-4BD8-80B1-010E16182981}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
