@@ -126,8 +126,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
 
         public bool Delete(Tool_Tool Tootool)
         {
-           
-            return true;
+           return true;
         }
 
         public List<Tool_Supplier> GetSuppliers() { return GetSuppliers(null); }
@@ -220,6 +219,11 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
         {
             this.Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        public List<Tool_Supplier> GetSuppliersByToolType(string sType)
+        {
+            throw new NotImplementedException();
         }
     }
 }
