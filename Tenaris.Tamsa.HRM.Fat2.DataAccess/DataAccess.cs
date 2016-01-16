@@ -86,7 +86,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
                 QueryCriteria = Utility.GetCriteria(Translator.Translate(predicate));
             }
                  Dictionary<string, object> cmdParams = new Dictionary<string, object>();
-                cmdParams.Add("@QueryFilter", QueryCriteria);
+                 cmdParams.Add("@QueryCriteria", QueryCriteria);
             var dtResult = cmd.ExecuteTable(new ReadOnlyDictionary<string, object>(cmdParams));            
             return DataTableToModel.DatatableToClass<User>(dtResult).ToList();
         }       
