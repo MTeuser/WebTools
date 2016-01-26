@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Tenaris.Tamsa.HRM.Fat2.DataAccess.Models.Tool_Tool>
+
+@{
+    ViewBag.Title = "Find";
+}
+
+<h2>Buscar Herramientas</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.idTool)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tag)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idSuplier)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idUser)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Active)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InsDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdDateTime)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.idTool)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tag)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idSuplier)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idUser)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Active)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InsDateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdDateTime)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

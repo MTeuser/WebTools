@@ -1,0 +1,67 @@
+﻿@model Tenaris.Tamsa.HRM.Fat2.DataAccess.AusV1.Tool_Tool
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Tool_Tool</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Tag)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Tag)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Tool_Supplier.Code)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Tool_Supplier.Code)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Tool_Type.Code)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Tool_Type.Code)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.User.Identification)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User.Identification)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Active)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Active)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.InsDateTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.InsDateTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdDateTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdDateTime)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

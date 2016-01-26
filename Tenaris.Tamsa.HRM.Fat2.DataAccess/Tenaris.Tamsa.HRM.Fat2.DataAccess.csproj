@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{61817475-06E0-4BD8-80B1-010E16182981}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tenaris.Tamsa.HRM.Fat2.WebTool.DataAccess</RootNamespace>
+    <AssemblyName>Tenaris.Tamsa.HRM.Fat2.WebTool.DataAccess</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Tenaris.Library.DbClient">
+      <HintPath>..\packages\Tenaris.Library.DbClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Tenaris.Library.Framework">
+      <HintPath>..\Tenaris.Library.Framework\Tenaris.Library.Framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataAccess.cs" />
+    <Compile Include="DataTableToModel.cs" />
+    <Compile Include="Evaluator.cs" />
+    <Compile Include="ExpQueryTranslator.cs" />
+    <Compile Include="MetaData\PartialClasses.cs" />
+    <Compile Include="MetaData\Tool_ApplicationCommandMetadata.cs" />
+    <Compile Include="MetaData\Tool_ApplicationMetadata.cs" />
+    <Compile Include="MetaData\Tool_GroupMetadata.cs" />
+    <Compile Include="MetaData\Tool_GroupPolicyMetadata.cs" />
+    <Compile Include="MetaData\Tool_HeatHistoryMetadata.cs" />
+    <Compile Include="MetaData\Tool_ProductionMetadata.cs" />
+    <Compile Include="MetaData\Tool_PropertyMetadata.cs" />
+    <Compile Include="MetaData\Tool_SupplierMetadata.cs" />
+    <Compile Include="MetaData\Tool_ToolDetailMetadata.cs" />
+    <Compile Include="MetaData\Tool_ToolMetadata.cs" />
+    <Compile Include="MetaData\Tool_ToolTypeMetadata.cs" />
+    <Compile Include="MetaData\Tool_UserGroupMetadata.cs" />
+    <Compile Include="MetaData\Tool_UserMetadata.cs" />
+    <Compile Include="Models\Application.cs" />
+    <Compile Include="Models\ApplicationCommand.cs" />
+    <Compile Include="Models\Group.cs" />
+    <Compile Include="Models\GroupPolicy.cs" />
+    <Compile Include="Models\HeatHistory.cs" />
+    <Compile Include="Models\Tool_Production.cs" />
+    <Compile Include="Models\Tool_Property.cs" />
+    <Compile Include="Models\Tool_Supplier.cs" />
+    <Compile Include="Models\Tool_Tool.cs" />
+    <Compile Include="Models\Tool_ToolDetail.cs" />
+    <Compile Include="Models\Tool_Type.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserGroup.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StoredProcedures.cs" />
+    <Compile Include="Utilities.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,102 @@
+﻿@model Tenaris.Tamsa.HRM.Fat2.DataAccess.Models.Tool_Tool
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class=".Tenaris">
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">Registrar</a></li>
+    <li><a href="#tabs-2">Consultar</a></li>    
+  </ul>
+  <div id="tabs-1">
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Tool_Tool</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Tag)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Tag)
+            @Html.ValidationMessageFor(model => model.Tag)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.idSuplier)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("idSuplier", String.Empty)
+            @Html.ValidationMessageFor(model => model.idSuplier)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.idType)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("idType", String.Empty)
+            @Html.ValidationMessageFor(model => model.idType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.idUser)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("idUser", String.Empty)
+            @Html.ValidationMessageFor(model => model.idUser)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Active)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Active)
+            @Html.ValidationMessageFor(model => model.Active)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.InsDateTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.InsDateTime)
+            @Html.ValidationMessageFor(model => model.InsDateTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UpdDateTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UpdDateTime)
+            @Html.ValidationMessageFor(model => model.UpdDateTime)
+        </div>
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}    
+  </div>
+  <div id="tabs-2">
+    <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
+  </div> 
+</div>
+</div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryiu")
+}
+
+<script>
+    $(function () {
+        $("#tabs").tabs();
+        $("#tabs").addClass("c-class");
+    });
+</script>

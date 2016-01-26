@@ -1,0 +1,105 @@
+﻿@model Tenaris.Tamsa.HRM.Fat2.WebTools.Models.TipViewModel
+
+<div class="Tenaris">
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">Registrar</a></li>
+    <li><a href="#tabs-2">Consultar</a></li>    
+  </ul>
+  <div id="tabs-1">
+
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>TipViewModel</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.idSupplier)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.idSupplier)
+            @Html.ValidationMessageFor(model => model.idSupplier)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.status)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.status)
+            @Html.ValidationMessageFor(model => model.status)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.diameter)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.diameter)
+            @Html.ValidationMessageFor(model => model.diameter)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.tag)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.tag)
+            @Html.ValidationMessageFor(model => model.tag)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+</div>
+  <div id="tabs-2">
+    <table style="border:1px solid Black">
+    <tr>
+     <th>
+            @Html.DisplayNameFor(model => model.id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tag)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idSupplier)
+        </th>
+       
+        
+        <th></th>
+    </tr>
+
+@{ var item = Model; } 
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idSupplier)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tag)
+        </td>        
+       
+    </tr>
+
+
+</table>
+  </div> 
+</div>
+
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryiu")
+}
+
+<script>
+    $(function () {
+        $("#tabs").tabs();
+        $("#tabs").addClass("c-class");
+    });
+</script>
