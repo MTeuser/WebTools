@@ -45,23 +45,16 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
 
         public ActionResult Create()
         {
-            int idType = 0;         
+            int idType = 0;
 
+            var TypeList = db.GetToolTypes();
             var SupplierList = db.GetSuppliersByToolType(idType);
             var UsersList = db.GetUsers();
             ViewBag.idSuplier = new SelectList(SupplierList, "idSupplier", "Code");
-            //ViewBag.idType = new SelectList(db.GetToolTypes(), "idType", "Code");
+            ViewBag.idType = new SelectList(TypeList, "idType", "Code");
             ViewBag.idUser = new SelectList(UsersList, "idUser", "Identification");
             ViewBag.Diameters = new SelectList(db.GetDiameters(idType));
-            if (idType == 1) //puntas
-            {
-                return View("TipCreate");
-            }
-            else
-            {
-                //Hacer los casos de las demas herramientas
-                return View("TipCreate");
-            }
+            return View();
         }
 
         //

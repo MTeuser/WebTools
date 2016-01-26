@@ -207,7 +207,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
             return DataTableToModel.DatatableToClass<Tool_Property>(dtResult).ToList();
         }
 
-        public List<Tool_Type> GetToolTypes() { return GetToolTypes(null); }
+        public List<Tool_Type> GetToolTypes() { return GetToolTypes(new Tool_Type { }); }
         public List<Tool_Type> GetToolTypes(Tool_Type entity)
         {
           
@@ -218,7 +218,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
             cmdParams.Add("@pDescription", entity.Description);
             cmdParams.Add("@pName", entity.Name);
             
-            var dtResult = ExecTable(StoredProcedures.Property_Get, cmdParams);
+            var dtResult = ExecTable(StoredProcedures.Types_Get, cmdParams);
             return DataTableToModel.DatatableToClass<Tool_Type>(dtResult).ToList();
         }
 
