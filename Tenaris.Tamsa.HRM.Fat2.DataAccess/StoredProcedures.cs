@@ -29,6 +29,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
         public const string Property_Ins = "[Tool].[Property_Ins]";
         public const string Property_Udp = "[Tool].[Property_Udp]";
         public const string Property_GetDiameters = "[Tool].[Properties_GetDiameters]";
+        public const string Property_GetByTypeId = "[Tool].[Property_GetByTypeId]";
 
         public const string Types_Get = "[Tool].[Types_Get]";
         public const string Types_Del = "[Tool].[Types_Del]";
