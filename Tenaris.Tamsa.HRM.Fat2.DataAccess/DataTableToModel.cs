@@ -54,7 +54,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
                 }
                 return result;
             }
-            catch
+            catch(Exception e)
             {
                 return new List<T>();
             }

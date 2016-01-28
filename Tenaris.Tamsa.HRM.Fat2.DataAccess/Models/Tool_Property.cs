@@ -25,7 +25,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.Models
             }
         }
         private global::System.Int32 _idProperty;
-        public Nullable<global::System.Int32> dataType
+        public global::System.Int32 dataType
         {
             get
             {
@@ -38,7 +38,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.Models
               
             }
         }
-        private Nullable<global::System.Int32> _dataType;
+        private global::System.Int32 _dataType;
         public global::System.String Value
         {
             get

@@ -13,6 +13,10 @@
                  if (this.id == "mnCreateTool") {
                      location.href = "@Url.Action("Create","Tool")";
                  }
+                 
+                 if (this.id == "mnTestView") {
+                     location.href = "@Url.Action("testView", "Home")";
+                 }
              });
     });
 
@@ -86,6 +90,20 @@
                     </td>
                     <td>
                         Crear 
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </li>
+    <li>
+        <div class='mbtn'>
+            <table id="mnTestView">
+                <tr>
+                    <td>
+                        <img alt="Puntas" height="50" src='images/Punta_368x310_10041164e0bcba6.jpg' width="50" />
+                    </td>
+                    <td>
+                        TestView
                     </td>
                 </tr>
             </table>

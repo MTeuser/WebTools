@@ -284,7 +284,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
         public object GetPropertiesByTypeId(int idTypeTool)
         {
             Dictionary<string, object> cmdParams = new Dictionary<string, object>();
-            cmdParams.Add("@pidTypeTool int", idTypeTool);
+            cmdParams.Add("@pidTypeTool", idTypeTool);
             var dtResult = ExecTable(StoredProcedures.Property_GetByTypeId, cmdParams);
             return DataTableToModel.DatatableToClass<Tool_Property>(dtResult).ToList();            
         }

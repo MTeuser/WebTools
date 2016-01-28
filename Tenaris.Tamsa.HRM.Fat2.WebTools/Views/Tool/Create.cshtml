@@ -3,78 +3,77 @@
 @{
     ViewBag.Title = "Create";
 }
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<style>
+    #feedback {
+        font-size: 1.4em;
+    }
 
+    #tymenu .ui-selecting {
+        background: #FECA40;
+    }
 
+    #tymenu .ui-selected {
+        background: #c804b8;
+        color: white;
+    }
+
+    #tymenu {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 30%;
+    }
+
+        #tymenu li {
+            margin: 3px;
+            padding: 0.4em;
+            font-size: 1.4em;
+            height: 18px;
+        }
+</style>
+
+<script>
+    $(function () {
+
+        $("#tymenu").selectable({
+            selected: function (event, ui) {
+                var idtype = ui.selected.id;                
+                document.forms["frmGetProperties"].elements["idType"].value = idtype;
+                //document.forms["frmGetProperties"].submit();
+                $("#frmGetProperties").submit();
+                
+            }
+        });
+
+    });
+
+</script>
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) {
+<ol id="tymenu">
+    @foreach (var item in ViewBag.idType)
+    {
+        <li id="@item.Value" class="ui-widget-content">@item.Text</li>
+    }
+</ol>
+
+<div id="contProperty">
+    <p>Esto sera reemplazado</p>
+</div>
+
+@using (Ajax.BeginForm("GetProperties", "Tool", FormMethod.Post, new AjaxOptions()
+{
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "contProperty"
+}, new { @name = "frmGetProperties", @id = "frmGetProperties" }))
+{
+    @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.idType);
+}
 
-    <fieldset>
-        <legend>Tool_Tool</legend>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Tag)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Tag)
-            @Html.ValidationMessageFor(model => model.Tag)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.idSuplier)
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("idSuplier", String.Empty)
-            @Html.ValidationMessageFor(model => model.idSuplier)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.idType)
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("idType", String.Empty)
-            @Html.ValidationMessageFor(model => model.idType)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.idUser)
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("idUser", String.Empty)
-            @Html.ValidationMessageFor(model => model.idUser)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Active)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Active)
-            @Html.ValidationMessageFor(model => model.Active)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.InsDateTime)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.InsDateTime)
-            @Html.ValidationMessageFor(model => model.InsDateTime)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.UpdDateTime)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.UpdDateTime)
-            @Html.ValidationMessageFor(model => model.UpdDateTime)
-        </div>
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
-}   
-  
 
 
 

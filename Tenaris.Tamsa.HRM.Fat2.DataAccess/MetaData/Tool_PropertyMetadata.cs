@@ -24,7 +24,11 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.Models
         [Display(Name = "Valor")]
         public global::System.String Value;
 
-        #endregion
+        [Display(Name="Nombre")]
+        public global::System.String name;
 
+        [Display(Name="Activo")]
+        public global::System.Boolean Active;
+        #endregion
     }
 }

@@ -51,7 +51,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
             var SupplierList = db.GetSuppliersByToolType(idType);
             var UsersList = db.GetUsers();
             ViewBag.idSuplier = new SelectList(SupplierList, "idSupplier", "Code");
-            ViewBag.idType = new SelectList(TypeList, "idType", "Code");
+            ViewBag.idType = new SelectList(TypeList, "idType", "Name");
             ViewBag.idUser = new SelectList(UsersList, "idUser", "Identification");
             ViewBag.Diameters = new SelectList(db.GetDiameters(idType));
             return View();
@@ -146,6 +146,24 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
         public ActionResult Properties()
         {
             return View();
+        }
+
+        public ActionResult AddTool(int ToolType)
+        {
+            return View("tipCreate");
+        }
+
+        //public JsonResult GetProperties(int idTypeTool)
+        //{     
+        //    var PropertyList = db.GetPropertiesByTypeId(idTypeTool);
+        //    return Json(PropertyList , JsonRequestBehavior.AllowGet);
+        //}
+
+        public ActionResult GetProperties(int idType)
+        {
+            var PropertyList = db.GetPropertiesByTypeId(idType);
+            return View(PropertyList);
+            //return Content("Resultado from Controller");
         }
 
        
