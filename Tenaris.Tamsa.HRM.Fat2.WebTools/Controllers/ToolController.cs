@@ -153,11 +153,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
             return View("tipCreate");
         }
 
-        //public JsonResult GetProperties(int idTypeTool)
-        //{     
-        //    var PropertyList = db.GetPropertiesByTypeId(idTypeTool);
-        //    return Json(PropertyList , JsonRequestBehavior.AllowGet);
-        //}
+        
 
         public ActionResult GetProperties(int idType)
         {
@@ -165,6 +161,8 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
             return View(PropertyList);
             //return Content("Resultado from Controller");
         }
+
+       
 
        
     }

@@ -45,7 +45,7 @@
 </style>
 
 <div style="padding:7px 0;">
-    <input type="button" value="Add New Property" onclick="OpenCreatePopup()" />
+    <input type="button" value="Nueva" onclick="OpenCreatePopup()" />
 </div>
 
 <div id="content">
@@ -58,12 +58,13 @@
                 columns: grid.Columns(
             //here i will add column for serial no
                     grid.Column(header: "", format: @<text><div>@(item.WebGrid.Rows.IndexOf(item) + 1)</div></text>),
-                    grid.Column(columnName: "Name", header: "Nombre"),
-                    grid.Column(columnName: "dataType", header: "Tipo de dato")
-                    //grid.Column(header: "Activo", format: @<text><input type="checkbox" checked="@item." disabled="disabled" /></text>)
-             ))
+                                            grid.Column(columnName: "Name", header: "Nombre"),
+                                            grid.Column(columnName: "dataType", header: "Tipo de dato")
+            //grid.Column(header: "Activo", format: @<text><input type="checkbox" checked="@item." disabled="disabled" /></text>)
+                                     ))
 </div>
 
+<div id="DivToAppendPartialVoew"></div>
 
 <script type="text/javascript">
     function Edit(pid) {
@@ -94,15 +95,19 @@
 
     function OpenCreatePopup() {
         var div = $("#DivToAppendPartialVoew");
-        div.load("/Products/Create", function () {
-            div.dialog({
-                modal: true,
-                width: 500,
-                height: 438,
-                title: "Add New Product",
-                resizable: false
-            });
+        @*div.load("@Url.Action("Create","Property")", function () {*@
+        div.load("@Url.Action("Create","Property")", function () {
+
+            //div.dialog({
+            //    modal: true,
+            //    width: 500,
+            //    height: 438,
+            //    title: "Add New Product",
+            //    resizable: false
+            //});
+            //alert("Dialog must be showed");
         });
+        setTimeout("$(DivToAppendPartialVoew).dialog();", 1000);
     }
 
 </script>
