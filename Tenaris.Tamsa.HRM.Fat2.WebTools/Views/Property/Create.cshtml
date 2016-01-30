@@ -3,38 +3,18 @@
 @{
     Layout = null;
 }
+
     
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm("Create","Property", FormMethod.Post)) {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
     
         <fieldset>
-            <legend>Tool_Property</legend>
-    
-            <div class="editor-label">
-                @Html.LabelFor(model => model.idProperty)
-            </div>
+            <legend>Propiedades</legend>  
+           
             <div class="editor-field">
-                @Html.EditorFor(model => model.idProperty)
-                @Html.ValidationMessageFor(model => model.idProperty)
+                @Html.HiddenFor(model => model.idProperty)
             </div>
-    
-            <div class="editor-label">
-                @Html.LabelFor(model => model.dataType)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.dataType)
-                @Html.ValidationMessageFor(model => model.dataType)
-            </div>
-    
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Value)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.Value)
-                @Html.ValidationMessageFor(model => model.Value)
-            </div>
-    
             <div class="editor-label">
                 @Html.LabelFor(model => model.name)
             </div>
@@ -42,18 +22,25 @@
                 @Html.EditorFor(model => model.name)
                 @Html.ValidationMessageFor(model => model.name)
             </div>
-    
             <div class="editor-label">
-                @Html.LabelFor(model => model.Active)
+                @Html.LabelFor(model => model.dataType)
             </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.Active)
-                @Html.ValidationMessageFor(model => model.Active)
-            </div>
-    
-            <p>
-                <input type="submit" value="Create" />
-            </p>
-        </fieldset>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.dataType)
+                    @Html.ValidationMessageFor(model => model.dataType)
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Active)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Active)
+                    @Html.ValidationMessageFor(model => model.Active)
+                </div>
+           
+
+                <p>
+                    <button type="submit" value="Create" class="Tenaris">Crear</button>
+                </p>
+</fieldset>
     }
     

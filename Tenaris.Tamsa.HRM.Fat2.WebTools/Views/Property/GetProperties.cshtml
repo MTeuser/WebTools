@@ -46,6 +46,7 @@
 
 <div style="padding:7px 0;">
     <input type="button" value="Nueva" onclick="OpenCreatePopup()" />
+
 </div>
 
 <div id="content">
@@ -64,7 +65,9 @@
                                      ))
 </div>
 
-<div id="DivToAppendPartialVoew"></div>
+<div class="Tenaris">
+    <div id="DivToAppendPartialVoew"></div>
+</div>
 
 <script type="text/javascript">
     function Edit(pid) {
@@ -75,7 +78,8 @@
                 width: 500,
                 height: 438,
                 title: "Edit Product",
-                resizable: false
+                resizable: false,
+                dialogClass: "Tenaris"
             });
         });
     }
@@ -94,20 +98,21 @@
     }
 
     function OpenCreatePopup() {
-        var div = $("#DivToAppendPartialVoew");
-        @*div.load("@Url.Action("Create","Property")", function () {*@
+        var div = $("#DivToAppendPartialVoew");       
         div.load("@Url.Action("Create","Property")", function () {
-
-            //div.dialog({
-            //    modal: true,
-            //    width: 500,
-            //    height: 438,
-            //    title: "Add New Product",
-            //    resizable: false
-            //});
-            //alert("Dialog must be showed");
-        });
-        setTimeout("$(DivToAppendPartialVoew).dialog();", 1000);
+            div.dialog({
+                modal: true,
+                width: 350,
+                height: 280,
+                title: "Nueva Propiedad",
+                resizable: false,                
+                autoOpen : false
+            });        
+        // Take the whole dialog and put it back into the custom scope.
+            div.parent('.ui-dialog').appendTo('.Tenaris');
+        // Open the dialog (if you want autoOpen).
+            div.dialog('open');
+        });        
     }
 
 </script>

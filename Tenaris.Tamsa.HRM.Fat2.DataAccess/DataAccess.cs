@@ -288,5 +288,24 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
             var dtResult = ExecTable(StoredProcedures.Property_GetByTypeId, cmdParams);
             return DataTableToModel.DatatableToClass<Tool_Property>(dtResult).ToList();            
         }
+
+        public bool Create(Tool_Property entity)
+        {
+            Dictionary<string, object> cmdParams = new Dictionary<string, object>();
+
+            cmdParams.Add("@pidProperty", entity.idProperty);
+            cmdParams.Add("@pdataType", entity.dataType);
+            cmdParams.Add("@pValue", entity.Value);
+            cmdParams.Add("@pActive", entity.Active);
+            cmdParams.Add("@pname", entity.name);   
+
+           
+            var dtResult = ExecTable(StoredProcedures.Property_Ins, cmdParams);
+            if (dtResult.Rows.Count <= 0)
+            {
+                throw new Exception();
+            }
+            //return DataTableToModel.DatatableToClass<Tool_Property>(dtResult).ToList(); 
+        }
     }
 }

@@ -28,6 +28,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
         [HttpPost]
         public ActionResult Create(Tool_Property entity)
         {
+             bool result =  db.Create(entity);
             return View();
         }
 
@@ -40,6 +41,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
         {
             return View();
         }
+
 
         public ActionResult Edit(Tool_Property entity)
         {
