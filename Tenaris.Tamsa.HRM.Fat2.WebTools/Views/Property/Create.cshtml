@@ -5,7 +5,8 @@
 }
 
     
-    @using (Html.BeginForm("Create","Property", FormMethod.Post)) {
+    @using (Ajax.BeginForm("Create", "Property", FormMethod.Post, new AjaxOptions() { OnSuccess = "CallBackCreateProperty(data)" }))
+    {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
     
@@ -39,8 +40,18 @@
            
 
                 <p>
-                    <button type="submit" value="Create" class="Tenaris">Crear</button>
+                    <button type="submit" value="Create" onclick="$('#frmGetProperties').submit();" class="Tenaris">Crear</button>
                 </p>
 </fieldset>
     }
+<script>
+    function CallBackCreateProperty(data)
+    {
+        if (data.result)
+        {
+            document.forms["frmGetProperties"].elements["idType"].value = data.idType;
+            $("#frmGetProperties").submit();
+        }
+    }
+</script>
     

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Tenaris.Tamsa.HRM.Fat2.DataAccess.Models;
 using Tenaris.Tamsa.HRM.Fat2.DataAccess;
+using Tenaris.Tamsa.HRM.Fat2.WebTools.Models;
 
 namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
 {
@@ -28,8 +29,10 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
         [HttpPost]
         public ActionResult Create(Tool_Property entity)
         {
-             bool result =  db.Create(entity);
-            return View();
+           ToolViewModel vTool = (ToolViewModel)Session["Tool"];
+           vTool.Properties.Add(entity);
+           Session["Tool"] = vTool;
+           return Json(new { result = true, idType = vTool.idType });
         }
 
         public ActionResult Delete(int id)
@@ -50,7 +53,19 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
 
         public ActionResult GetProperties(int idType)
         {
-            var PropertyList = db.GetPropertiesByTypeId(idType);
+            List<Tool_Property> PropertyList = null;
+            if (Session["Tool"] != null)
+            {   
+                ToolViewModel vModel = (ToolViewModel)Session["Tool"];
+                PropertyList = vModel.Properties;
+            }
+            if(PropertyList == null)
+            {
+                PropertyList = db.GetPropertiesByTypeId(idType);
+                ToolViewModel vModel = (ToolViewModel)Session["Tool"];
+                vModel.idType = idType;
+                vModel.Properties = PropertyList;
+             }            
             return View(PropertyList);            
         }
 

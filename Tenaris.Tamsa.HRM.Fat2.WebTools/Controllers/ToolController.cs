@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Tenaris.Tamsa.HRM.Fat2.DataAccess;
 using Tenaris.Tamsa.HRM.Fat2.DataAccess.Models;
+using Tenaris.Tamsa.HRM.Fat2.WebTools.Models;
 
 namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
 {
@@ -46,6 +47,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
         public ActionResult Create()
         {
             int idType = 0;
+            ToolViewModel vModel = new ToolViewModel();
 
             var TypeList = db.GetToolTypes();
             var SupplierList = db.GetSuppliersByToolType(idType);
@@ -54,6 +56,11 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
             ViewBag.idType = new SelectList(TypeList, "idType", "Name");
             ViewBag.idUser = new SelectList(UsersList, "idUser", "Identification");
             ViewBag.Diameters = new SelectList(db.GetDiameters(idType));
+
+            //Se crea el viewModel que contendra el nuevo tipo de herramienta mientras se 
+            //agregan propiedades.
+            Session["Tool"] = vModel;
+            
             return View();
         }
 
