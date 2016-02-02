@@ -7,13 +7,8 @@ using Tenaris.Tamsa.HRM.Fat2.DataAccess.Models;
 
 namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Models
 {
-    public class ToolViewModel
+    public class ToolViewModel : Tool_Tool
     {
-        [Display(Name="Id Punta")]
-        public int id { get; set; }
-
-        public int idType { get; set; }
-
         public List<Tool_Property> Properties { get; set; }
     }
 }

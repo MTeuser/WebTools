@@ -56,6 +56,7 @@
             selected: function (event, ui) {
                 var idtype = ui.selected.id;                
                 document.forms["frmGetProperties"].elements["idType"].value = idtype;
+                document.forms["frmGetProperties"].elements["fromDb"].value = true;
                 //document.forms["frmGetProperties"].submit();
                 $("#frmGetProperties").submit();
                 
@@ -93,6 +94,7 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
     @Html.HiddenFor(model => model.idType);
+    <input type="hidden" name="fromDb" value="true" />   
 }
 
 

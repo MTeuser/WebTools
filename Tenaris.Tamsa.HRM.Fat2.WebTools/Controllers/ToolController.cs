@@ -20,10 +20,8 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
 
         public ActionResult Index()
         {
-            //var tool_tool = db.Tool_Tool.Include("Tool_Supplier").Include("Tool_Type").Include("User");
-            var tool_tool = db.GetTools(null);
-
-            //var Details = db.Tool_ToolDetail.Include("Tool_Property");
+            
+            var tool_tool = db.GetTools();           
 
             return View(tool_tool);
         }
@@ -47,7 +45,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
         public ActionResult Create()
         {
             int idType = 0;
-            ToolViewModel vModel = new ToolViewModel();
+            
 
             var TypeList = db.GetToolTypes();
             var SupplierList = db.GetSuppliersByToolType(idType);
@@ -59,7 +57,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
 
             //Se crea el viewModel que contendra el nuevo tipo de herramienta mientras se 
             //agregan propiedades.
-            Session["Tool"] = vModel;
+           
             
             return View();
         }
@@ -76,9 +74,11 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            ViewBag.idSuplier = new SelectList(db.GetSuppliers(), "idSupplier", "Code", tool_tool.idSuplier);
-            ViewBag.idType = new SelectList(db.GetToolTypes(), "idType", "Code", tool_tool.idType);
-            ViewBag.idUser = new SelectList(db.GetUsers(), "idUser", "Identification", tool_tool.idUser);
+            List<Tool_Type> Types = db.GetToolTypes();
+
+            //ViewBag.idSuplier = new SelectList(db.GetSuppliers(), "idSupplier", "Code", tool_tool.idSuplier);
+            //ViewBag.idType = new SelectList(db.GetToolTypes(), "idType", "Code", tool_tool.idType);
+            //ViewBag.idUser = new SelectList(db.GetUsers(), "idUser", "Identification", tool_tool.idUser);
             //return View("Home\Index.cshtml");
             return RedirectToAction("Index", "Home");
         }
@@ -158,19 +158,37 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
         public ActionResult AddTool(int ToolType)
         {
             return View("tipCreate");
-        }
-
-        
+        }        
 
         public ActionResult GetProperties(int idType)
         {
             var PropertyList = db.GetPropertiesByTypeId(idType);
-            return View(PropertyList);
-            //return Content("Resultado from Controller");
+            return View(PropertyList);            
         }
 
-       
+        public ActionResult GetTools()
+        {
+            List<Tool_Tool> Tools = db.GetTools();
+            List<ToolViewModel> vTools = new List<ToolViewModel>();
+            foreach(Tool_Tool Tool in Tools)
+            {
+                ToolViewModel vmTool = new ToolViewModel();
+                vmTool.Active = Tool.Active;
+                vmTool.idSuplier = Tool.idSuplier;
+                vmTool.idTool = Tool.idTool;
+                vmTool.idType = Tool.idType;
+                vmTool.idUser = Tool.idUser;
+                vmTool.InsDateTime = Tool.InsDateTime;
+                vmTool.Tag = Tool.Tag;
+                vmTool.UpdDateTime = Tool.UpdDateTime;
 
-       
+                vmTool.Properties = db.GetPropertiesByTypeId(Tool.idType ?? 0);
+
+                vTools.Add(vmTool);
+            }
+
+
+            return Json(vTools, JsonRequestBehavior.AllowGet);
+        }
     }
 }

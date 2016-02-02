@@ -281,12 +281,13 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
             return DataTableToModel.DatatableToClass<Tool_Supplier>(dtResult).ToList();
         }
 
-        public object GetPropertiesByTypeId(int idTypeTool)
+        public List<Tool_Property> GetPropertiesByTypeId(int idTypeTool)
         {
             Dictionary<string, object> cmdParams = new Dictionary<string, object>();
             cmdParams.Add("@pidTypeTool", idTypeTool);
             var dtResult = ExecTable(StoredProcedures.Property_GetByTypeId, cmdParams);
-            return DataTableToModel.DatatableToClass<Tool_Property>(dtResult).ToList();            
+            List<Tool_Property> ListProperties = DataTableToModel.DatatableToClass<Tool_Property>(dtResult).ToList();
+            return ListProperties;
         }
 
         public bool Create(Tool_Property entity)
@@ -298,7 +299,6 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
             cmdParams.Add("@pValue", entity.Value);
             cmdParams.Add("@pActive", entity.Active);
             cmdParams.Add("@pname", entity.name);   
-
            
             var dtResult = ExecTable(StoredProcedures.Property_Ins, cmdParams);
             if (dtResult.Rows.Count <= 0)
@@ -306,6 +306,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
                 throw new Exception();
             }
             //return DataTableToModel.DatatableToClass<Tool_Property>(dtResult).ToList(); 
+            return true;
         }
     }
 }

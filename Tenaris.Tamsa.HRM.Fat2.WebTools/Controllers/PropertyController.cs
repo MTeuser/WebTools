@@ -51,10 +51,10 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
             return View();
         }
 
-        public ActionResult GetProperties(int idType)
+        public ActionResult GetProperties(int idType, bool fromDb)
         {
             List<Tool_Property> PropertyList = null;
-            if (Session["Tool"] != null)
+            if (Session["Tool"] != null && !fromDb)
             {   
                 ToolViewModel vModel = (ToolViewModel)Session["Tool"];
                 PropertyList = vModel.Properties;
@@ -62,9 +62,10 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
             if(PropertyList == null)
             {
                 PropertyList = db.GetPropertiesByTypeId(idType);
-                ToolViewModel vModel = (ToolViewModel)Session["Tool"];
+                ToolViewModel vModel = new ToolViewModel();
                 vModel.idType = idType;
                 vModel.Properties = PropertyList;
+                Session["Tool"] = vModel;
              }            
             return View(PropertyList);            
         }

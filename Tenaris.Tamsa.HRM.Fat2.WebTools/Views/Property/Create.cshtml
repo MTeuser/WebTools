@@ -50,6 +50,7 @@
         if (data.result)
         {
             document.forms["frmGetProperties"].elements["idType"].value = data.idType;
+            document.forms["frmGetProperties"].elements["fromDb"].value = false;
             $("#frmGetProperties").submit();
         }
     }
