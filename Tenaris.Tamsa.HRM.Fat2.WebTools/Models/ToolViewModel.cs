@@ -7,7 +7,7 @@ using Tenaris.Tamsa.HRM.Fat2.DataAccess.Models;
 
 namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Models
 {
-    public class ToolViewModel : Tool_Tool
+    public class Tool_vm : Tool_Tool
     {
         public List<Tool_Property> Properties { get; set; }
     }

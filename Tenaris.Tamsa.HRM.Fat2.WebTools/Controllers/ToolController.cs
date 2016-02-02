@@ -44,21 +44,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
 
         public ActionResult Create()
         {
-            int idType = 0;
-            
 
-            var TypeList = db.GetToolTypes();
-            var SupplierList = db.GetSuppliersByToolType(idType);
-            var UsersList = db.GetUsers();
-            ViewBag.idSuplier = new SelectList(SupplierList, "idSupplier", "Code");
-            ViewBag.idType = new SelectList(TypeList, "idType", "Name");
-            ViewBag.idUser = new SelectList(UsersList, "idUser", "Identification");
-            ViewBag.Diameters = new SelectList(db.GetDiameters(idType));
-
-            //Se crea el viewModel que contendra el nuevo tipo de herramienta mientras se 
-            //agregan propiedades.
-           
-            
             return View();
         }
 
@@ -169,10 +155,10 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
         public ActionResult GetTools()
         {
             List<Tool_Tool> Tools = db.GetTools();
-            List<ToolViewModel> vTools = new List<ToolViewModel>();
+            List<Tool_vm> vTools = new List<Tool_vm>();
             foreach(Tool_Tool Tool in Tools)
             {
-                ToolViewModel vmTool = new ToolViewModel();
+                Tool_vm vmTool = new Tool_vm();
                 vmTool.Active = Tool.Active;
                 vmTool.idSuplier = Tool.idSuplier;
                 vmTool.idTool = Tool.idTool;

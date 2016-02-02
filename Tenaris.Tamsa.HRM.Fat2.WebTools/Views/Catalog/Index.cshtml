@@ -1,0 +1,279 @@
+﻿@model IEnumerable<Tenaris.Tamsa.HRM.Fat2.WebTools.Models.Catalog_vm>
+
+@{
+    ViewBag.Title = "Create";
+    var grid = new WebGrid(source: Model, canPage: true, rowsPerPage: 10, selectionFieldName: "SelectedRow");
+    grid.Pager(WebGridPagerModes.All);
+}
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<style>
+    #feedback {
+        font-size: 1.4em;
+    }
+
+    #tymenu .ui-selecting {
+        background: #FECA40;
+    }
+
+    #tymenu .ui-selected {
+        background: #c804b8;
+        color: white;
+    }
+
+    #tymenu {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 90%;
+    }
+
+        #tymenu li {
+            margin: 3px;
+            padding: 0.4em;
+            font-size: 1.4em;
+            height: 18px;
+        }
+
+    #contTypes {
+        width: 50%;
+        float: left;
+        background-color: #c804b8;
+    }
+
+    #contProperty {
+        float: left;
+        background-color: #FECA40;
+    }
+
+    #dCreateTool {
+        width: 80%;
+        height: 300px;
+        float: left;
+        background-color: #808080;
+    }
+    /*WebGrid*/
+    .webgrid-table {
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 10pt;
+        width: 100%;
+        display: table;
+        background-color: #FFFFFF;
+    }
+
+        .webgrid-table td, th {
+            border: 1px solid #808080;
+            padding: 3px 7px 2px;
+        }
+
+    .webgrid-header {
+        background-color: #CCD9CC;
+        color: #003366;
+        padding-bottom: 4px;
+        padding-top: 5px;
+        text-align: left;
+    }
+
+    .webgrid-footer {
+    }
+
+    .webgrid-row-style {
+        padding: 3px 7px 2px;
+    }
+
+    .webgrid-alternating-row {
+        background-color: #E5E5E5;
+        padding: 3px 7px 2px;
+    }
+
+    #tHeader {
+        background-color: #009999;
+        color: #ffffff;
+        font-family: Verdana;
+        font-weight: bold;
+        font-size: 12pt;
+        text-align: center;
+        height: 25px;
+    }
+
+    .clickable {
+        cursor: pointer;
+        background: #ffff99;
+    }
+
+    .selectRow {
+        background-color: #660066;
+        color: #FFFFFF;
+    }
+
+    /*Menu buttom*/
+    .ulmenu {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+        .ulmenu li {
+            float: left;
+        }
+
+            .ulmenu li a {
+                display: block;
+                padding: 8px;
+                background-color: #dddddd;
+            }
+
+    .mbtn {
+        width: 215px;
+    }
+
+    #content {
+        border: 1px solid #808080;
+        padding: 3px 3px 3px 3px;
+    }
+</style>
+
+<script>
+    $(function () {
+
+        $("#tymenu").selectable({
+            selected: function (event, ui) {
+                var idtype = ui.selected.id;
+                document.forms["frmGetProperties"].elements["idType"].value = idtype;
+                document.forms["frmGetProperties"].elements["fromDb"].value = true;
+                //document.forms["frmGetProperties"].submit();
+                $("#frmGetProperties").submit();
+
+            }
+        });
+
+        $('#gridCatalog tbody tr').hover(function () {
+            $(this).toggleClass('clickable');
+        });
+           // .on('click', function () {
+           // location.href = '/Details/' + $(this).find('td:first').text();
+        //});
+        $('#gridCatalog tr').click(function () {
+            $(this).addClass('selectRow');
+            $('#gridCatalog tr').not(this).removeClass('selectRow');
+            var rowId = $(this).find("div").eq(0).attr('id');
+            $("#idTemp").val(rowId);
+        });
+
+        $('#gridFooter div table')
+            .button()
+            .click(function () {
+                if (this.id == "mnDetails") {
+                    location.href = "@Url.Action("Details", "Catalog")?IdCatalog=" + $("#idTemp").val();
+                }
+                if (this.id == "mnFindTool") {
+                    location.href = "@Url.Action("Find","Tool")";
+                }
+                if (this.id == "mnCreateTool") {
+                    location.href = "@Url.Action("Create","Tool")";
+                }
+
+                if (this.id == "mnTestView") {
+                    location.href = "@Url.Action("testView", "Home")";
+                }
+            });
+    });
+
+</script>
+
+
+
+<div id="content">
+    <div id="tHeader">Catalogo de Herramientas</div>
+    @grid.GetHtml(
+                htmlAttributes: new { id = "gridCatalog" },
+                tableStyle: "webgrid-table",
+                headerStyle: "webgrid-header",
+                footerStyle: "webgrid-footer",
+                alternatingRowStyle: "webgrid-alternating-row",
+                rowStyle: "webgrid-row-style",
+                columns: grid.Columns(
+                 grid.Column(columnName: "IdType", header: "Tipo", format: @<text><div id="@item.IdCatalog">@item.IdType</div></text>),
+                                                                                                     grid.Column(columnName: "Code", header: "Codigo"),
+                                                                                                                             grid.Column(columnName: "Name", header: "Nombre"),
+                                                                                                                             grid.Column(columnName: "Description", header: "Descripcion"),
+                                                                                                                             grid.Column(columnName: "InsDateTime", header: "Fecha Alta"),
+                                                                                                                             grid.Column(columnName: "UpdDateTime", header: "Fecha Actualizacion")
+            //grid.Column(header: "Activo", format: @<text><input type="checkbox" checked="@item." disabled="disabled" /></text>)
+                                                                                                                                              ))
+    <div id="gridFooter">
+        <div class="Tenaris">
+
+            <ul class="ulmenu">
+                <li>
+                    <div class='mbtn'>
+                        <table id="mnDetails">
+                            <tr>
+
+                                <td>
+                                    Detalles
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </li>
+                <li>
+                    <div class='mbtn'>
+                        <table id="mnFindTool">
+                            <tr>
+
+                                <td>
+                                    Buscar
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </li>
+                <li>
+                    <div class='mbtn'>
+                        <table id="mnCreateTool">
+                            <tr>
+
+                                <td>
+                                    Agregar
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </li>
+                <li>
+                    <div class='mbtn'>
+                        <table id="mnTestView">
+                            <tr>
+
+                                <td>
+                                    Eliminar
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="idTemp" />
+
+
+@using (Ajax.BeginForm("GetProperties", "Property", FormMethod.Post, new AjaxOptions()
+{
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "contProperty"
+}, new { @name = "frmGetProperties", @id = "frmGetProperties" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.FirstOrDefault().IdCatalog);
+    <input type="hidden" name="fromDb" value="true" />
+}
+
+
+
+

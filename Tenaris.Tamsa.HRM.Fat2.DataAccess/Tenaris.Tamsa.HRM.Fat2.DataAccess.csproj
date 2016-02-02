@@ -70,6 +70,7 @@
     <Compile Include="Models\Group.cs" />
     <Compile Include="Models\GroupPolicy.cs" />
     <Compile Include="Models\HeatHistory.cs" />
+    <Compile Include="Models\Tool_Catalog.cs" />
     <Compile Include="Models\Tool_Production.cs" />
     <Compile Include="Models\Tool_Property.cs" />
     <Compile Include="Models\Tool_Supplier.cs" />

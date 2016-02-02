@@ -7,7 +7,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.Models
 {
     public partial class Tool_Property
     {
-        
+        //idProperty, IdCatalog, IdDatatype, name
         public global::System.Int32 idProperty
         {
             get
@@ -25,34 +25,37 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.Models
             }
         }
         private global::System.Int32 _idProperty;
-        public global::System.Int32 dataType
+        public global::System.Int32 IdCatalog
         {
             get
             {
-                return _dataType;
+                return _IdCatalog;
             }
             set
             {
-              
-                _dataType = value;
-              
+
+                _IdCatalog = value;
+
             }
         }
-        private global::System.Int32 _dataType;
-        public global::System.String Value
+        private global::System.Int32 _IdCatalog;
+
+
+        public global::System.Int32 IdDatatype
         {
             get
             {
-                return _Value;
+                return _IdDatatype;
             }
             set
             {
+
+                _IdDatatype = value;
               
-                _Value = value;
-               
             }
         }
-        private global::System.String _Value;
+        private global::System.Int32 _IdDatatype;
+       
         public global::System.String name
         {
             get
@@ -67,19 +70,6 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.Models
             }
         }
         private global::System.String _name;
-        public global::System.Boolean Active
-        {
-            get
-            {
-                return _Active;
-            }
-            set
-            {
-
-                _Active = value;
-
-            }
-        }
-        private global::System.Boolean _Active;
+       
     }
 }

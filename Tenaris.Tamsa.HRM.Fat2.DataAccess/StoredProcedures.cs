@@ -40,6 +40,11 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
         public const string ToolDetail_Del = "[Tool].[ToolDetail_Del]";
         public const string ToolDetail_Ins = "[Tool].[ToolDetail_Ins]";
         public const string ToolDetail_Udp = "[Tool].[ToolDetail_Udp]";
+
+        public const string Catalog_Ins = "[Tool].[Catalog_Ins]";
+        public const string Catalog_Get = "[Tool].[Catalog_Get]";
+        public const string Catalog_Upd = "[Tool].[Catalog_Upd]";
+        public const string Catalog_Del = "[Tool].[Catalog_Del]";
         
     }
 }

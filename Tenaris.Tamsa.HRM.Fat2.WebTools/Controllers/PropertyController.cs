@@ -29,7 +29,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
         [HttpPost]
         public ActionResult Create(Tool_Property entity)
         {
-           ToolViewModel vTool = (ToolViewModel)Session["Tool"];
+           Tool_vm vTool = (Tool_vm)Session["Tool"];
            vTool.Properties.Add(entity);
            Session["Tool"] = vTool;
            return Json(new { result = true, idType = vTool.idType });
@@ -56,13 +56,13 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
             List<Tool_Property> PropertyList = null;
             if (Session["Tool"] != null && !fromDb)
             {   
-                ToolViewModel vModel = (ToolViewModel)Session["Tool"];
+                Tool_vm vModel = (Tool_vm)Session["Tool"];
                 PropertyList = vModel.Properties;
             }
             if(PropertyList == null)
             {
                 PropertyList = db.GetPropertiesByTypeId(idType);
-                ToolViewModel vModel = new ToolViewModel();
+                Tool_vm vModel = new Tool_vm();
                 vModel.idType = idType;
                 vModel.Properties = PropertyList;
                 Session["Tool"] = vModel;

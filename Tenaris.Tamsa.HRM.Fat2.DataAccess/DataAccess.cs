@@ -196,11 +196,10 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
         {
            
             Dictionary<string, object> cmdParams = new Dictionary<string, object>();
-            //@pidProperty, @pdataType, @pValue, @pname
+            //idProperty, IdCatalog, IdDatatype, name
             cmdParams.Add("@pidProperty", entity.idProperty);
-            cmdParams.Add("@pdataType", entity.dataType);
-            cmdParams.Add("@pValue", entity.Value);
-            cmdParams.Add("@pActive", entity.Active);
+            cmdParams.Add("@pIdCatalog", entity.IdCatalog);
+            cmdParams.Add("@PIdDatatype", entity.IdDatatype);            
             cmdParams.Add("@pname", entity.name);          
 
             var dtResult = ExecTable(StoredProcedures.Property_Get, cmdParams);
@@ -220,6 +219,59 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
             
             var dtResult = ExecTable(StoredProcedures.Types_Get, cmdParams);
             return DataTableToModel.DatatableToClass<Tool_Type>(dtResult).ToList();
+        }
+
+        public List<Tool_Supplier> GetSuppliersByToolType(int idType)
+        {
+            Dictionary<string, object> cmdParams = new Dictionary<string, object>();
+            cmdParams.Add("@pidType", idType);
+            var dtResult = ExecTable(StoredProcedures.Suppliers_GetByToolType, cmdParams);
+            return DataTableToModel.DatatableToClass<Tool_Supplier>(dtResult).ToList();
+        }
+
+        public List<Tool_Property> GetPropertiesByTypeId(int idTypeTool)
+        {
+            Dictionary<string, object> cmdParams = new Dictionary<string, object>();
+            cmdParams.Add("@pidTypeTool", idTypeTool);
+            var dtResult = ExecTable(StoredProcedures.Property_GetByTypeId, cmdParams);
+            List<Tool_Property> ListProperties = DataTableToModel.DatatableToClass<Tool_Property>(dtResult).ToList();
+            return ListProperties;
+        }
+
+        public bool Create(Tool_Property entity)
+        {
+            Dictionary<string, object> cmdParams = new Dictionary<string, object>();
+
+            cmdParams.Add("@pidProperty", entity.idProperty);
+            cmdParams.Add("@pIdCatalog", entity.IdCatalog);
+            cmdParams.Add("@pIdDatatype", entity.IdDatatype);            
+            cmdParams.Add("@pname", entity.name);
+
+            var dtResult = ExecTable(StoredProcedures.Property_Ins, cmdParams);
+            if (dtResult.Rows.Count <= 0)
+            {
+                throw new Exception();
+            }
+            //return DataTableToModel.DatatableToClass<Tool_Property>(dtResult).ToList(); 
+            return true;
+        }
+
+        public List<Tool_Catalog> GetToolCatalog() { return GetToolCatalog(new Tool_Catalog { }); }
+        public List<Tool_Catalog> GetToolCatalog(Tool_Catalog entity)
+        {
+
+            Dictionary<string, object> cmdParams = new Dictionary<string, object>();
+            
+                cmdParams.Add("@pIdCatalog", entity.IdCatalog);
+                cmdParams.Add("@pIdType", entity.IdType);
+                //cmdParams.Add("@pActive", entity.Active);
+                cmdParams.Add("@pInsDateTime", entity.InsDateTime);
+                cmdParams.Add("@pUpdDateTime", entity.UpdDateTime);
+          
+          
+
+            var dtResult = ExecTable(StoredProcedures.Catalog_Get, cmdParams);
+            return DataTableToModel.DatatableToClass<Tool_Catalog>(dtResult).ToList();
         }
 
         //--- Get all distint Diameter from all Tool type equs idToolType
@@ -273,40 +325,6 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
             throw new NotImplementedException();
         }
 
-        public List<Tool_Supplier> GetSuppliersByToolType(int idType)
-        {
-            Dictionary<string, object> cmdParams = new Dictionary<string, object>();
-            cmdParams.Add("@pidType", idType);
-            var dtResult = ExecTable(StoredProcedures.Suppliers_GetByToolType, cmdParams);
-            return DataTableToModel.DatatableToClass<Tool_Supplier>(dtResult).ToList();
-        }
-
-        public List<Tool_Property> GetPropertiesByTypeId(int idTypeTool)
-        {
-            Dictionary<string, object> cmdParams = new Dictionary<string, object>();
-            cmdParams.Add("@pidTypeTool", idTypeTool);
-            var dtResult = ExecTable(StoredProcedures.Property_GetByTypeId, cmdParams);
-            List<Tool_Property> ListProperties = DataTableToModel.DatatableToClass<Tool_Property>(dtResult).ToList();
-            return ListProperties;
-        }
-
-        public bool Create(Tool_Property entity)
-        {
-            Dictionary<string, object> cmdParams = new Dictionary<string, object>();
-
-            cmdParams.Add("@pidProperty", entity.idProperty);
-            cmdParams.Add("@pdataType", entity.dataType);
-            cmdParams.Add("@pValue", entity.Value);
-            cmdParams.Add("@pActive", entity.Active);
-            cmdParams.Add("@pname", entity.name);   
-           
-            var dtResult = ExecTable(StoredProcedures.Property_Ins, cmdParams);
-            if (dtResult.Rows.Count <= 0)
-            {
-                throw new Exception();
-            }
-            //return DataTableToModel.DatatableToClass<Tool_Property>(dtResult).ToList(); 
-            return true;
-        }
+      
     }
 }
