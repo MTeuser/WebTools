@@ -1,0 +1,84 @@
+﻿ 
+<link href="~/Content/TenarisWebApplication.css" rel="stylesheet" />
+
+<!-- Row de Fecha y y Turno *******************  Zona de Búsqueda de la Producción  ************************** -->
+<div class="row">
+
+    <div class="col-md-12" style="font-size: 12pt;font-weight: bold; background-color:#009999; color:#FFFFFF; height:20px; text-align:center; vertical-align:middle; font-family: Verdana; margin-bottom:3px">
+        Reportes de Bitácora MPM
+    </div>  <!-- Fin de la Cabecera de Reportes de Bitácora MPM -->
+
+    <div style="border:1px solid #000">
+
+        <form class="form-horizontal center" role="form">
+
+            <div class="form-group" style="">
+
+                @Html.Label("lblBeginDate", "Fecha Inicial: ", new { @class = "label col-sm-2", @style = "padding-bottom: 22px; margin-left: 15px" })
+
+                <div class="span5 col-md-2">
+                    <div class="input-group date">
+                        <input type="text" class="form-control" id="txtBeginDate"> <span class="input-group-addon calendarDatePicker"><i class="glyphicon glyphicon-calendar"></i></span>
+                    </div>
+                </div>
+
+
+
+                @Html.Label("lblTurno", "Turno: ", new { @class = "label control-label col-sm-1", @style = "text-align:left; padding-bottom: 18px;" })
+
+                <div class="col-sm-2">
+                    @{
+                         var selectList = new SelectList(
+                         new List<SelectListItem>
+                                {
+                                    new SelectListItem {Text = "Google", Value = "Google"},
+                                     new SelectListItem {Text = "Other", Value = "Other"},
+                                 }, "Value", "Text");
+                    }
+
+
+                    @Html.DropDownList("ddlTurnos", selectList, new { @class = "dropDownListtTurno form-control col-sm-1" })
+                </div>
+
+            </div>
+
+            <div class="form-group">
+
+                <div class="">
+
+                    <label id="lblEndDate" class="label col-sm-2" style="padding-bottom: 12px; margin-left: 15px; font-weight:bold">
+
+                        <input type="checkbox" id="chkEndDate" value="" />
+
+                        Fecha Final:
+                    </label>
+
+                </div>
+
+
+
+                <div class="span5 col-md-2">
+                    <div id="divEndDate" class="input-group date">
+                        <input type="text" id="txtEndDate" class="form-control" disabled="disabled"> <span class="input-group-addon calendarDatePicker"><i class="glyphicon glyphicon-calendar"></i></span>
+                    </div>
+                </div>
+
+            </div>
+
+        </form> <!-- Fin del Form de Fecha Inicial y Fecha Final. -->
+
+    </div> <!-- Fin del Border que rodea a las fechas de búsqueda -->
+
+</div> <!-- Fin del ROW de Búsqueda de Fechas y Turnos. -->
+<!--  ROW del botón  ***********************************************************                 -->
+<div class="row" style="border:1px solid #000; margin-top:1px; margin-bottom:1px">
+
+    <div class="form-group">
+        <div class="col-sm-6" style=" padding-bottom:5px">
+            <input id="btnBuscar" type=button value="Buscar" class="btn cssButton" style="background-image: url(/Content/TenarisIcons/icon_search.png); margin-top:5px; " />
+            <input id="btnExcel" type=button value="Excel" class="btn cssButton" style="background-image: url(/Content/TenarisIcons/icon_export_excel.png);  margin-top:5px;" disabled="disabled" />
+            <input id="btnEnviarCorreo" type=button value="Enviar" class="btn cssButton" data-toggle="modal" data-target="#myModal" style="background-image: url(/Content/TenarisIcons/icon_send_info.png);  margin-top:5px;" disabled="disabled" />
+        </div>
+    </div>
+
+</div> <!-- Fin del ROW del Botón Buscar -->

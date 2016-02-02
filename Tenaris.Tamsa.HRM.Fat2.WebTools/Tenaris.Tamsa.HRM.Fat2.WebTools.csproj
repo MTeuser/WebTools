@@ -195,6 +195,7 @@
     <Content Include="Content\Telerik\telerik.common.min.css" />
     <Content Include="Content\Telerik\telerik.rtl.css" />
     <Content Include="Content\Telerik\telerik.WebBlue.css" />
+    <Content Include="Content\TenarisWebApplication.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -333,6 +334,7 @@
     <Content Include="Views\Property\Create.cshtml" />
     <Content Include="Views\Catalog\Index.cshtml" />
     <Content Include="Views\Catalog\Details.cshtml" />
+    <Content Include="Views\Catalog\PartialFilter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

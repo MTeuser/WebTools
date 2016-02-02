@@ -199,7 +199,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
             //idProperty, IdCatalog, IdDatatype, name
             cmdParams.Add("@pidProperty", entity.idProperty);
             cmdParams.Add("@pIdCatalog", entity.IdCatalog);
-            cmdParams.Add("@PIdDatatype", entity.IdDatatype);            
+            cmdParams.Add("@pIdDatatype", entity.IdDatatype);            
             cmdParams.Add("@pname", entity.name);          
 
             var dtResult = ExecTable(StoredProcedures.Property_Get, cmdParams);

@@ -2,4 +2,34 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<div>
+    Detalles   
+ <div id="Content">
+     <table>
+          
+         @foreach (var item in ViewBag.Type)
+         {
+             <tr>
+                 <div>@item.idType</div>
+                 <div>@item.Code</div>
+                 <div>@item.Name</div>
+                 <div>@item.Description</div>
+             </tr>
+         }
+     </table>
+     <div id="cProperties" class="contentproperties">
+         <table>
+             @foreach (var p in ViewBag.Properties)
+             {
+                 <tr>
+                     <td>@p.idProperty</td>
+                     <td >@p.name</td>                     
+                     <td >@p.TypeName</td>                     
+                 </tr>
+             }
+         </table>
+     </div>
+ </div>
+            
+</div>
+
