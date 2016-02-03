@@ -18,6 +18,9 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/datatimepicker_es").Include(
+                        "~/Scripts/ui.datepicker-es-MX.js"));
+
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(

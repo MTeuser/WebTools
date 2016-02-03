@@ -273,9 +273,6 @@
     <Content Include="Images\logoTenaris.gif" />
     <Content Include="Images\Mandril_84891-8107635.jpg" />
     <Content Include="Images\Punta_368x310_10041164e0bcba6.jpg" />
-    <None Include="Scripts\jquery-1.8.0-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.8.0.js" />
-    <Content Include="Scripts\jquery-1.8.0.min.js" />
     <Content Include="Scripts\jquery-add-input-area.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
@@ -288,7 +285,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\ui.datepicker-es-MX.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
