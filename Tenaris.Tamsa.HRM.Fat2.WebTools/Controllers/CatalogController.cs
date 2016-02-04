@@ -56,5 +56,56 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
             return View();
         }
 
+        public ActionResult Search(int Type = 0, string Code="", string Name="", string Description="")
+        {
+            List<Catalog_vm> ListCatalog = new List<Catalog_vm>();
+            var Catalog = db.GetToolCatalog();
+            var Types = db.GetToolTypes();
+            try
+            {
+                ListCatalog = (from item in Catalog
+                               join eType in Types on item.IdType equals eType.idType                               
+                               select new Catalog_vm
+                               {
+                                   IdCatalog = item.IdCatalog,
+                                   Active = item.Active,
+                                   Code = eType.Code,
+                                   IdType = eType.idType,
+                                   Description = eType.Description,
+                                   InsDateTime = item.InsDateTime,
+                                   Name = eType.Name,
+                                   UpdDateTime = item.UpdDateTime
+                               }).ToList();              
+                if (Type > 0)
+                {
+                    ListCatalog = ListCatalog.Where(l => l.IdType == Type).ToList();
+                }
+                if (Code.Length > 0)
+                {
+                    ListCatalog = ListCatalog.Where(l => l.Code.ToUpper().Equals(Code.ToUpper())).ToList();
+                }
+                if (Name.Length > 0)
+                {
+                    ListCatalog = ListCatalog.Where(l => l.Name.ToUpper().Equals(Name.ToUpper())).ToList();
+                }
+                if (Description.Length > 0)
+                {
+                    ListCatalog = ListCatalog.Where(l => l.Description.ToUpper().Contains(Description.ToUpper())).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                //ignore.
+            }
+            return View("Index",ListCatalog);  
+        }
+
+        public ActionResult New()
+        {
+            ViewBag.Types = new SelectList(db.GetToolTypes(), "idType", "Code");
+            ViewBag.Properties = new SelectList(db.GetToolProperties(), "idProperty", "name");
+            return View();
+        }
+
     }
 }

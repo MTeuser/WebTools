@@ -191,7 +191,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
             return DataTableToModel.DatatableToClass<Tool_Supplier>(dtResult).ToList();
         }
 
-        public List<Tool_Property> GetToolProperties() { return GetToolProperties(null); }
+        public List<Tool_Property> GetToolProperties() { return GetToolProperties(new Tool_Property { }); }
         public List<Tool_Property> GetToolProperties(Tool_Property entity)
         {
            

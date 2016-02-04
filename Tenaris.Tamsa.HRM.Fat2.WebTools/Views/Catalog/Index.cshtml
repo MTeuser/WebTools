@@ -151,15 +151,20 @@
         $('#gridCatalog tbody tr').hover(function () {
             $(this).toggleClass('clickable');
         });
-           // .on('click', function () {
-           // location.href = '/Details/' + $(this).find('td:first').text();
+        // .on('click', function () {
+        // location.href = '/Details/' + $(this).find('td:first').text();
         //});
         $('#gridCatalog tr').click(function () {
             $(this).addClass('selectRow');
             $('#gridCatalog tr').not(this).removeClass('selectRow');
             var rowId = $(this).find("div").eq(0).attr('id');
-            $("#idTemp").val(rowId);
+            $("#IdCatalog").val(rowId);
         });
+
+        if ($("#IdCatalog").val().length > 0) {
+            $("#IdCatalog").val("0");
+        }
+
 
         $('#gridFooter div table')
             .button()
@@ -178,12 +183,44 @@
                     location.href = "@Url.Action("testView", "Home")";
                 }
             });
+
+        $("#btnDetails").button().click(function () {
+            var idTemp = $("#IdCatalog").val();
+            if (idTemp.length == 0 || idTemp == 0)
+            { alert("Selecione un renglon."); return false; }
+            frm = document.getElementById("frmGoAction");
+            frm.action = "@Url.Action("Details", "Catalog")";
+            frm.submit();
+            //location.href = "@Url.Action("Details", "Catalog")?IdCatalog=" + idTemp;
+        });
+        $("#btnEdit").button().click(function () {
+            var idTemp = $("#IdCatalog").val();
+            if (idTemp.length == 0 || idTemp == 0)
+            { alert("Selecione un renglon."); return false; }
+            frm = document.getElementById("frmGoAction");
+            frm.action = "@Url.Action("Edit", "Catalog")";
+            frm.submit();
+        });
+        $("#btnDelete").button().click(function () {
+            var idTemp = $("#IdCatalog").val();
+            if (idTemp.length == 0 || idTemp == 0)
+            { alert("Selecione un renglon."); return false; }
+            frm = document.getElementById("frmGoAction");
+            frm.action = "@Url.Action("Delete", "Catalog")";
+            frm.submit();
+        });
+        //btnNew
+        $("#btnNew").button().click(function () {
+            location.href = "@Url.Action("New", "Catalog")";
+        });
     });
+
+
 
 </script>
 <div class="col-md-12" style="font-size: 12pt;font-weight: bold; background-color:#009999; color:#FFFFFF; height:20px; text-align:center; vertical-align:middle; font-family: Verdana; margin-bottom:3px">
     Catalogo de herramientas
-</div>  <!-- Fin de la Cabecera de Reportes de Bitácora MPM -->
+</div>  
 
 @{Html.RenderPartial("PartialFilter");}
 
@@ -211,12 +248,36 @@
 
 <input type="hidden" id="idTemp" />
 
+<div id="gridFooter">
+    <div class="row" style="border:1px solid #000; margin-top:1px; margin-bottom:1px">
 
-@using (Ajax.BeginForm("GetProperties", "Property", FormMethod.Post, new AjaxOptions()
+        <div class="form-group">
+            <div class="col-sm-6" style=" padding-bottom:5px">
+                <input id="btnDetails" type=button value="Detalles" class="csbutton" style="margin-top:5px; width:150px; font-size:10pt;" />
+                <input id="btnEdit" type=button value="Modificar" class="csbutton" style="margin-top:5px; width:150px; font-size:10pt;" />
+                <input id="btnNew" type=button value="Nueva" class="csbutton" style="margin-top:5px; width:150px; font-size:10pt;" />
+                <input id="btnDelete" type=button value="Eliminar" class="csbutton" style="margin-top:5px; width:150px; font-size:10pt;" />
+            </div>
+        </div>
+
+    </div> <!-- Fin del ROW del Botón Buscar -->
+</div>
+
+
+    @using (Ajax.BeginForm("GetProperties", "Property", FormMethod.Post, new AjaxOptions()
 {
     InsertionMode = InsertionMode.Replace,
     UpdateTargetId = "contProperty"
 }, new { @name = "frmGetProperties", @id = "frmGetProperties" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.FirstOrDefault().Active);
+        <input type="hidden" name="fromDb" value="true" />
+    }
+
+@using (Html.BeginForm("GetProperties", "Property", FormMethod.Post, 
+    new { @name = "frmGoAction", @id = "frmGoAction" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)

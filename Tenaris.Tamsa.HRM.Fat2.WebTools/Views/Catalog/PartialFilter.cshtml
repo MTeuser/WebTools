@@ -1,42 +1,50 @@
 ﻿ 
-<link href="~/Content/TenarisWebApplication.css" rel="stylesheet" />
+
 
 <!-- Row de Fecha y y Turno *******************  Zona de Búsqueda de la Producción  ************************** -->
-<table style="width: 100%; border-spacing: 2px;" class="tableData">
-    <tr>
-        <td class="itemcell" id="lbl1">
-            Tipo
-        </td>
-        <td class="itemcellValue">
-            <input id="txtType" type="text" class="textBox" />
-        </td>
-        <td class="itemcell" id="lbl2">
-            Codigo
-        </td>
-        <td class="itemcellValue">
-            <input id="txtCode" type="text" class="textBox" />
-        </td>
-        <td class="itemcell" id="lbl3">
-            Nombre
-        </td>
-        <td class="itemcellValue">
-            <input id="txtNombre" type="text" class="textBox" />
-        </td>
-        <td class="itemcell" id="lbl4">
-            Descripcion
-        </td>
-        <td class="itemcellValue">
-            <input id="txtDescription" type="text" class="textBox" />
-        </td>
-    </tr>
-   
-</table>
+
+@using (Html.BeginForm("Search", "Catalog", FormMethod.Post, new { @name = "frmSearch", @id="frmSearch" }))
+{
+    <div class="row" style="border:1px solid #000; margin-top:1px; margin-bottom:1px">
+        <table style="width: 100%; border-spacing: 2px;" class="tableData">
+            <tr>
+                <td class="itemcell" id="lbl1">
+                    Tipo
+                </td>
+                <td class="itemcellValue">
+                    <input id="Type" name="Type" type="text" class="textBox" />
+                </td>
+                <td class="itemcell" id="lbl2">
+                    Codigo
+                </td>
+                <td class="itemcellValue">
+                    <input id="Code" name="Code" type=" text" class="textBox" />
+                </td>
+            </tr>
+            <tr>
+                <td class="itemcell" id="lbl3">
+                    Nombre
+                </td>
+                <td class="itemcellValue">
+                    <input id="Name" name="Name" type="text" class="textBox" />
+                </td>
+                <td class="itemcell" id="lbl4">
+                    Descripcion
+                </td>
+                <td class="itemcellValue">
+                    <input id="Description" name="Description" type="text" class="textBox" />
+                </td>
+            </tr>
+
+        </table>
+    </div>
+}
 <!--  ROW del botón  ***********************************************************                 -->
 <div class="row" style="border:1px solid #000; margin-top:1px; margin-bottom:1px">
 
     <div class="form-group">
         <div class="col-sm-6" style=" padding-bottom:5px">
-            <input id="btnBuscar" type=button value="Buscar" class="csbutton" style="background-image: url(/Content/TenarisIcons/icon_search.png); margin-top:5px; width:130px;" />                        
+            <input id="btnBuscar" type=button value="Buscar" class="csbutton" style="background-image: url(/Content/TenarisIcons/icon_search.png); margin-top:5px; width:130px; font-size:10pt;" />                        
         </div>
     </div>
 
@@ -48,5 +56,12 @@
     $("#txtFechaInicio").datepicker();
     $("#txtFechaFin").datepicker();
     $('#ui-datepicker-div').wrap('<div class="Tenaris"></div>');
-    $('#btnBuscar').button();
+    $('#btnBuscar').button().click(function () {
+        $("#frmSearch").submit();
+    });
+    $("#Type").keyup(function () {
+        if (this.value != this.value.replace(/[^0-9\.]/g, '')) {
+            this.value = this.value.replace(/[^0-9\.]/g, '');
+        }
+    });
 </script>

@@ -45,7 +45,8 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools
             bundles.Add(new StyleBundle("~/Content/themes/Tenaris/css").Include(
                         "~/Content/themes/Tenaris/jquery-ui.css",
                         "~/Content/themes/Tenaris/jquery-ui.structure.css",
-                        "~/Content/themes/Tenaris/jquery-ui.theme.css"
+                        "~/Content/themes/Tenaris/jquery-ui.theme.css",
+                        "~/Content/TenarisWebApplication.css"
                         ));   
 
             

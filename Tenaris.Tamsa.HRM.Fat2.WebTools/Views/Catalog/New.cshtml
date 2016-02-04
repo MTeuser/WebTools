@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "New";
+}
+
+<div class="col-md-12" style="font-size: 12pt;font-weight: bold; background-color:#009999; color:#FFFFFF; height:20px; text-align:center; vertical-align:middle; font-family: Verdana; margin-bottom:3px">
+    Nueva herramienta
+</div> 
+<div >
+    <div style="text-align:center">@Html.DropDownList("Type", (SelectList)ViewBag.Types)</div>
+    <div style="width:100%">
+        <div style="border:1px solid blue;float:left">Propiedades añadidas</div>
+        <div style="float:left"><input type="button" value=">>" /><input type="button" value="<<" /></div>
+        <div style="">
+             @Html.DropDownList("Property", (SelectList)ViewBag.Properties, new { @multiple = "multiple" })
+        </div>
+    </div>       
+</div>
+<!--  ROW del botón  ***********************************************************                 -->
+<div class="row" style="border:1px solid #000; margin-top:1px; margin-bottom:1px">
+    <div class="form-group">
+        <div class="col-sm-6" style=" padding-bottom:5px">
+            <input id="btnOk" type=button value="Aceptar" class="csbutton" style="background-image: url(/Content/TenarisIcons/icon_search.png); margin-top:5px; width:130px; font-size:10pt;" />
+            <input id="btnCancel" type=button value="Cancelar" class="csbutton" style="background-image: url(/Content/TenarisIcons/icon_search.png); margin-top:5px; width:130px; font-size:10pt;" />
+        </div>
+    </div>
+
+</div> <!-- Fin del ROW del Botón -->
+

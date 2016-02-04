@@ -391,6 +391,7 @@
     <Content Include="Views\Tool\Find.cshtml" />
     <Content Include="Views\Home\testView.cshtml" />
     <Content Include="Views\Tool\GetProperties.cshtml" />
+    <Content Include="Views\Catalog\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tenaris.Tamsa.HRM.Fat2.DataAccess\Tenaris.Tamsa.HRM.Fat2.DataAccess.csproj">
