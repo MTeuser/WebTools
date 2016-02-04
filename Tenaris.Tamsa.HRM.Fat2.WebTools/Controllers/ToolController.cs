@@ -143,7 +143,8 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
 
         public ActionResult AddTool(int ToolType)
         {
-            return View("tipCreate");
+            //ViewBag.ToolType = 
+            return View("Create");
         }        
 
         public ActionResult GetProperties(int idType)

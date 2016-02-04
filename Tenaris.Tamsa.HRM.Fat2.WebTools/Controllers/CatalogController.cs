@@ -102,8 +102,8 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
 
         public ActionResult New()
         {
-            ViewBag.Types = new SelectList(db.GetToolTypes(), "idType", "Code");
-            ViewBag.Properties = new SelectList(db.GetToolProperties(), "idProperty", "name");
+            ViewBag.Types = new SelectList(db.GetToolTypes(), "idType", "Name");
+            ViewBag.Properties = new SelectList(db.GetToolProperties(), "idProperty", "Name");
             return View();
         }
 

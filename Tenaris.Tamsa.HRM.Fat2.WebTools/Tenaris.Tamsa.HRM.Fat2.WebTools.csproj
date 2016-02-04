@@ -286,6 +286,7 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\ui.datepicker-es-MX.js" />
+    <Content Include="Views\Catalog\PartialFilter.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -331,7 +332,6 @@
     <Content Include="Views\Property\Create.cshtml" />
     <Content Include="Views\Catalog\Index.cshtml" />
     <Content Include="Views\Catalog\Details.cshtml" />
-    <Content Include="Views\Catalog\PartialFilter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -392,6 +392,7 @@
     <Content Include="Views\Home\testView.cshtml" />
     <Content Include="Views\Tool\GetProperties.cshtml" />
     <Content Include="Views\Catalog\New.cshtml" />
+    <Content Include="Views\Tool\PartialFilter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tenaris.Tamsa.HRM.Fat2.DataAccess\Tenaris.Tamsa.HRM.Fat2.DataAccess.csproj">
