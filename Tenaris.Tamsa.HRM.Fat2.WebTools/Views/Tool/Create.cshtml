@@ -225,12 +225,18 @@
             //location.href = "@Url.Action("Details", "Tool")?IdCatalog=" + idTemp;
         });
         $("#btnEdit").button().click(function () {
-            var idTemp = $("#idTool").val();
-            if (idTemp.length == 0 || idTemp == 0)
-            { alert("Selecione un renglon."); return false; }
-            frm = document.getElementById("frmGoAction");
-            frm.action = "@Url.Action("Edit", "Tool")";
-            frm.submit();
+            var idTool = $("#idTool").val();
+            var id = 0;
+            if (idTool.length > 0)
+            {
+                id = idTool * 1;
+            }
+            if(id == 0)
+            {
+                alert("Seleccione un registro");
+                return false;
+            }
+            OpenEditPopup();
         });
         $("#btnDelete").button().click(function () {
             var idTemp = $("#idTool").val();
@@ -274,6 +280,27 @@
                 width: 1000,
                 height: 650,
                 title: "Detalles - Punta",
+                resizable: false,
+                autoOpen: false,
+                dialogClass: 'Tenaris',
+            });
+
+            div.parent('.ui-dialog').appendTo('.myCustomScope');
+            div.dialog('open');
+
+        });
+
+    }
+
+    function OpenEditPopup() {
+        var div = $("#DivToAppendPartialView");
+        var idTool = $("#idTool").val();
+        div.load("/Tool/Edit?idTool=" + idTool, function () {
+            div.dialog({
+                modal: true,
+                width: 1000,
+                height: 650,
+                title: "Editar - Punta",
                 resizable: false,
                 autoOpen: false,
                 dialogClass: 'Tenaris',

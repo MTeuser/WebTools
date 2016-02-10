@@ -95,20 +95,45 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
         //
         // GET: /Tool/Edit/5
 
-        public ActionResult Edit(int id = 0)
+        public ActionResult Edit(int idTool)
         {
-            Tool_Tool tool_tool = db.GetTools(new Tool_Tool { idTool = id }).Single();
-                       
-            return View(tool_tool);
+            Tool_vm tool_tool = GetToolsProperties().Where(t => t.idTool == idTool).FirstOrDefault();                        
+            return View("partialEdit",tool_tool);
         }
 
         //
         // POST: /Tool/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Tool_Tool tool_tool)
+        public ActionResult Edit(FormCollection formCollection)
         {
-            return View(tool_tool);
+            int idUser = 1;
+            if (Session["idUser"] != null)
+            {
+                idUser = (int)Session["idUser"];
+            }
+            int idTool = Convert.ToInt32(formCollection["idTool"]);
+
+            if (idTool > 0)
+            {
+                int index = 0;
+                foreach (var key in formCollection.AllKeys)
+                {
+                    //index fc.keys -1, Jquery add value.
+                    if (index > 1 && index < formCollection.Keys.Count - 1)
+                    {
+                        var value = formCollection[key];
+                        Tool_ToolDetail Td = db.Update(new Tool_ToolDetail
+                        {
+                            idTool = idTool,
+                            idProperty = Convert.ToInt32(key),
+                            Value = value
+                        });
+                    }
+                    index++;
+                }
+            }
+            return Json(new { Success = 1 }, "Application/Json", JsonRequestBehavior.AllowGet);
         }
 
         //

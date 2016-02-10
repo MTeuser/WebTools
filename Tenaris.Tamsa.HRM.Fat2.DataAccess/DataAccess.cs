@@ -357,6 +357,16 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
             throw new NotImplementedException();
         }
 
-      
+        public Tool_ToolDetail Update(Tool_ToolDetail entity)
+        {
+            Dictionary<string, object> cmdParams = new Dictionary<string, object>();
+            cmdParams.Add("@pidToolDetail", entity.idToolDetail);
+            cmdParams.Add("@pidProperty", entity.idProperty);
+            cmdParams.Add("@pidTool", entity.idTool);
+            cmdParams.Add("@pValue", entity.Value);
+
+            var dtResult = ExecTable(StoredProcedures.ToolDetail_Udp, cmdParams);
+            return DataTableToModel.DatatableToClass<Tool_ToolDetail>(dtResult).ToList().FirstOrDefault();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿@model Tenaris.Tamsa.HRM.Fat2.WebTools.Models.Tool_vm
+
 @{
     Layout = null;
 }
@@ -16,14 +17,14 @@
     }
 </style>
 
-@using (Ajax.BeginForm("AddNew", "Tool", FormMethod.Post, new AjaxOptions { OnSuccess = "msjSuccess(data)" }, new { @id="frmAddNew" }))
+@using (Ajax.BeginForm("Edit", "Tool", FormMethod.Post, new AjaxOptions { OnSuccess = "msjSuccess(data)" }, new { @id="frmEdit" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <div class="row" id="dvfrmElements">
         <table style="width: 100%; border-spacing: 2px;" class="tableData">
-            @Html.Hidden("idCatalog","@(ViewBag.idCatalog)")
+            @Html.Hidden("idTool", Model.idTool)
             @foreach(var property in Model.Properties)
                 {
                 <tr>
@@ -31,7 +32,7 @@
                         @property.Name
                     </td>
                     <td class="itemcellValue">
-                        @Html.TextBox(property.idProperty.ToString())
+                        @Html.TextBox(property.idProperty.ToString(), property.Value.ToString())
                     </td>
                 </tr>
                 }
@@ -66,7 +67,7 @@
                 $("#DivToAppendPartialView").dialog("close");
             });
             $("#btnOk").button().click(function () {
-                $("#frmAddNew").submit();
+                $("#frmEdit").submit();
             });
 
 </script>
