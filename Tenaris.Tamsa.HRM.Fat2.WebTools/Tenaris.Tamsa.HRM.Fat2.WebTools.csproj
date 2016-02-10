@@ -188,8 +188,9 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Catalog_vm.cs" />
+    <Compile Include="Models\Property_vm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\ToolViewModel.cs" />
+    <Compile Include="Models\Tool_vm.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Telerik\telerik.common.min.css" />
@@ -393,6 +394,9 @@
     <Content Include="Views\Tool\GetProperties.cshtml" />
     <Content Include="Views\Catalog\New.cshtml" />
     <Content Include="Views\Tool\PartialFilter.cshtml" />
+    <Content Include="Views\Tool\partialNewTool.cshtml" />
+    <Content Include="Views\Tool\partialDetails.cshtml" />
+    <Content Include="Views\Tool\partialEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tenaris.Tamsa.HRM.Fat2.DataAccess\Tenaris.Tamsa.HRM.Fat2.DataAccess.csproj">

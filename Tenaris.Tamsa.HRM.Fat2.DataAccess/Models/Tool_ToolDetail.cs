@@ -54,5 +54,20 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.Models
             }
         }
         private Nullable<global::System.Int32> _idTool;
+
+        public global::System.String Value
+        {
+            get
+            {
+                return _Value;
+            }
+            set
+            {
+
+                _Value = value;
+
+            }
+        }
+        private global::System.String _Value;
     }
 }

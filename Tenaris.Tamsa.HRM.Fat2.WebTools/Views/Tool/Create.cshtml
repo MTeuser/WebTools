@@ -4,6 +4,43 @@
     ViewBag.Title = "Create";
     var grid = new WebGrid(source: Model, canPage: true, rowsPerPage: 10, selectionFieldName: "SelectedRow");
     grid.Pager(WebGridPagerModes.All);
+
+
+
+    List<WebGridColumn> cols = new List<WebGridColumn>();
+    
+    int addId = 0;                                                                                                                          
+    for (int i = 0; i < Model.FirstOrDefault().Properties.Count; i++)
+    {
+        int local = i;
+        byte[] intBytes = BitConverter.GetBytes(Model.ElementAt(0).Properties[local].ViewUI);
+        if ((intBytes[0] & (1 << 1 - 1)) != 0)
+        {
+            if (addId == 0)
+            {
+                //@<text><div id="@item.IdCatalog">@item.IdType</div></text>
+                cols.Add(grid.Column(Model.FirstOrDefault().Properties[i].Name, Model.FirstOrDefault().Properties[i].Name,
+                 format: item => Html.Raw("<text><div id="+ item.IdCatalog + ">" + item.Properties[local].Value + "</div></text>")));
+                addId++;         
+            }
+            else
+            {
+                if (addId == 1)
+                {
+                    cols.Add(grid.Column(Model.FirstOrDefault().Properties[i].Name, Model.FirstOrDefault().Properties[i].Name,
+                        format: item => Html.Raw("<text><div id=" + item.idTool + ">" + item.Properties[local].Value + "</div></text>")));
+                    addId++;
+                }
+                else
+                { 
+                    cols.Add(grid.Column(Model.FirstOrDefault().Properties[i].Name, Model.FirstOrDefault().Properties[i].Name,
+                        format: item => Html.Raw("<text>" + item.Properties[local].Value + "</text>")
+                        ));
+                }
+            }
+        }
+    }
+
 }
 <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 <style>
@@ -156,23 +193,35 @@
 
             $(this).addClass('selectRow');
             $('#gridTools tr').not(this).removeClass('selectRow');
-            var rowId = $(this).find("div").eq(0).attr('id');
-            $("#idTool").val(rowId);
+            var IdTool = $(this).find("div").eq(1).attr('id');
+            var idCatalog = $(this).find("div").eq(0).attr('id');
+
+            $("#idTool").val(IdTool);
+            $("#txtidCatalog").val(idCatalog);
         });
 
         if ($("#idTool").val().length > 0) {
             $("#idTool").val("0");
         }
+        //if ($("#txtidCatalog").val().length > 0) {
+        //    $("#txtidCatalog").val("0");
+        //}
 
       
 
         $("#btnDetails").button().click(function () {
-            var idTemp = $("#idTool").val();
-            if (idTemp.length == 0 || idTemp == 0)
-            { alert("Selecione un renglon."); return false; }
-            frm = document.getElementById("frmGoAction");
-            frm.action = "@Url.Action("Details", "Tool")";
-            frm.submit();
+            var idTool = $("#idTool").val();
+            var id = 0;
+            if (idTool.length > 0)
+            {
+                id = idTool * 1;
+            }
+            if(id == 0)
+            {
+                alert("Seleccione un registro");
+                return false;
+            }
+            OpenDetailsPopup();
             //location.href = "@Url.Action("Details", "Tool")?IdCatalog=" + idTemp;
         });
         $("#btnEdit").button().click(function () {
@@ -193,15 +242,54 @@
         });
         //btnNew
         $("#btnNew").button().click(function () {
-            location.href = "@Url.Action("New", "Tool")";
+            OpenCreatePopup();
         });
     });
 
+    function OpenCreatePopup() {
+        var div = $("#DivToAppendPartialView");
+        var idCatalog = $("#txtidCatalog").val();
+        div.load("/Tool/New?idCatalog=" + idCatalog, function () {
+            div.dialog({
+                modal: true,
+                width: 1000,
+                height: 650,
+                title: "Nuevo - Punta",
+                resizable: false,
+                autoOpen: false,
+                dialogClass: 'Tenaris',
+            });
+
+            div.parent('.ui-dialog').appendTo('.myCustomScope');            
+            div.dialog('open');           
+        });       
+    }
+
+    function OpenDetailsPopup() {
+        var div = $("#DivToAppendPartialView");
+        var idTool = $("#idTool").val();
+        div.load("/Tool/Details?idTool=" + idTool, function () {
+            div.dialog({
+                modal: true,
+                width: 1000,
+                height: 650,
+                title: "Detalles - Punta",
+                resizable: false,
+                autoOpen: false,
+                dialogClass: 'Tenaris',
+            });
+
+            div.parent('.ui-dialog').appendTo('.myCustomScope');
+            div.dialog('open');
+
+        });
+
+    }
 
 
 </script>
 <div class="col-md-12" style="font-size: 12pt;font-weight: bold; background-color:#009999; color:#FFFFFF; height:20px; text-align:center; vertical-align:middle; font-family: Verdana; margin-bottom:3px">
-    Catalogo de herramientas
+    Herramientas -  Puntas
 </div>
 
 @{Html.RenderPartial("PartialFilter");}
@@ -216,23 +304,14 @@
                 footerStyle: "webgrid-footer",
                 alternatingRowStyle: "webgrid-alternating-row",
                 rowStyle: "webgrid-row-style",
-                columns: grid.Columns(
-                 grid.Column(columnName: "IdType", header: "Tipo", format: @<text><div id="@item.IdCatalog">@item.IdType</div></text>),
-                                                                                                                          grid.Column(columnName: "Code", header: "Codigo"),
-                                                                                                                                                  grid.Column(columnName: "Name", header: "Nombre"),
-                                                                                                                                                  grid.Column(columnName: "Description", header: "Descripcion"),
-                                                                                                                                                  grid.Column(columnName: "InsDateTime", header: "Fecha Alta"),
-                                                                                                                                                  grid.Column(columnName: "UpdDateTime", header: "Fecha Actualizacion")
-            //grid.Column(header: "Activo", format: @<text><input type="checkbox" checked="@item." disabled="disabled" /></text>)
-                                                                                                                                                                   ))
-
+                columns: cols
+    )
 </div>
 
-<input type="hidden" id="idTemp" />
+<input type="hidden" id="txtidCatalog" value="@(ViewBag.idCatalog)" />
 
-<div id="gridFooter">
+<div id="gridFooter" class="Tenaris">
     <div class="row" style="border:1px solid #000; margin-top:1px; margin-bottom:1px">
-
         <div class="form-group">
             <div class="col-sm-6" style=" padding-bottom:5px">
                 <input id="btnDetails" type=button value="Detalles" class="csbutton" style="margin-top:5px; width:150px; font-size:10pt;" />
@@ -244,6 +323,8 @@
     </div> <!-- Fin del ROW del Botón Buscar -->
 </div>
 
+<div id="DivToAppendPartialView">
+</div>
 
 @using (Ajax.BeginForm("/", "/", FormMethod.Post, new AjaxOptions()
 {

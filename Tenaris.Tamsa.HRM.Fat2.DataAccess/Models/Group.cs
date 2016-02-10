@@ -77,7 +77,6 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.Models
             }
         }
         private global::System.String _Description;
-
         public global::System.Boolean Active
         {
             get

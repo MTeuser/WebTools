@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Web;
 
-namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.Models
+namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Models
 {
-    public partial class Tool_Property
+    public class Property_vm 
     {
         //idProperty, IdCatalog, IdDatatype, name
         public global::System.Int32 idProperty
@@ -18,9 +18,9 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.Models
             {
                 if (_idProperty != value)
                 {
-                   
+
                     _idProperty = value;
-                   
+
                 }
             }
         }
@@ -51,11 +51,11 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.Models
             {
 
                 _IdDatatype = value;
-              
+
             }
         }
         private global::System.Int32 _IdDatatype;
-       
+
         public global::System.String Name
         {
             get
@@ -64,15 +64,30 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.Models
             }
             set
             {
-              
+
                 _Name = value;
-               
+
             }
         }
         private global::System.String _Name;
 
+        public global::System.String Value
+        {
+            get
+            {
+                return _Value;
+            }
+            set
+            {
+
+                _Value = value;
+
+            }
+        }
+        private global::System.String _Value;
+
         public global::System.Int32 ViewUI
-             {
+        {
             get
             {
                 return _ViewUI;
@@ -81,7 +96,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.Models
             {
 
                 _ViewUI = value;
-              
+
             }
         }
         private global::System.Int32 _ViewUI;
@@ -114,6 +129,6 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.Models
 
             }
         }
-        private global::System.String _TypeName;       
+        private global::System.String _TypeName;
     }
 }

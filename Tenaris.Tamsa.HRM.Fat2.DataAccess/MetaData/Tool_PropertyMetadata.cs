@@ -18,17 +18,16 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.Models
         [Display(Name = "Id")]
         public global::System.Int32 idProperty;
 
-        [Display(Name = "Tipo de dato")]
-        public Nullable<global::System.Int32> dataType;
+         [Display(Name = "Catalogo")]
+        private global::System.Int32 IdCatalog;
 
-        [Display(Name = "Valor")]
-        public global::System.String Value;
+        [Display(Name = "Tipo de dato")]
+         public Nullable<global::System.Int32> IdDatatype;       
 
         [Display(Name="Nombre")]
-        public global::System.String name;
-
-        [Display(Name="Activo")]
-        public global::System.Boolean Active;
+        public global::System.String Name;      
+        
+        
         #endregion
     }
 }

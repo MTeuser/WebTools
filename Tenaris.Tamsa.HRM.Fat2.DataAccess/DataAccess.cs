@@ -132,7 +132,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
                 cmdParams.Add("@pidUser", DBNull.Value);
                 cmdParams.Add("@pInsDateTime", DBNull.Value);
                 cmdParams.Add("@pUpdDateTime", DBNull.Value);
-                cmdParams.Add("@pActive", DBNull.Value);
+                cmdParams.Add("@pActive", 1);
             }
             else
             {
@@ -148,16 +148,49 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
             return DataTableToModel.DatatableToClass<Tool_Tool>(dtResult).ToList();
         }
 
-        public Tool_Tool Create(Tool_Tool Tooltool)
+        public Tool_Tool Create(Tool_Tool entity)
         {
-           
-            return Tooltool;
+            Dictionary<string, object> cmdParams = new Dictionary<string, object>();            
+            cmdParams.Add("@pTag", "-");
+            cmdParams.Add("@pidSuplier", DBNull.Value);
+            cmdParams.Add("@pIdCatalog", entity.IdCatalog);
+            cmdParams.Add("@pidUser", entity.idUser);
+            cmdParams.Add("@pInsDateTime", DateTime.Now.ToString());
+            cmdParams.Add("@pUpdDateTime", DateTime.Now.ToString());
+            cmdParams.Add("@pActive", 1);
+
+            var dtResult = ExecTable(StoredProcedures.Tool_Ins, cmdParams);
+            return DataTableToModel.DatatableToClass<Tool_Tool>(dtResult).ToList().FirstOrDefault();
+            //return Tooltool;
         }
 
-        public Tool_Tool Edit(Tool_Tool Tooltool)
+        public Tool_Tool Edit(Tool_Tool entity)
         {
-           
-            return Tooltool;
+            Dictionary<string, object> cmdParams = new Dictionary<string, object>();
+            cmdParams.Add("@pidTool", entity.idTool);
+            cmdParams.Add("@pTag", entity.Tag);
+            cmdParams.Add("@pidSuplier", entity.idSuplier);
+            cmdParams.Add("@pidUser", entity.idUser);
+            cmdParams.Add("@pInsDateTime", entity.InsDateTime);
+            cmdParams.Add("@pUpdDateTime", entity.UpdDateTime);
+            cmdParams.Add("@pActive", entity.Active);
+
+            var dtResult = ExecTable(StoredProcedures.Tool_Ins, cmdParams);
+            return DataTableToModel.DatatableToClass<Tool_Tool>(dtResult).ToList().FirstOrDefault();           
+            //return Tooltool;
+        }
+
+        public Tool_ToolDetail Create(Tool_ToolDetail entity)
+        {
+            Dictionary<string, object> cmdParams = new Dictionary<string, object>();
+            cmdParams.Add("@pidToolDetail", entity.idToolDetail);
+            cmdParams.Add("@pidProperty", entity.idProperty);
+            cmdParams.Add("@pidTool", entity.idTool);
+            cmdParams.Add("@pValue", entity.Value);
+
+            var dtResult = ExecTable(StoredProcedures.ToolDetail_Ins, cmdParams);
+            return DataTableToModel.DatatableToClass<Tool_ToolDetail>(dtResult).ToList().FirstOrDefault();
+            //return Tooltool;
         }
 
         public bool Delete(Tool_Tool Tootool)
@@ -200,10 +233,16 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
             cmdParams.Add("@pidProperty", entity.idProperty);
             cmdParams.Add("@pIdCatalog", entity.IdCatalog);
             cmdParams.Add("@pIdDatatype", entity.IdDatatype);            
-            cmdParams.Add("@pname", entity.name);          
+            cmdParams.Add("@pname", entity.Name);          
 
             var dtResult = ExecTable(StoredProcedures.Property_Get, cmdParams);
             return DataTableToModel.DatatableToClass<Tool_Property>(dtResult).ToList();
+        }
+
+        public List<Tool_Property> GetPropertiesByCatalogId(int idCatalog)
+        {
+            List<Tool_Property> ListProperties = GetToolProperties(new Tool_Property { IdCatalog = idCatalog });
+            return ListProperties;
         }
 
         public List<Tool_Type> GetToolTypes() { return GetToolTypes(new Tool_Type { }); }
@@ -229,14 +268,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
             return DataTableToModel.DatatableToClass<Tool_Supplier>(dtResult).ToList();
         }
 
-        public List<Tool_Property> GetPropertiesByTypeId(int idTypeTool)
-        {
-            Dictionary<string, object> cmdParams = new Dictionary<string, object>();
-            cmdParams.Add("@pidTypeTool", idTypeTool);
-            var dtResult = ExecTable(StoredProcedures.Property_GetByTypeId, cmdParams);
-            List<Tool_Property> ListProperties = DataTableToModel.DatatableToClass<Tool_Property>(dtResult).ToList();
-            return ListProperties;
-        }
+       
 
         public bool Create(Tool_Property entity)
         {
@@ -245,7 +277,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
             cmdParams.Add("@pidProperty", entity.idProperty);
             cmdParams.Add("@pIdCatalog", entity.IdCatalog);
             cmdParams.Add("@pIdDatatype", entity.IdDatatype);            
-            cmdParams.Add("@pname", entity.name);
+            cmdParams.Add("@pname", entity.Name);
 
             var dtResult = ExecTable(StoredProcedures.Property_Ins, cmdParams);
             if (dtResult.Rows.Count <= 0)

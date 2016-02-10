@@ -45,6 +45,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
                 try
                 {
                     User user = DataAccess.Login(model.UserName, model.Password);
+                    Session["idUser"] = user.idUser;
                     //WebSecurity.Login(model.UserName, model.Password, true);
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
                     return RedirectToLocal(returnUrl);

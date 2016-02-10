@@ -5,11 +5,11 @@
              .button()
              .click(function () {
                  //alert(this.id);
-                 location.href = "http://" + self.location.host + "/Tool/AddTool?ToolType=";
+                 location.href = "@Url.Action("Create", "Tool")?idToolType=" + 1; //por el momento Puntas 
              });
     });
 
-  
+
 
 </script>
 <style>

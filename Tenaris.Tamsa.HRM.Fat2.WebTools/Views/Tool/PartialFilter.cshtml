@@ -3,36 +3,36 @@
 
 <!-- Row de Fecha y y Turno *******************  Zona de Búsqueda de la Producción  ************************** -->
 
-@using (Html.BeginForm("Search", "Catalog", FormMethod.Post, new { @name = "frmSearch", @id="frmSearch" }))
+@using (Html.BeginForm("Search", "Tool", FormMethod.Post, new { @name = "frmSearch", @id="frmSearch" }))
 {
     <div class="row" style="border:1px solid #000; margin-top:1px; margin-bottom:1px">
         <table style="width: 100%; border-spacing: 2px;" class="tableData">
             <tr>
                 <td class="itemcell" id="lbl1">
-                    Tipo
+                    Matricula
                 </td>
                 <td class="itemcellValue">
-                    <input id="Type" name="Type" type="text" class="textBox" />
+                    <input id="Tag" name="Type" type="text" class="textBox" />
                 </td>
                 <td class="itemcell" id="lbl2">
-                    Codigo
+                    Estado
                 </td>
                 <td class="itemcellValue">
-                    <input id="Code" name="Code" type=" text" class="textBox" />
+                    <input id="Status" name="Code" type="text" class="textBox" />
                 </td>
             </tr>
             <tr>
                 <td class="itemcell" id="lbl3">
-                    Nombre
+                    Stdkgtonslan
                 </td>
                 <td class="itemcellValue">
-                    <input id="Name" name="Name" type="text" class="textBox" />
+                    <input id="Stdkgtonslan" name="Name" type="text" class="textBox" />
                 </td>
                 <td class="itemcell" id="lbl4">
-                    Descripcion
+                    Calibre
                 </td>
                 <td class="itemcellValue">
-                    <input id="Description" name="Description" type="text" class="textBox" />
+                    <input id="Calibre" name="Description" type="text" class="textBox" />
                 </td>
             </tr>
 
