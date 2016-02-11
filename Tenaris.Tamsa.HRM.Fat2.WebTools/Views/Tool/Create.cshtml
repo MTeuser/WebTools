@@ -9,8 +9,13 @@
 
     List<WebGridColumn> cols = new List<WebGridColumn>();
     
-    int addId = 0;                                                                                                                          
-    for (int i = 0; i < Model.FirstOrDefault().Properties.Count; i++)
+    int addId = 0;
+    int numProperties = 0;
+    if (Model.Count() > 0)
+    {
+        numProperties = Model.FirstOrDefault().Properties.Count;         
+    }
+    for (int i = 0; i < numProperties; i++)
     {
         int local = i;
         byte[] intBytes = BitConverter.GetBytes(Model.ElementAt(0).Properties[local].ViewUI);
@@ -274,7 +279,8 @@
     function OpenDetailsPopup() {
         var div = $("#DivToAppendPartialView");
         var idTool = $("#idTool").val();
-        div.load("/Tool/Details?idTool=" + idTool, function () {
+        $.post("/Tool/Details", { idTool: idTool }, function (data) {
+            div.html(data);
             div.dialog({
                 modal: true,
                 width: 1000,
@@ -284,7 +290,6 @@
                 autoOpen: false,
                 dialogClass: 'Tenaris',
             });
-
             div.parent('.ui-dialog').appendTo('.myCustomScope');
             div.dialog('open');
 
@@ -295,7 +300,8 @@
     function OpenEditPopup() {
         var div = $("#DivToAppendPartialView");
         var idTool = $("#idTool").val();
-        div.load("/Tool/Edit?idTool=" + idTool, function () {
+        $.post("/Tool/Edit", { idTool: idTool }, function (data) {
+            div.html(data);
             div.dialog({
                 modal: true,
                 width: 1000,
@@ -305,7 +311,6 @@
                 autoOpen: false,
                 dialogClass: 'Tenaris',
             });
-
             div.parent('.ui-dialog').appendTo('.myCustomScope');
             div.dialog('open');
 
@@ -361,7 +366,7 @@
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-    @Html.HiddenFor(model => model.FirstOrDefault().Active);
+    @Html.HiddenFor(model => model.FirstOrDefault().idTool)
     <input type="hidden" name="fromDb" value="true" />
 }
 

@@ -17,7 +17,7 @@
     }
 </style>
 
-@using (Ajax.BeginForm("Edit", "Tool", FormMethod.Post, new AjaxOptions { OnSuccess = "msjSuccess(data)" }, new { @id="frmEdit" }))
+@using (Ajax.BeginForm("SaveEdit", "Tool", FormMethod.Post, new AjaxOptions { OnSuccess = "msjSuccess(data)" }, new { @id = "frmEdit" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)

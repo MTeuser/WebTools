@@ -94,7 +94,6 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
 
         //
         // GET: /Tool/Edit/5
-
         public ActionResult Edit(int idTool)
         {
             Tool_vm tool_tool = GetToolsProperties().Where(t => t.idTool == idTool).FirstOrDefault();                        
@@ -105,7 +104,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
         // POST: /Tool/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(FormCollection formCollection)
+        public ActionResult SaveEdit(FormCollection formCollection)
         {
             int idUser = 1;
             if (Session["idUser"] != null)
@@ -133,7 +132,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
                     index++;
                 }
             }
-            return Json(new { Success = 1 }, "Application/Json", JsonRequestBehavior.AllowGet);
+            return Json(new { Success = 1 }, "application/json", JsonRequestBehavior.AllowGet);
         }
 
         //
@@ -242,6 +241,12 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
                 if (idCurrentTool == 0)
                 {
                     idCurrentTool = Tool.idTool;
+                    vmTool.idTool = Tool.idTool;
+                    vmTool.idUser = Tool.idUser.ToString();
+                    vmTool.Active = Tool.Active;
+                    vmTool.IdCatalog = Tool.IdCatalog;
+                    vmTool.InsDateTime = Tool.InsDateTime.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+                    vmTool.UpdDateTime = Tool.UpdDateTime.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
                 }                
                     
                if (idCurrentTool != Tool.idTool)
@@ -250,19 +255,18 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
                     vTools.Add(vmTool);
                     vPropertyList = new List<Property_vm>();
                     vmTool = new Tool_vm();
+
+                    vmTool.idTool = Tool.idTool;
+                    vmTool.idUser = Tool.idUser.ToString();
+                    vmTool.Active = Tool.Active;
+                    vmTool.IdCatalog = Tool.IdCatalog;
+                    vmTool.InsDateTime = Tool.InsDateTime.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+                    vmTool.UpdDateTime = Tool.UpdDateTime.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
                 }
-
-               vmTool.idTool = Tool.idTool;
-               vmTool.idUser = Tool.idUser.ToString();
-               vmTool.Active = Tool.Active;
-               vmTool.IdCatalog = Tool.IdCatalog;
-               vmTool.InsDateTime = Tool.InsDateTime.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
-               vmTool.UpdDateTime = Tool.UpdDateTime.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
-
                Property_vm Property = new Property_vm();
                Property.idProperty = Convert.ToInt32(Tool.idProperty);
                Property.IdCatalog = Convert.ToInt32(Tool.IdCatalog);
-               Property.Value = Tool.Value;
+               Property.Value = Tool.Value ?? "";
                Property.Name = Tool.Name;
                Property.ViewUI = Tool.ViewUI;
                Property.LabelUI = Tool.LabelUI;
@@ -287,22 +291,22 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
             }
             if (!string.IsNullOrEmpty(Status))
             {
-                vToolList = vToolList.Where(t => t.Properties.Where(p => p.Name.Equals("Estado")).ToList().Count > 1)
-                                    .ToList()
-                                    .Where(o => o.Properties.Where(p => p.Value.Equals("Status")).ToList().Count > 1).ToList();
-                                           
+
+                vToolList = vToolList.Where(t => t.Properties.Where(p => p.Name.Equals("Estado") && p.Value.Contains(Status)).ToList().Count > 0)                                                            
+                                    .ToList();
+                                   
             }
-            if (!string.IsNullOrEmpty(Status))
+            if (!string.IsNullOrEmpty(Stdkgtonslan))
             {
                 vToolList = vToolList.Where(t => t.Properties.Where(p => p.Name.Equals("Stdkgtonslan")).ToList().Count > 1)
                                     .ToList()
-                                    .Where(o => o.Properties.Where(p => p.Value.Equals("Stdkgtonslan")).ToList().Count > 1).ToList();
+                                    .Where(o => o.Properties.Where(p => p.Value.Equals(Stdkgtonslan)).ToList().Count > 1).ToList();
             }
-            if (!string.IsNullOrEmpty(Status))
+            if (!string.IsNullOrEmpty(Calibre))
             {
                 vToolList = vToolList.Where(t => t.Properties.Where(p => p.Name.Equals("Calibre")).ToList().Count > 1)
                                     .ToList()
-                                    .Where(o => o.Properties.Where(p => p.Value.Equals("Calibre")).ToList().Count > 1).ToList();
+                                    .Where(o => o.Properties.Where(p => p.Value.Equals(Calibre)).ToList().Count > 1).ToList();
             }
             
 
