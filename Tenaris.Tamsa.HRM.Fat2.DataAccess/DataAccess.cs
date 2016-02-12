@@ -193,8 +193,14 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
             //return Tooltool;
         }
 
-        public bool Delete(Tool_Tool Tootool)
+        public bool Delete(Tool_Tool entity)
         {
+            //@pIdTool
+            Dictionary<string, object> cmdParams = new Dictionary<string, object>();
+            cmdParams.Add("@pIdTool", entity.idTool);
+
+            var dtResult = ExecTable(StoredProcedures.Tool_Del, cmdParams);
+            DataTableToModel.DatatableToClass<Tool_ToolDetail>(dtResult).ToList().FirstOrDefault();
            return true;
         }
 

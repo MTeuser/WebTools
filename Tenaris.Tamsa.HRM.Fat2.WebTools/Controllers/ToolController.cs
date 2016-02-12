@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -30,22 +31,35 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
         //
         // GET: /Tool/Details/5
 
-        public ActionResult Details(int idTool = 0)
+        public ActionResult Details(int idTool = 0, int numCols = 2)
         {
             Tool_vm ToolVmList = new Tool_vm();
             ToolVmList = GetToolsProperties().Where(t => t.idTool == idTool).OrderByDescending(t => t.InsDateTime).FirstOrDefault();
-            //foreach (Tool_vm tool in ToolVmList)
-            //{
-            //    User user = db.GetUsers().Where(u => u.idUser == Convert.ToInt32(tool.idUser)).FirstOrDefault();
-            //    if (user != null)
-            //    {
-            //        tool.idUser = user.FirstName + " " + user.LastName;
-            //    }
-            //}
+           
            
                 ViewBag.idCatalog = ToolVmList.IdCatalog;
+
+                ViewBag.numCols = numCols;
+                int dWitdh = 0;
+                if (ToolVmList.Properties.Count > numCols)
+                {
+                    dWitdh = 380 * numCols;
+                }
+                else
+                {
+                    dWitdh = 380 * ToolVmList.Properties.Count;
+                }
+
+                dWitdh += 50;
+
+                int dHeight = 0;
+                dHeight = (70 * (ToolVmList.Properties.Count / numCols)) + (numCols * 40);
+
+
+                return Json(new { DialogWidth = dWitdh, DialogHeight = dHeight, dContent = RenderRazorViewToString("partialDetails", ToolVmList) }, JsonRequestBehavior.AllowGet);
+       
            
-            return View("partialDetails",ToolVmList);            
+            //return View("partialDetails",ToolVmList);            
         }
 
         //
@@ -94,10 +108,31 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
 
         //
         // GET: /Tool/Edit/5
-        public ActionResult Edit(int idTool)
+        public ActionResult Edit(int idTool, int numCols = 2)
         {
-            Tool_vm tool_tool = GetToolsProperties().Where(t => t.idTool == idTool).FirstOrDefault();                        
-            return View("partialEdit",tool_tool);
+            Tool_vm tool_tool = GetToolsProperties().Where(t => t.idTool == idTool).FirstOrDefault();
+            ViewBag.numCols = numCols;
+            int dWitdh = 0;
+            if (tool_tool.Properties.Count > numCols)
+            {
+                dWitdh = 380 * numCols;
+            }
+            else
+            {
+                dWitdh = 380 * tool_tool.Properties.Count;
+            }
+
+            dWitdh += 50;
+
+            int dHeight = 0;
+            dHeight = (70 * (tool_tool.Properties.Count / numCols)) + (numCols * 40);
+
+
+            
+            return Json(new { DialogWidth = dWitdh, DialogHeight = dHeight, dContent = RenderRazorViewToString("partialEdit",tool_tool) }, JsonRequestBehavior.AllowGet);
+       
+           
+            //return View("partialEdit",tool_tool);
         }
 
         //
@@ -138,22 +173,13 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
         //
         // GET: /Tool/Delete/5
 
-        public ActionResult Delete(int id = 0)
+        public ActionResult Delete(int idTool)
         {
-            Tool_Tool tool_tool = db.GetTools(new Tool_Tool { idTool = id }).Single();           
-            return View(tool_tool);
+            bool result = db.Delete(new Tool_Tool { idTool = idTool });
+            return Json(new { Success = 1 }, JsonRequestBehavior.AllowGet);
         }
 
-        //
-        // POST: /Tool/Delete/5
-
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Tool_Tool tool_tool = db.GetTools(new Tool_Tool { idTool = id }).Single();            
-            return RedirectToAction("Index");
-        }
-
+        
         public ActionResult Find()
         {
             return View(new List<Tool_Tool>());
@@ -186,14 +212,35 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
            return Json(GetToolsProperties(), JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult New(int idCatalog)
+        public ActionResult New(int idCatalog, int numCols = 2)
         {
             List<Tool_Property> PropertyList = db.GetToolProperties(new Tool_Property { IdCatalog = idCatalog });
             //int[] aNum = {8,9,10,11,12,13,14,15};
             PropertyList = PropertyList.Where(p => p.ViewUI > 7).ToList();
 
+            
+          
             ViewBag.idCatalog = idCatalog;
-            return View("partialNewTool", PropertyList);
+
+            ViewBag.numCols = numCols;
+            int dWitdh = 0;
+            if (PropertyList.Count > numCols)
+            {
+                dWitdh = 380 * numCols;
+            }
+            else
+            {
+                dWitdh = 380 * PropertyList.Count;
+            }
+
+            dWitdh+=50;
+            
+            int dHeight = 0;
+            dHeight = (70 * (PropertyList.Count / numCols)) + (numCols * 40);
+
+
+            //return View("partialNewTool", PropertyList);
+            return Json(new { DialogWidth = dWitdh, DialogHeight = dHeight, dContent = RenderRazorViewToString("partialNewTool",PropertyList) }, JsonRequestBehavior.AllowGet);
         }
 
        
@@ -287,28 +334,24 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
             vToolList = ToolList;
             if(!string.IsNullOrEmpty(Tag))
             {
-                vToolList = vToolList.Where(t => t.Tag.Equals(Tag)).ToList();
+                vToolList = vToolList.Where(t => t.Properties.Where(p => p.Name.Equals("Matricula") && p.Value.ToUpper().Contains(Tag.Trim().ToUpper())).ToList().Count > 0)
+                                    .ToList();
             }
             if (!string.IsNullOrEmpty(Status))
             {
-
-                vToolList = vToolList.Where(t => t.Properties.Where(p => p.Name.Equals("Estado") && p.Value.Contains(Status)).ToList().Count > 0)                                                            
-                                    .ToList();
-                                   
+                vToolList = vToolList.Where(t => t.Properties.Where(p => p.Name.Equals("Estado") && p.Value.ToUpper().Contains(Status.Trim().ToUpper())).ToList().Count > 0)                                                            
+                                    .ToList();                                   
             }
             if (!string.IsNullOrEmpty(Stdkgtonslan))
             {
-                vToolList = vToolList.Where(t => t.Properties.Where(p => p.Name.Equals("Stdkgtonslan")).ToList().Count > 1)
-                                    .ToList()
-                                    .Where(o => o.Properties.Where(p => p.Value.Equals(Stdkgtonslan)).ToList().Count > 1).ToList();
+                vToolList = vToolList.Where(t => t.Properties.Where(p => p.Name.Equals("Stdkgtonslan") && p.Value.ToUpper().Contains(Stdkgtonslan.Trim().ToUpper())).ToList().Count > 0)
+                                    .ToList();                                    
             }
             if (!string.IsNullOrEmpty(Calibre))
             {
-                vToolList = vToolList.Where(t => t.Properties.Where(p => p.Name.Equals("Calibre")).ToList().Count > 1)
-                                    .ToList()
-                                    .Where(o => o.Properties.Where(p => p.Value.Equals(Calibre)).ToList().Count > 1).ToList();
+                vToolList = vToolList.Where(t => t.Properties.Where(p => p.Name.Equals("Calibre") && p.Value.ToUpper().Contains(Calibre.Trim().ToUpper())).ToList().Count > 0)
+                                    .ToList();                                    
             }
-            
 
             vToolList = vToolList.OrderByDescending(t => t.InsDateTime).ToList();
             ViewBag.idCatalog = 0;
@@ -316,8 +359,22 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
             {
                 ViewBag.idCatalog = vToolList.FirstOrDefault().IdCatalog;
             }
-
             return View("Create", vToolList);
+        }
+
+        public string RenderRazorViewToString(string viewName, object model)
+        {
+            ViewData.Model = model;
+            using (var sw = new StringWriter())
+            {
+                var viewResult = ViewEngines.Engines.FindPartialView(ControllerContext,
+                                                                         viewName);
+                var viewContext = new ViewContext(ControllerContext, viewResult.View,
+                                             ViewData, TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+                viewResult.ViewEngine.ReleaseView(ControllerContext, viewResult.View);
+                return sw.GetStringBuilder().ToString();
+            }
         }
     }
 }

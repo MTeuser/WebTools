@@ -2,19 +2,24 @@
 
 @{
     Layout = null;
+    int ColsControls = ViewBag.numCols;
+    int index = 0;
 }
 <script src="~/Scripts/jquery-1.8.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 <style>
-    #dvfrmElements {
-        border: 1px solid #000;
-        margin-top: 1px;
-        margin-bottom: 1px;
-        margin-left: auto;
-        margin-right: auto;
-        width: 600px;
+     #dvfrmElements {
+        border:1px solid #000; 
+        margin-top:1px; 
+        margin-bottom:1px; 
+        margin-left:auto; 
+        margin-right:auto;
+        /*width:600px;*/
     }
+        #dvfrmElements input {
+            width:200px;
+        }
 </style>
 
 @using (Ajax.BeginForm("SaveEdit", "Tool", FormMethod.Post, new AjaxOptions { OnSuccess = "msjSuccess(data)" }, new { @id = "frmEdit" }))
@@ -25,17 +30,36 @@
     <div class="row" id="dvfrmElements">
         <table style="width: 100%; border-spacing: 2px;" class="tableData">
             @Html.Hidden("idTool", Model.idTool)
-            @foreach(var property in Model.Properties)
+            @foreach (var property in Model.Properties)
+            {
+                HtmlString tr1 = new HtmlString("");
+                HtmlString tr2 = new HtmlString("");
+                if (index == 0)
                 {
-                <tr>
-                    <td class=" itemcell">
-                        @property.Name
-                    </td>
-                    <td class="itemcellValue">
-                        @Html.TextBox(property.idProperty.ToString(), property.Value.ToString())
-                    </td>
-                </tr>
+                    tr1 = new HtmlString("<tr>");
+
                 }
+                if (index == (ColsControls - 1))
+                {
+                    tr2 = new HtmlString("</tr>");
+                }
+                index++;
+                if (index == ColsControls)
+                {
+                    index = 0;
+                }
+                @(tr1)
+
+
+                <td class=" itemcell">
+                    @property.Name
+                </td>
+                <td class="itemcellValue">
+                    @Html.TextBox(property.idProperty.ToString(), property.Value.ToString())
+                </td>
+
+                @(tr2)
+            }
         </table>
     </div>
 

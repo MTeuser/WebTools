@@ -173,6 +173,48 @@
         border: 1px solid #808080;
         padding: 3px 3px 3px 3px;
     }
+
+   
+
+    #btnDetails {
+        background-image: url(/Content/TenarisIcons/icon_search.png);
+         background-repeat:no-repeat;
+         background-size:16px;
+         margin-top:5px; 
+         width:150px; 
+         font-size:10pt;
+         font-weight:bold;
+    }
+
+    #btnEdit {
+        background-image: url(/Content/TenarisIcons/icon_inprocess.png);
+         background-repeat:no-repeat;
+         background-size:16px;
+         margin-top:5px; 
+         width:150px; 
+         font-size:10pt;
+         font-weight:bold;
+    }
+    #btnNew {
+        background-image: url(/Content/TenarisIcons/FileAdd16px.png);
+         background-repeat:no-repeat;
+         background-size:16px;
+         margin-top:5px; 
+         width:150px; 
+         font-size:10pt;   
+         font-weight:bold;     
+    }
+    #btnDelete {
+        background-image: url(/Content/TenarisIcons/icon_close.png);
+         background-repeat:no-repeat;
+         background-size:16px;
+         margin-top:5px; 
+         width:150px; 
+         font-size:10pt;
+         font-weight:bold;
+    }
+
+    
 </style>
 
 <script>
@@ -223,7 +265,7 @@
             }
             if(id == 0)
             {
-                alert("Seleccione un registro");
+                alert("Selecione un renglon.");
                 return false;
             }
             OpenDetailsPopup();
@@ -238,7 +280,7 @@
             }
             if(id == 0)
             {
-                alert("Seleccione un registro");
+                alert("Selecione un renglon.");
                 return false;
             }
             OpenEditPopup();
@@ -247,9 +289,13 @@
             var idTemp = $("#idTool").val();
             if (idTemp.length == 0 || idTemp == 0)
             { alert("Selecione un renglon."); return false; }
-            frm = document.getElementById("frmGoAction");
-            frm.action = "@Url.Action("Delete", "Tool")";
-            frm.submit();
+            if (confirm("Confrima que desea borrar  la herramienta seleccionada")) {
+                $.post("/Tool/Delete", { idTool: idTemp }, function (data) {
+                    if (data.Success == 1) {
+                        $("#frmSearch").submit();
+                    }
+                });
+            }
         });
         //btnNew
         $("#btnNew").button().click(function () {
@@ -260,31 +306,32 @@
     function OpenCreatePopup() {
         var div = $("#DivToAppendPartialView");
         var idCatalog = $("#txtidCatalog").val();
-        div.load("/Tool/New?idCatalog=" + idCatalog, function () {
+        $.post("/Tool/New", { idCatalog: idCatalog,numCols : 2}, function (data) {
+            div.html(data.dContent);
             div.dialog({
                 modal: true,
-                width: 1000,
-                height: 650,
-                title: "Nuevo - Punta",
+                width: data.DialogWidth,
+                height: data.DialogHeight,
+                title: "Detalles - Punta",
                 resizable: false,
                 autoOpen: false,
                 dialogClass: 'Tenaris',
             });
+            div.parent('.ui-dialog').appendTo('.myCustomScope');
+            div.dialog('open');
 
-            div.parent('.ui-dialog').appendTo('.myCustomScope');            
-            div.dialog('open');           
-        });       
+        });
     }
 
     function OpenDetailsPopup() {
         var div = $("#DivToAppendPartialView");
         var idTool = $("#idTool").val();
-        $.post("/Tool/Details", { idTool: idTool }, function (data) {
-            div.html(data);
+        $.post("/Tool/Details", { idTool: idTool, numCols: 2 }, function (data) {
+            div.html(data.dContent);
             div.dialog({
                 modal: true,
-                width: 1000,
-                height: 650,
+                width: data.DialogWidth,
+                height: data.DialogHeight,
                 title: "Detalles - Punta",
                 resizable: false,
                 autoOpen: false,
@@ -300,12 +347,12 @@
     function OpenEditPopup() {
         var div = $("#DivToAppendPartialView");
         var idTool = $("#idTool").val();
-        $.post("/Tool/Edit", { idTool: idTool }, function (data) {
-            div.html(data);
+        $.post("/Tool/Edit", { idTool: idTool, numCols: 2 }, function (data) {
+            div.html(data.dContent);
             div.dialog({
                 modal: true,
-                width: 1000,
-                height: 650,
+                width: data.DialogWidth,
+                height: data.DialogHeight,
                 title: "Editar - Punta",
                 resizable: false,
                 autoOpen: false,
@@ -346,10 +393,10 @@
     <div class="row" style="border:1px solid #000; margin-top:1px; margin-bottom:1px">
         <div class="form-group">
             <div class="col-sm-6" style=" padding-bottom:5px">
-                <input id="btnDetails" type=button value="Detalles" class="csbutton" style="margin-top:5px; width:150px; font-size:10pt;" />
-                <input id="btnEdit" type=button value="Modificar" class="csbutton" style="margin-top:5px; width:150px; font-size:10pt;" />
-                <input id="btnNew" type=button value="Nueva" class="csbutton" style="margin-top:5px; width:150px; font-size:10pt;" />
-                <input id="btnDelete" type=button value="Eliminar" class="csbutton" style="margin-top:5px; width:150px; font-size:10pt;" />
+                <input id="btnDetails" type=button value="Detalles" class="csbutton"/>
+                <input id="btnEdit" type=button value="Modificar" class="csbutton" />
+                <input id="btnNew" type=button value="Nueva" class="csbutton" />
+                <input id="btnDelete" type=button value="Eliminar" class="csbutton" />
             </div>
         </div>
     </div> <!-- Fin del ROW del Botón Buscar -->
