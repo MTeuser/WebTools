@@ -289,7 +289,7 @@
             var idTemp = $("#idTool").val();
             if (idTemp.length == 0 || idTemp == 0)
             { alert("Selecione un renglon."); return false; }
-            if (confirm("Confrima que desea borrar  la herramienta seleccionada")) {
+            if (confirm("Confirma que desea eliminar  la herramienta seleccionada")) {
                 $.post("/Tool/Delete", { idTool: idTemp }, function (data) {
                     if (data.Success == 1) {
                         $("#frmSearch").submit();

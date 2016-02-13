@@ -345,6 +345,32 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
             return PartialView("_RemoveExternalLoginsPartial", externalLogins);
         }
 
+
+         [AllowAnonymous]
+        public ActionResult wLogin(string User)
+        {
+            LoginModel LoginM = new LoginModel();
+            User user = DataAccess.GetUsers().Where(u => u.Identification.ToUpper().Equals(User.ToUpper())).FirstOrDefault();
+
+           
+           
+            if (user != null)
+            {
+                LoginM.UserName = user.Identification;
+                LoginM.Password = user.Password;
+            }
+            LoginM.RememberMe = false;
+            LoginM.UserName = User;
+            Session["idUser"] = user.idUser;
+            //WebSecurity.Login(model.UserName, model.Password, true);
+            FormsAuthentication.SetAuthCookie(LoginM.UserName, LoginM.RememberMe);
+            //LoginM.Password = Pass;
+
+            return RedirectToLocal("");
+        }
+
+       
+
         #region Helpers
         private ActionResult RedirectToLocal(string returnUrl)
         {
