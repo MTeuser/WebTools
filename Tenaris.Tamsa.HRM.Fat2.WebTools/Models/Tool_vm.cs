@@ -12,7 +12,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Models
         public int idTool { get; set;}
         public string Tag { get; set;}
         public string idUser { get; set; }
-        public int IdCatalog { get; set; }
+        public int IdType { get; set; }
         public string Active { get; set; }
         public string InsDateTime { get; set; }
         public string UpdDateTime { get; set; }

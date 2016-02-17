@@ -7,8 +7,33 @@
 <script src="~/Scripts/jquery-1.8.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/ui.combobox.js"></script>
 <style>
-    #dvfrmElements {
+   
+         .custom-combobox {
+            position: relative;
+            display: inline-block;
+          
+        }
+            #dcombobox input {
+                width:120px;
+            }
+
+
+        .custom-combobox-toggle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin-left: -1px;
+            padding: 0;
+        }
+
+        .custom-combobox-input {
+            margin: 0;
+            padding: 5px 10px;            
+        }
+
+         #dvfrmElements {
         border:1px solid #000; 
         margin-top:1px; 
         margin-bottom:1px; 
@@ -16,9 +41,10 @@
         margin-right:auto;
         /*width:600px;*/
     }
-        #dvfrmElements input {
-            width:200px;
-        }
+
+    #dText input {
+        width:200px;
+    }
 
 </style>
 
@@ -29,7 +55,7 @@
 
     <div class="row" id="dvfrmElements">
         <table style="width: 100%; border-spacing: 2px;" class="tableData">
-                @Html.Hidden("idCatalog","@(ViewBag.idCatalog)")
+                @Html.Hidden("IdType", "@(ViewBag.idType)")
             
                 @foreach (var property in Model)
                 {
@@ -53,10 +79,41 @@
    
 
         <td class=" itemcell">
+            @{
+                    string proName = property.Name;
+                    bool isSupplierField = false;
+                    if (proName.ToUpper().Contains("provee".ToUpper()))
+                    {
+                        //Es el campo de proveedores ligar a la lista de proveedores. 
+                        isSupplierField = true;
+                    }
+            }
             @property.Name
         </td>
         <td class="itemcellValue">
-            @Html.TextBox(property.idProperty.ToString())
+            @{                
+                    string tclass = "tc" + property.TypeName;                                        
+            }
+            
+                @if (isSupplierField)
+                {
+                    <div id="dcombobox">
+                    @*@Html.TextBox(property.idProperty.ToString(), "", new { @class = tclass })*@
+                    <div style="float:left; width:180px;back"> 
+                            @Html.DropDownList(property.idProperty.ToString(), (SelectList)ViewBag.Suppliers)
+                    </div>
+                     <div style="float:left">
+                         <input type="button" id="btnSuppliers" onclick="openProveedores(@(property.idProperty.ToString()))" value="..." style="width:25px; height:25px" />
+                         </div>
+                     </div>
+                }
+                else
+                {
+                    <div id="dText">
+                        @Html.TextBox(property.idProperty.ToString(), "", new { @class = tclass })
+                    </div>
+                }
+           
         </td>
     
                     @(tr2)
@@ -75,27 +132,48 @@
         </div>
 
 }
-
+<div>
+    <input type="text" id="Viewtext" onclick="viewselect(this);" />
+</div>
         <script>
-            function msjSuccess(data) {                
-                if (data.Success == 1)
-                {
-                    $("#DivToAppendPartialView").dialog("close");
-                    $("#frmSearch").submit();
-                }
+    function msjSuccess(data) {
+        if (data.Success == 1) {
+            $("#DivToAppendPartialView").dialog("close");
+            $("#frmSearch").submit();
+        }
+        else {
+            alert(data.Message);
+            $("[name='" + data.element + "']").focus();
+
+
+        }
+    }
+
+    $.datepicker.setDefaults($.datepicker.regional['es-MX']);
+
+    $(".tcFecha").val("@(DateTime.Now.ToString("yyy-MM-dd"))");
+    $(".tcFecha").datepicker();
+    $("[name='1']").width(160);
+    $('#ui-datepicker-div').wrap('<div class="Tenaris"></div>');
+    $('#btnCancel').button().click(function () {
+        $("#DivToAppendPartialView").dialog("close");
+    });
+    $("#btnOk").button().click(function () {
+        $("#frmAddNew").submit();
+    });
+
+    //Texto
+    $(".tcNumero").keyup(function () {
+        if (this.value != this.value.replace(/[^0-9\.]/g, '')) {
+            this.value = this.value.replace(/[^0-9\.]/g, '');
+        }
+    });
+
+    //Obtener el id del proveedor
+    $("[name='@((string)ViewBag.idProperty)']").combobox();
+
+            function viewselect(e)
+            {
+                e.value = $("[name='@((string)ViewBag.idProperty)']").val();
             }
-
-            $.datepicker.setDefaults($.datepicker.regional['es-MX']);
-
-            $("[name='5']").val("@(DateTime.Now.ToString("dd/MM/yyy"))");
-            $("[name='5']").datepicker();
-            $("[name='1']").autocomplete({source : ["SS","TI","AA"]});
-            $('#ui-datepicker-div').wrap('<div class="Tenaris"></div>');
-            $('#btnCancel').button().click(function () {
-                $("#DivToAppendPartialView").dialog("close");
-            });
-            $("#btnOk").button().click(function () { 
-                $("#frmAddNew").submit();                
-            });
-            
         </script>

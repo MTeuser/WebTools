@@ -24,22 +24,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.Models
                 }
             }
         }
-        private global::System.Int32 _idProperty;
-
-        public global::System.Int32 IdCatalog
-        {
-            get
-            {
-                return _IdCatalog;
-            }
-            set
-            {
-
-                _IdCatalog = value;
-
-            }
-        }
-        private global::System.Int32 _IdCatalog;
+        private global::System.Int32 _idProperty;       
 
         public global::System.Int32 IdDatatype
         {
@@ -84,22 +69,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.Models
               
             }
         }
-        private global::System.Int32 _ViewUI;
-
-        public global::System.String LabelUI
-        {
-            get
-            {
-                return _LabelUI;
-            }
-            set
-            {
-
-                _LabelUI = value;
-
-            }
-        }
-        private global::System.String _LabelUI;
+        private global::System.Int32 _ViewUI;       
 
         public global::System.String TypeName
         {

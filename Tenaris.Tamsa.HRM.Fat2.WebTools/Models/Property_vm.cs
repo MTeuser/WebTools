@@ -26,20 +26,20 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Models
         }
         private global::System.Int32 _idProperty;
 
-        public global::System.Int32 IdCatalog
+        public global::System.Int32 IdType
         {
             get
             {
-                return _IdCatalog;
+                return _IdType;
             }
             set
             {
 
-                _IdCatalog = value;
+                _IdType = value;
 
             }
         }
-        private global::System.Int32 _IdCatalog;
+        private global::System.Int32 _IdType;
 
         public global::System.Int32 IdDatatype
         {

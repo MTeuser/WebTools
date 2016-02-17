@@ -23,6 +23,13 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.Models
         }
         private global::System.Boolean _Active;
 
+        public global::System.Int32 idProperty
+        {
+            get { return _IdType; }
+            set { _IdType = value; }
+        }
+        private global::System.Boolean _idProperty;
+
         public global::System.Boolean Active
         {
             get { return _Active; }

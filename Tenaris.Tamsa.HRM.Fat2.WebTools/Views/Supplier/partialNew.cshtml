@@ -1,0 +1,54 @@
+﻿@model Tenaris.Tamsa.HRM.Fat2.DataAccess.Models.Tool_Supplier
+@{
+    Layout = null;    
+}
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<style>
+    #dvfrmElements {
+        border:1px solid #000; 
+        margin-top:1px; 
+        margin-bottom:1px; 
+        margin-left:auto; 
+        margin-right:auto;
+        /*width:600px;*/
+    }
+       
+
+</style>
+@Html.Hidden("idProperty", (int)ViewBag.idProperty)
+
+@using (Ajax.BeginForm("Create", "Supplier", FormMethod.Post, new AjaxOptions { OnSuccess = "AddSupplierSuccess" }, new { @id = "frmAddSupplier" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="row" id="dvfrmElements">
+        <table style="width: 100%; border-spacing: 2px;" class="tableData">
+         <tr>
+             <td class="itemcell">
+                 @Html.LabelFor(model => model.Code)                
+             </td>
+             <td class="itemcellValue">
+                 <div id="dText">
+                     @Html.EditorFor(model => model.Code)
+                     </div>
+</td>
+         </tr>   
+            <tr>
+                <td class="itemcell">
+                    @Html.LabelFor(model => model.Name)
+                </td>
+                <td class="itemcellValue">
+                    <div id="dText">
+                        @Html.EditorFor(model => model.Name)
+                        </div>
+</td>
+            </tr>              
+         </table>
+        </div>
+}
+
+<script src="~/Scripts/WebTool/Supplier.js"></script>

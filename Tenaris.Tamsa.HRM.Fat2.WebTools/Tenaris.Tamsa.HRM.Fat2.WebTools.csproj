@@ -181,6 +181,7 @@
     <Compile Include="Controllers\CatalogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PropertyController.cs" />
+    <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="Controllers\ToolController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -197,6 +198,7 @@
     <Content Include="Content\Telerik\telerik.rtl.css" />
     <Content Include="Content\Telerik\telerik.WebBlue.css" />
     <Content Include="Content\TenarisWebApplication.css" />
+    <Content Include="Content\themes\base\images\ajax-loader.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -286,7 +288,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
+    <Content Include="Scripts\ui.combobox.js" />
     <Content Include="Scripts\ui.datepicker-es-MX.js" />
+    <Content Include="Scripts\WebTool\Supplier.js" />
     <Content Include="Views\Catalog\PartialFilter.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -397,6 +401,11 @@
     <Content Include="Views\Tool\partialNewTool.cshtml" />
     <Content Include="Views\Tool\partialDetails.cshtml" />
     <Content Include="Views\Tool\partialEdit.cshtml" />
+    <Content Include="Views\Supplier\Index.cshtml" />
+    <Content Include="Views\Supplier\partialDetails.cshtml" />
+    <Content Include="Views\Supplier\partialEdit.cshtml" />
+    <Content Include="Views\Supplier\PartialFilter.cshtml" />
+    <Content Include="Views\Supplier\partialNew.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tenaris.Tamsa.HRM.Fat2.DataAccess\Tenaris.Tamsa.HRM.Fat2.DataAccess.csproj">

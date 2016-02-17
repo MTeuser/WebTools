@@ -45,10 +45,10 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
             return View(ListCatalog);            
         }
 
-        public ActionResult Details(int IdCatalog)
+        public ActionResult Details(int IdType)
         {
-            var Catalog = db.GetToolCatalog(new Tool_Catalog { IdCatalog = IdCatalog }).FirstOrDefault();
-            var ListProperties = db.GetToolProperties(new Tool_Property { IdCatalog = IdCatalog });
+            var Catalog = db.GetToolCatalog(new Tool_Catalog { IdType = IdType }).FirstOrDefault();
+            var ListProperties = db.GetTools(new Tool_Tool { IdType = IdType });
             var Type = db.GetToolTypes(new Tool_Type { idType = Catalog.IdType });
 
             ViewBag.Properties = ListProperties;

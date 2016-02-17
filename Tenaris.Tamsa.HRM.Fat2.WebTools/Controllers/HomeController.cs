@@ -28,6 +28,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult testView()
         {
             return View();

@@ -129,6 +129,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
                 cmdParams.Add("@pidTool", null);
                 cmdParams.Add("@pTag", DBNull.Value);
                 cmdParams.Add("@pidSuplier", DBNull.Value);
+                cmdParams.Add("@pIdType", DBNull.Value);
                 cmdParams.Add("@pidUser", DBNull.Value);
                 cmdParams.Add("@pInsDateTime", DBNull.Value);
                 cmdParams.Add("@pUpdDateTime", DBNull.Value);
@@ -139,6 +140,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
                 cmdParams.Add("@pidTool", entity.idTool);
                 cmdParams.Add("@pTag", entity.Tag);
                 cmdParams.Add("@pidSuplier", entity.idSuplier);
+                cmdParams.Add("@pIdType", entity.IdType);
                 cmdParams.Add("@pidUser", entity.idUser);
                 cmdParams.Add("@pInsDateTime", entity.InsDateTime);
                 cmdParams.Add("@pUpdDateTime", entity.UpdDateTime);
@@ -153,7 +155,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
             Dictionary<string, object> cmdParams = new Dictionary<string, object>();            
             cmdParams.Add("@pTag", "-");
             cmdParams.Add("@pidSuplier", DBNull.Value);
-            cmdParams.Add("@pIdCatalog", entity.IdCatalog);
+            cmdParams.Add("@pIdType", entity.IdType);
             cmdParams.Add("@pidUser", entity.idUser);
             cmdParams.Add("@pInsDateTime", DateTime.Now.ToString());
             cmdParams.Add("@pUpdDateTime", DateTime.Now.ToString());
@@ -170,6 +172,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
             cmdParams.Add("@pidTool", entity.idTool);
             cmdParams.Add("@pTag", entity.Tag);
             cmdParams.Add("@pidSuplier", entity.idSuplier);
+            cmdParams.Add("@pIdType", entity.idSuplier);
             cmdParams.Add("@pidUser", entity.idUser);
             cmdParams.Add("@pInsDateTime", entity.InsDateTime);
             cmdParams.Add("@pUpdDateTime", entity.UpdDateTime);
@@ -208,21 +211,25 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
         public List<Tool_Supplier> GetSuppliers(Tool_Supplier entity)
         {
             Dictionary<string, object> cmdParams = new Dictionary<string, object>();
-            /*   
-             *@pidSupplier int = null, 
-	          @pCode nchar(10) = null, 
-	          @pName nchar(10) = null, 
-	          @pActive bit = 1, 
-	          @pInsDateTime DateTimeOffset(7) = null, 
-	          @pUpdDateTime DateTimeOffset(7) = null 
-             */
 
-            cmdParams.Add("@pidSupplier", entity.idSupplier);
-            cmdParams.Add("@pCode", entity.idSupplier);
-            cmdParams.Add("@pName", entity.idSupplier);
-            cmdParams.Add("@pActive", entity.idSupplier);
-            cmdParams.Add("@pInsDateTime", entity.idSupplier);
-            cmdParams.Add("@pUpdDateTime", entity.idSupplier);
+            if (entity == null)
+            {
+                cmdParams.Add("@pidSupplier", DBNull.Value);
+                cmdParams.Add("@pCode", DBNull.Value);
+                cmdParams.Add("@pName", DBNull.Value);
+                cmdParams.Add("@pActive", 1);
+                cmdParams.Add("@pInsDateTime", DBNull.Value);
+                cmdParams.Add("@pUpdDateTime", DBNull.Value);
+            }
+            else
+            {
+                cmdParams.Add("@pidSupplier", entity.idSupplier);
+                cmdParams.Add("@pCode", entity.Code);
+                cmdParams.Add("@pName", entity.Name);
+                cmdParams.Add("@pActive", 1);
+                cmdParams.Add("@pInsDateTime", entity.InsDateTime);
+                cmdParams.Add("@pUpdDateTime", entity.UpdDateTime);
+            }
             
 
             var dtResult = ExecTable(StoredProcedures.Suppliers_Get,cmdParams);
@@ -236,8 +243,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
            
             Dictionary<string, object> cmdParams = new Dictionary<string, object>();
             //idProperty, IdCatalog, IdDatatype, name
-            cmdParams.Add("@pidProperty", entity.idProperty);
-            cmdParams.Add("@pIdCatalog", entity.IdCatalog);
+            cmdParams.Add("@pidProperty", entity.idProperty);            
             cmdParams.Add("@pIdDatatype", entity.IdDatatype);            
             cmdParams.Add("@pname", entity.Name);          
 
@@ -245,10 +251,12 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
             return DataTableToModel.DatatableToClass<Tool_Property>(dtResult).ToList();
         }
 
-        public List<Tool_Property> GetPropertiesByCatalogId(int idCatalog)
-        {
-            List<Tool_Property> ListProperties = GetToolProperties(new Tool_Property { IdCatalog = idCatalog });
-            return ListProperties;
+        public List<Tool_Property> GetPropertiesByTypeId(int idType)
+        {            
+            Dictionary<string, object> cmdParams = new Dictionary<string, object>();            
+            cmdParams.Add("@pIdType", idType);
+            var dtResult = ExecTable(StoredProcedures.Property_GetByType, cmdParams);
+            return DataTableToModel.DatatableToClass<Tool_Property>(dtResult).ToList();            
         }
 
         public List<Tool_Type> GetToolTypes() { return GetToolTypes(new Tool_Type { }); }
@@ -280,11 +288,11 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
         {
             Dictionary<string, object> cmdParams = new Dictionary<string, object>();
 
-            cmdParams.Add("@pidProperty", entity.idProperty);
-            cmdParams.Add("@pIdCatalog", entity.IdCatalog);
-            cmdParams.Add("@pIdDatatype", entity.IdDatatype);            
-            cmdParams.Add("@pname", entity.Name);
-
+            cmdParams.Add("@pidProperty", entity.idProperty);            
+            cmdParams.Add("@pIdDatatype", entity.IdDatatype);
+            cmdParams.Add("@pName", entity.Name);
+            cmdParams.Add("@pName", entity.ViewUI);
+            
             var dtResult = ExecTable(StoredProcedures.Property_Ins, cmdParams);
             if (dtResult.Rows.Count <= 0)
             {
@@ -373,6 +381,20 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
 
             var dtResult = ExecTable(StoredProcedures.ToolDetail_Udp, cmdParams);
             return DataTableToModel.DatatableToClass<Tool_ToolDetail>(dtResult).ToList().FirstOrDefault();
+        }
+
+        public Tool_Supplier Create(Tool_Supplier entity)
+        {
+            Dictionary<string, object> cmdParams = new Dictionary<string, object>();
+
+            cmdParams.Add("@pName", entity.Name);
+            cmdParams.Add("@pCode", entity.Code);
+            cmdParams.Add("@pInsDateTime", DateTime.Now.ToString());
+            cmdParams.Add("@pUpdDateTime", DateTime.Now.ToString());
+            cmdParams.Add("@pActive", 1);
+
+            var dtResult = ExecTable(StoredProcedures.Suppliers_Ins, cmdParams);
+            return DataTableToModel.DatatableToClass<Tool_Supplier>(dtResult).ToList().FirstOrDefault();            
         }
     }
 }

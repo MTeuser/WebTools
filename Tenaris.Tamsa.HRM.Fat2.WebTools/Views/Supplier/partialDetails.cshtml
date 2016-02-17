@@ -1,0 +1,100 @@
+﻿@model Tenaris.Tamsa.HRM.Fat2.WebTools.Models.Tool_vm
+@{
+    Layout = null;
+    int ColsControls = ViewBag.numCols;
+    int index = 0;
+}
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<style>
+      #dvfrmElements {
+        border:1px solid #000; 
+        margin-top:1px; 
+        margin-bottom:1px; 
+        margin-left:auto; 
+        margin-right:auto;
+        /*width:600px;*/
+    }
+        #dvfrmElements input {
+            width:200px;
+        }
+</style>
+
+@using (Ajax.BeginForm("AddNew", "Tool", FormMethod.Post, new AjaxOptions { OnSuccess = "msjSuccess(data)" }, new { @id = "frmAddNew" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+
+    <div class="row" id="dvfrmElements">
+        <table style="width: 100%; border-spacing: 2px;" class="tableData">
+            @Html.Hidden("idCatalog", "@(ViewBag.idCatalog)")
+            
+            
+                @foreach (var property in Model.Properties)
+                {
+                    HtmlString tr1 = new HtmlString("");
+                    HtmlString tr2 = new HtmlString("");
+                    if (index == 0)
+                    {
+                        tr1 = new HtmlString("<tr>");
+
+                    }
+                    if (index == (ColsControls - 1))
+                    {
+                        tr2 = new HtmlString("</tr>");
+                    }
+                    index++;
+                    if (index == ColsControls)
+                    {
+                        index = 0;
+                    }
+                    @(tr1)
+
+
+                    <td class=" itemcell">
+                        @property.Name
+                    </td>
+                    <td class="itemcellValue">
+                        @Html.TextBox("values", @property.Value, new { @readonly = "readonly" })
+                    </td>
+
+                    @(tr2)
+                }
+
+        </table>
+    </div>
+
+    <div id="gridFooter">
+        <div class="form-group">
+            <div class="col-sm-6" style=" padding-bottom:5px">
+                @*<input id="btnOk" type=button value="Aceptar" class="csbutton" style="margin-top:5px; width:150px; font-size:10pt;" />*@
+                <input id="btnCancel" type=button value="Cerrar" class="csbutton" style="margin-top:5px; width:150px; font-size:10pt;" />
+            </div>
+        </div>
+    </div>
+
+}
+
+<script>
+            function msjSuccess(data) {
+                if (data.Success == 1)
+                {
+                    $("#DivToAppendPartialView").dialog("close");
+                    $("#frmSearch").submit();
+                }
+            }
+
+            $.datepicker.setDefaults($.datepicker.regional['es-MX']);
+
+            $("#iProperty5").datepicker();
+            $('#ui-datepicker-div').wrap('<div class="Tenaris"></div>');
+            $('#btnCancel').button().click(function () {
+                $("#DivToAppendPartialView").dialog("close");
+            });
+            $("#btnOk").button().click(function () {
+                $("#frmAddNew").submit();
+            });
+
+</script>

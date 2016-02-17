@@ -15,6 +15,8 @@
     {
         numProperties = Model.FirstOrDefault().Properties.Count;         
     }
+    
+    
     for (int i = 0; i < numProperties; i++)
     {
         int local = i;
@@ -25,7 +27,7 @@
             {
                 //@<text><div id="@item.IdCatalog">@item.IdType</div></text>
                 cols.Add(grid.Column(Model.FirstOrDefault().Properties[i].Name, Model.FirstOrDefault().Properties[i].Name,
-                 format: item => Html.Raw("<text><div id="+ item.IdCatalog + ">" + item.Properties[local].Value + "</div></text>")));
+                 format: item => Html.Raw("<text><div id="+ item.IdType + ">" + item.Properties[local].Value + "</div></text>")));
                 addId++;         
             }
             else
@@ -296,23 +298,33 @@
                     }
                 });
             }
+
         });
         //btnNew
         $("#btnNew").button().click(function () {
             OpenCreatePopup();
         });
+
+        $body = $("body");
+
+        $(document).on({
+            ajaxStart: function () { $body.addClass("loading"); },
+            ajaxStop: function () { $body.removeClass("loading"); }
+        });
     });
 
     function OpenCreatePopup() {
         var div = $("#DivToAppendPartialView");
-        var idCatalog = $("#txtidCatalog").val();
-        $.post("/Tool/New", { idCatalog: idCatalog,numCols : 2}, function (data) {
+        var idType = $("#txtidType").val();
+        $.post("/Tool/New", { idType: idType,numCols : 2}, function (data) {
             div.html(data.dContent);
+            
             div.dialog({
                 modal: true,
                 width: data.DialogWidth,
+                //width: 1100,
                 height: data.DialogHeight,
-                title: "Detalles - Punta",
+                title: "Nuevo - Punta",
                 resizable: false,
                 autoOpen: false,
                 dialogClass: 'Tenaris',
@@ -360,12 +372,31 @@
             });
             div.parent('.ui-dialog').appendTo('.myCustomScope');
             div.dialog('open');
-
         });
 
     }
 
-
+    function openProveedores(idProperty) {
+        var div = $("#DivToAppendPartialView2");
+        $.post("/Supplier/New", { idProperty : idProperty }, function (data) {
+            div.html(data);
+            div.dialog({
+                modal: true,
+                width: 420,
+                height: 270,
+                title: "Agregar - proveedores",
+                resizable: false,
+                autoOpen: false,
+                dialogClass: 'Tenaris',
+                buttons:   { "Aceptar": Add,
+                     Cancel: function() {
+                         div.dialog("close");
+                }}
+            });
+            div.parent('.ui-dialog').appendTo('.myCustomScope');
+            div.dialog('open');
+        });
+    }
 </script>
 <div class="col-md-12" style="font-size: 12pt;font-weight: bold; background-color:#009999; color:#FFFFFF; height:20px; text-align:center; vertical-align:middle; font-family: Verdana; margin-bottom:3px">
     Herramientas -  Puntas
@@ -374,7 +405,7 @@
 @{Html.RenderPartial("PartialFilter");}
 
 
-<div id="content">
+<div id="content" style="overflow-y:scroll">
 
     @grid.GetHtml(
                 htmlAttributes: new { id = "gridTools" },
@@ -386,8 +417,7 @@
                 columns: cols
     )
 </div>
-
-<input type="hidden" id="txtidCatalog" value="@(ViewBag.idCatalog)" />
+<input type="hidden" id="txtidType" value="@(ViewBag.idType)" />
 
 <div id="gridFooter" class="Tenaris">
     <div class="row" style="border:1px solid #000; margin-top:1px; margin-bottom:1px">
@@ -403,6 +433,8 @@
 </div>
 
 <div id="DivToAppendPartialView">
+</div>
+<div id="DivToAppendPartialView2">
 </div>
 
 @using (Ajax.BeginForm("/", "/", FormMethod.Post, new AjaxOptions()
