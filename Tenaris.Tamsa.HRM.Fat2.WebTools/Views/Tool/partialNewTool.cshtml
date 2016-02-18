@@ -100,7 +100,7 @@
                     <div id="dcombobox">
                     @*@Html.TextBox(property.idProperty.ToString(), "", new { @class = tclass })*@
                     <div style="float:left; width:180px;back"> 
-                            @Html.DropDownList(property.idProperty.ToString(), (SelectList)ViewBag.Suppliers)
+                            @Html.DropDownList(property.idProperty.ToString(), (SelectList)ViewBag.Suppliers,"Seleccionar -->")
                     </div>
                      <div style="float:left">
                          <input type="button" id="btnSuppliers" onclick="openProveedores(@(property.idProperty.ToString()))" value="..." style="width:25px; height:25px" />
@@ -132,9 +132,6 @@
         </div>
 
 }
-<div>
-    <input type="text" id="Viewtext" onclick="viewselect(this);" />
-</div>
         <script>
     function msjSuccess(data) {
         if (data.Success == 1) {
@@ -170,10 +167,7 @@
     });
 
     //Obtener el id del proveedor
-    $("[name='@((string)ViewBag.idProperty)']").combobox();
+    //$("[name='@((string)ViewBag.idProperty)']").combobox();
 
-            function viewselect(e)
-            {
-                e.value = $("[name='@((string)ViewBag.idProperty)']").val();
-            }
+         
         </script>

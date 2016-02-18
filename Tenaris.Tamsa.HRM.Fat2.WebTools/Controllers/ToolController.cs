@@ -111,6 +111,26 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
         public ActionResult Edit(int idTool, int numCols = 2)
         {
             Tool_vm tool_tool = GetToolsProperties().Where(t => t.idTool == idTool).FirstOrDefault();
+
+
+            SelectList sSuppliers = null;
+
+            var Supplier = tool_tool.Properties.Where(p => p.Name.ToUpper().Contains("PROVEE")).FirstOrDefault();
+            string sProperty = "";
+            if (Supplier != null)
+            {
+                List<Tool_Supplier> SupplierList = db.GetSuppliers();                
+                sSuppliers = new SelectList(SupplierList, "Code", "Code", Supplier.Value);
+                //var selected = sSuppliers.Where(s => s.Value == Supplier.Value).FirstOrDefault();
+                //selected.Selected = true;
+                sProperty = Supplier.idProperty.ToString();
+            }
+
+            ViewBag.idProperty = sProperty;
+            ViewBag.Suppliers = sSuppliers;
+
+
+
             ViewBag.numCols = numCols;
             int dWitdh = 0;
             if (tool_tool.Properties.Count > numCols)
@@ -145,6 +165,12 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
             if (Session["idUser"] != null)
             {
                 idUser = (int)Session["idUser"];
+            }
+            string mkey = "17"; //Matricula must checking as as key of Tool
+            if (formCollection[mkey].Trim().Length == 0)
+            {
+               
+                return Json(new { Success = 0, Message = "Falta introducir algunos valores requeridos.", element = mkey }, JsonRequestBehavior.AllowGet);
             }
             int idTool = Convert.ToInt32(formCollection["idTool"]);
 

@@ -20,6 +20,14 @@
         #dvfrmElements input {
             width:200px;
         }
+
+         #dcombobox input {
+                width:120px;
+            }
+
+         #dText input {
+        width:200px;
+    }
 </style>
 
 @using (Ajax.BeginForm("SaveEdit", "Tool", FormMethod.Post, new AjaxOptions { OnSuccess = "msjSuccess(data)" }, new { @id = "frmEdit" }))
@@ -52,13 +60,39 @@
 
 
                 <td class=" itemcell">
+                    @{
+                string proName = property.Name;
+                bool isSupplierField = false;
+                if (proName.ToUpper().Contains("provee".ToUpper()))
+                {
+                    //Es el campo de proveedores ligar a la lista de proveedores.
+                    isSupplierField = true;
+                }
+                    }
                     @property.Name
                 </td>
                 <td class="itemcellValue">
                     @{
                         string tclass = "tc" + property.TypeName;
                     }
-                    @Html.TextBox(property.idProperty.ToString(), property.Value.ToString(), new { @class = tclass })                    
+                    @if (isSupplierField)
+                    {
+                        <div id="dcombobox">
+                            @*@Html.TextBox(property.idProperty.ToString(), "", new { @class = tclass })*@
+                            <div style="float:left; width:120px;back">
+                                @Html.DropDownList(property.idProperty.ToString(), (SelectList)ViewBag.Suppliers,"Seleccionar -->")
+                            </div>
+                            <div style="float:left">
+                                <input type="button" id="btnSuppliers" onclick="openProveedores(@(property.idProperty.ToString()))" value="..." style="width:25px; height:25px" />
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div id="dText">
+                            @Html.TextBox(property.idProperty.ToString(), property.Value.ToString(), new { @class = tclass })           
+                        </div>
+                    }
                 </td>
 
                 @(tr2)
@@ -83,6 +117,10 @@
                 {
                     $("#DivToAppendPartialView").dialog("close");
                     $("#frmSearch").submit();
+                }
+                else {
+                    alert(data.Message);
+                    $("[name='" + data.element + "']").focus();
                 }
             }
 

@@ -378,6 +378,7 @@
 
     function openProveedores(idProperty) {
         var div = $("#DivToAppendPartialView2");
+        div.attr("background-color", "#009999");
         $.post("/Supplier/New", { idProperty : idProperty }, function (data) {
             div.html(data);
             div.dialog({
