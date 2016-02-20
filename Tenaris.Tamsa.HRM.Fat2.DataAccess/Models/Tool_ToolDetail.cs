@@ -7,8 +7,6 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.Models
 {
     public partial class Tool_ToolDetail
     {
-
-       
         public global::System.Int32 idToolDetail
         {
             get
@@ -26,7 +24,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.Models
             }
         }
         private global::System.Int32 _idToolDetail;
-        public Nullable<global::System.Int32> idProperty
+        public global::System.Int32 idProperty
         {
             get
             {
@@ -39,8 +37,8 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.Models
                 
             }
         }
-        private Nullable<global::System.Int32> _idProperty;
-        public Nullable<global::System.Int32> idTool
+        private global::System.Int32 _idProperty;
+        public global::System.Int32 idTool
         {
             get
             {
@@ -53,7 +51,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.Models
                 
             }
         }
-        private Nullable<global::System.Int32> _idTool;
+        private global::System.Int32 _idTool;
 
         public global::System.String Value
         {

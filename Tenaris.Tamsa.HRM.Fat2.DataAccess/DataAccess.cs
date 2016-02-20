@@ -321,20 +321,46 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess
         }
 
         //--- Get all distint Diameter from all Tool type equs idToolType
-        public List<int> GetDiameters(int idToolType)
+        public List<string> GetDiameters(int idToolType, int idProperty)
         {
-            List<int> diamet = new List<int>();
+            List<string> diamet = new List<string>();
+            Dictionary<string, object> cmdParams = new Dictionary<string, object>();
 
-            //List<Tool_Property> lstProperties = ausv1Context.Properties.Where(p => p.name.ToUpper().Equals("DIAMETRO")).ToList();
-            //if (lstProperties != null)
-            //{
-            //    diamet = lstProperties.Where(
-            //                                c => c.ToolDetails.Where(td => td.Tool.idType == idToolType)
-            //                                                      .ToList()
-            //                                                      .Count > 0)
-            //                           .Select(p => Convert.ToInt32(p.Value)).ToList();
-            //}
+            cmdParams.Add("@pIdType", idToolType);
+            cmdParams.Add("@pIdProperty", idProperty);
+            
+
+            var dtResult = ExecTable(StoredProcedures.Property_GetDistinctValuesByType, cmdParams);
+            foreach (Tool_ToolDetail TD in DataTableToModel.DatatableToClass<Tool_ToolDetail>(dtResult).ToList())
+            {
+                diamet.Add(TD.Value);
+            }            
             return diamet;
+        }
+
+        public  List<Tool_ToolDetail> GetToolDetail(Tool_ToolDetail entity)
+        {
+            List<string> diamet = new List<string>();
+            Dictionary<string, object> cmdParams = new Dictionary<string, object>();
+
+            if (entity != null)
+            {
+                cmdParams.Add("@pidToolDetail", entity.idToolDetail);
+                cmdParams.Add("@pidProperty", entity.idProperty);
+                cmdParams.Add("@pidTool", entity.idTool);
+                cmdParams.Add("@pValue", entity.Value);
+            }
+            else
+            {
+                cmdParams.Add("@pidToolDetail", DBNull.Value);
+                cmdParams.Add("@pidProperty", DBNull.Value);
+                cmdParams.Add("@pidTool", DBNull.Value);
+                cmdParams.Add("@pValue", DBNull.Value);
+            }
+
+            var dtResult = ExecTable(StoredProcedures.ToolDetail_Get, cmdParams);
+            List<Tool_ToolDetail> TDList = DataTableToModel.DatatableToClass<Tool_ToolDetail>(dtResult).ToList();
+            return TDList;
         }
 
 

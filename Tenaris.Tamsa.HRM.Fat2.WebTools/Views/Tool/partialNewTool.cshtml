@@ -16,7 +16,7 @@
           
         }
             #dcombobox input {
-                width:120px;
+                width:100px;
             }
 
 
@@ -82,10 +82,23 @@
             @{
                     string proName = property.Name;
                     bool isSupplierField = false;
+                    bool isStateField = false;
+                    bool isDiameterField = false;
                     if (proName.ToUpper().Contains("provee".ToUpper()))
                     {
                         //Es el campo de proveedores ligar a la lista de proveedores. 
                         isSupplierField = true;
+                    }
+                    if (proName.ToUpper().Contains("estado".ToUpper()))
+                    {
+                        //Es el campo de proveedores ligar a la lista de proveedores.
+                        isStateField = true;
+                    }
+
+                    if (proName.ToUpper().Contains("metro".ToUpper()))
+                    {
+                        //Es el campo de proveedores ligar a la lista de proveedores.
+                        isDiameterField = true;
                     }
             }
             @property.Name
@@ -99,22 +112,41 @@
                 {
                     <div id="dcombobox">
                     @*@Html.TextBox(property.idProperty.ToString(), "", new { @class = tclass })*@
-                    <div style="float:left; width:180px;back"> 
+                    <div style="float:left; width:140px;back"> 
                             @Html.DropDownList(property.idProperty.ToString(), (SelectList)ViewBag.Suppliers,"Seleccionar -->")
                     </div>
                      <div style="float:left">
-                         <input type="button" id="btnSuppliers" onclick="openProveedores(@(property.idProperty.ToString()))" value="..." style="width:25px; height:25px" />
+                         <input type="button" id="btnSuppliers" onclick="openProveedores(@(property.idProperty.ToString()))"  value="..." style="width:25px; height:25px" />
                          </div>
                      </div>
                 }
                 else
                 {
-                    <div id="dText">
-                        @Html.TextBox(property.idProperty.ToString(), "", new { @class = tclass })
-                    </div>
-                }
-           
-        </td>
+                    if (isStateField)
+                    {
+                        @Html.DropDownList(property.idProperty.ToString(), (SelectList)ViewBag.StatusList, "Seleccionar -->")
+                    }
+                    else
+                    {
+                        if (isDiameterField)
+                        {
+                            <div style="float:left; width:140px;back">
+                                @Html.DropDownList(property.idProperty.ToString(), (SelectList)ViewBag.DiametroList, "Seleccionar -->")
+                                </div>
+                                <div style="float:left">
+                                    <input type="button" id="btnNewDiameter" value="..." style="width:25px; height:25px" />
+                                </div>
+                                }
+                                else
+                                {
+                                <div id="dText">
+                                    @Html.TextBox(property.idProperty.ToString(), "", new { @class = tclass })
+                                </div>
+                                }
+                                }
+                                }
+
+</td>
     
                     @(tr2)
                 }
@@ -140,9 +172,11 @@
         }
         else {
             alert(data.Message);
+            if (data.Tool)
+            {
+                alert("Fecha de registro:" + Tool.insDatetime);
+            }
             $("[name='" + data.element + "']").focus();
-
-
         }
     }
 
@@ -150,11 +184,12 @@
 
     $(".tcFecha").val("@(DateTime.Now.ToString("yyy-MM-dd"))");
     $(".tcFecha").datepicker();
-    $("[name='1']").width(160);
+    $("[name='1']").width(120);
     $('#ui-datepicker-div').wrap('<div class="Tenaris"></div>');
     $('#btnCancel').button().click(function () {
         $("#DivToAppendPartialView").dialog("close");
     });
+
     $("#btnOk").button().click(function () {
         $("#frmAddNew").submit();
     });
@@ -169,5 +204,34 @@
     //Obtener el id del proveedor
     //$("[name='@((string)ViewBag.idProperty)']").combobox();
 
+            $("#btnSuppliers").button();            
+
+            $("#btnNewDiameter").button().click(function () {
+                var div = $("#DivToAppendPartialView2");
+                var oSelector = "[name='3']";
+                var oType = "select";
+                $.post("/Tool/SetValue","", function (data) {
+                    div.html(data);
+                    div.dialog({
+                        modal: true,
+                        width: 500,
+                        height: 270,
+                        title: "Agregar - valor",
+                        resizable: false,
+                        autoOpen: false,
+                        dialogClass: 'Tenaris',
+                        buttons: {
+                            "Aceptar": function () { btnOk(oSelector, oType); },
+                            Cancel: function () {
+                                div.dialog("close");
+                            }
+                        }
+                    });
+                    div.parent('.ui-dialog').appendTo('.myCustomScope');
+                    div.dialog('open');
+                });
+            });
+
+           
          
         </script>

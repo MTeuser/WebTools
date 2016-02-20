@@ -1,0 +1,28 @@
+﻿<table>
+    <tr>
+        <td class="itemcell">
+            Valor :
+        </td>
+        <td class="itemcellValue">
+            @Html.TextBox("Value")
+        </td>
+     </tr>
+</table>
+<script>
+    function btnOk(oSelector,oType)
+    {
+        var Value = $("[name='Value']").val();
+        if (oType == "textBox")
+        {
+            $(oSelector).val(Value);
+        }
+        if(oType == "select")
+        {
+            if (Value.length != 0) {
+                $(oSelector).append($('<option>', { value: Value, text: Value }));
+                $(oSelector).val(Value);
+                $("#DivToAppendPartialView2").dialog('close');
+            }            
+        }
+    }
+</script>

@@ -114,9 +114,12 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
 
 
             SelectList sSuppliers = null;
+            SelectList sStatus = null;
+            SelectList sDiameters = null;
 
             var Supplier = tool_tool.Properties.Where(p => p.Name.ToUpper().Contains("PROVEE")).FirstOrDefault();
             string sProperty = "";
+            
             if (Supplier != null)
             {
                 List<Tool_Supplier> SupplierList = db.GetSuppliers();                
@@ -126,9 +129,40 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
                 sProperty = Supplier.idProperty.ToString();
             }
 
+
+            var Status = tool_tool.Properties.Where(p => p.Name.ToUpper().Contains("estado".ToUpper())).FirstOrDefault();
+            if (Status != null)
+            {
+                List<SelectListItem> StatusList = new List<SelectListItem> ();
+               
+                StatusList.Add(new SelectListItem { Text="Usada",Value="Usada" });               
+                StatusList.Add(new SelectListItem { Text="Nueva",Value="Nueva" });                
+                StatusList.Add(new SelectListItem { Text = "Chatarra", Value = "Chatarra" });
+                sStatus = new SelectList(StatusList, "Text", "Text",Status.Value);
+            }
+
+            var Diameter = tool_tool.Properties.Where(p => p.Name.ToUpper().Contains("metro".ToUpper())).FirstOrDefault();
+            int Diam_idProperty = 3;
+            if (Diameter != null)
+            {
+                Diam_idProperty = Diameter.idProperty;
+                List<SelectListItem> DiametroList = new List<SelectListItem>();
+                foreach (string d in db.GetDiameters(tool_tool.IdType, Diam_idProperty))
+                {
+                    DiametroList.Add(new SelectListItem { Text = d, Value = d });
+                }
+                sDiameters = new SelectList(DiametroList, "Text", "Value", Diameter.Value);
+            }
+            else
+            {
+                 List<SelectListItem> DiametroList = new List<SelectListItem>();
+                 sDiameters = new SelectList(DiametroList, "Text", "Value");
+            }
+            
             ViewBag.idProperty = sProperty;
             ViewBag.Suppliers = sSuppliers;
-
+            ViewBag.StatusList = sStatus;
+            ViewBag.DiametroList = sDiameters;
 
 
             ViewBag.numCols = numCols;
@@ -147,10 +181,11 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
             int dHeight = 0;
             dHeight = (70 * (tool_tool.Properties.Count / numCols)) + (numCols * 40);
 
-
             
-            return Json(new { DialogWidth = dWitdh, DialogHeight = dHeight, dContent = RenderRazorViewToString("partialEdit",tool_tool) }, JsonRequestBehavior.AllowGet);
-       
+            return Json(new { DialogWidth = dWitdh, 
+                              DialogHeight = dHeight, 
+                              dContent = RenderRazorViewToString("partialEdit",tool_tool) },
+                              JsonRequestBehavior.AllowGet);     
            
             //return View("partialEdit",tool_tool);
         }
@@ -245,6 +280,8 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
             PropertyList = PropertyList.Where(p => p.ViewUI > 7).ToList();
 
             SelectList sSuppliers = null;
+            SelectList sStatus = null;
+            SelectList sDiameters = null;
 
             var Supplier = PropertyList.Where(p => p.Name.ToUpper().Contains("PROVEE")).FirstOrDefault();
             string sProperty = "";
@@ -255,8 +292,42 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
                 sProperty = Supplier.idProperty.ToString();
             }
 
+
+            var Status = PropertyList.Where(p => p.Name.ToUpper().Contains("estado".ToUpper())).FirstOrDefault();
+            if (Status != null)
+            {
+                List<SelectListItem> StatusList = new List<SelectListItem>();
+
+                StatusList.Add(new SelectListItem { Text = "Usada", Value = "Usada" });
+                StatusList.Add(new SelectListItem { Text = "Nueva", Value = "Nueva" });
+                StatusList.Add(new SelectListItem { Text = "Chatarra", Value = "Chatarra" });
+                sStatus = new SelectList(StatusList, "Text", "Text");
+            }
+
+
+            var Diameter = PropertyList.Where(p => p.Name.ToUpper().Contains("metro".ToUpper())).FirstOrDefault();
+            int Diam_idProperty = 3;
+            if (Diameter != null)
+            {
+                Diam_idProperty = Diameter.idProperty;
+                List<SelectListItem> DiametroList = new List<SelectListItem>();
+                foreach (string d in db.GetDiameters(idType, Diam_idProperty))
+                {
+                    DiametroList.Add(new SelectListItem { Text = d, Value = d });
+                }
+                sDiameters = new SelectList(DiametroList, "Text", "Value");
+            }
+            else
+            {
+                List<SelectListItem> DiametroList = new List<SelectListItem>();
+                sDiameters = new SelectList(DiametroList, "Text", "Value");
+            }
+
+
             ViewBag.idProperty = sProperty;
             ViewBag.Suppliers = sSuppliers;
+            ViewBag.StatusList = sStatus;
+            ViewBag.DiametroList = sDiameters;
           
             ViewBag.idType = idType;
 
@@ -304,6 +375,18 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
                         return Json(new { Success = 0, Message = "Falta introducir algunos valores requeridos.", element = key }, JsonRequestBehavior.AllowGet);
                     }
                 
+            }
+
+            //Validar que la matricula no este registrada
+            
+            Tool_ToolDetail ToolDetail = db.GetToolDetail(new Tool_ToolDetail { Value = fc["17"]}).ToList().FirstOrDefault();
+            if (ToolDetail != null)
+            {
+                Tool_Tool sTool = db.GetTools(new Tool_Tool { idTool = ToolDetail.idTool }).ToList().FirstOrDefault();
+                if(sTool != null)
+                {
+                    return Json(new { Success = 0, Tool = sTool, Message = "La matricula ya se encuentra registrada." }, "application/json", JsonRequestBehavior.AllowGet);
+                }
             }
 
             Tool_Tool Tool = db.Create(new Tool_Tool { idUser = idUser, 
@@ -430,6 +513,11 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
                 viewResult.ViewEngine.ReleaseView(ControllerContext, viewResult.View);
                 return sw.GetStringBuilder().ToString();
             }
+        }
+
+        public ActionResult SetValue()
+        {
+            return PartialView("partialSetValue");
         }
     }
 }

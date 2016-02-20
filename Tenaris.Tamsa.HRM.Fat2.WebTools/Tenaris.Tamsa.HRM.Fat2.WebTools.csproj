@@ -255,6 +255,8 @@
     <Content Include="Images\logoTenaris.gif" />
     <Content Include="Images\Mandril_84891-8107635.jpg" />
     <Content Include="Images\Punta_368x310_10041164e0bcba6.jpg" />
+    <Content Include="Scripts\jquery-1.7.1.js" />
+    <Content Include="Scripts\jquery-1.7.1.min.js" />
     <Content Include="Scripts\jquery-add-input-area.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
@@ -385,6 +387,7 @@
     <Content Include="Views\Supplier\partialEdit.cshtml" />
     <Content Include="Views\Supplier\PartialFilter.cshtml" />
     <Content Include="Views\Supplier\partialNew.cshtml" />
+    <Content Include="Views\Tool\partialSetValue.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tenaris.Tamsa.HRM.Fat2.DataAccess\Tenaris.Tamsa.HRM.Fat2.DataAccess.csproj">

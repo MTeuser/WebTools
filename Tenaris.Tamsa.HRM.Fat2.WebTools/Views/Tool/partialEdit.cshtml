@@ -63,10 +63,23 @@
                     @{
                 string proName = property.Name;
                 bool isSupplierField = false;
+                bool isStateField = false;
+                bool isDiameterField = false;
                 if (proName.ToUpper().Contains("provee".ToUpper()))
                 {
                     //Es el campo de proveedores ligar a la lista de proveedores.
                     isSupplierField = true;
+                }
+                if (proName.ToUpper().Contains("estado".ToUpper()))
+                {
+                    //Es el campo de proveedores ligar a la lista de proveedores.
+                    isStateField = true;
+                }
+                
+                if (proName.ToUpper().Contains("metro".ToUpper()))
+                {
+                    //Es el campo de proveedores ligar a la lista de proveedores.
+                    isDiameterField = true;
                 }
                     }
                     @property.Name
@@ -89,10 +102,26 @@
                     }
                     else
                     {
-                        <div id="dText">
-                            @Html.TextBox(property.idProperty.ToString(), property.Value.ToString(), new { @class = tclass })           
-                        </div>
+                        if (isStateField)
+                        {
+                            @Html.DropDownList(property.idProperty.ToString(), (SelectList)ViewBag.StatusList, "Seleccionar -->")
+                        }
+                        else
+                        {
+                            if (isDiameterField)
+                            {                                
+                                    @Html.DropDownList(property.idProperty.ToString(), (SelectList)ViewBag.DiametroList, "Seleccionar -->")
+                            }
+                            else
+                            { 
+                            <div id="dText">
+                                @Html.TextBox(property.idProperty.ToString(), property.Value.ToString(), new { @class = tclass })
+                            </div>
+                            }
+                        }
                     }
+
+                   
                 </td>
 
                 @(tr2)
@@ -141,4 +170,5 @@
                 }
             });
 
+            
 </script>
