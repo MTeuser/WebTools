@@ -258,8 +258,9 @@
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
     <Content Include="Scripts\jquery-add-input-area.js" />
-    <Content Include="Scripts\jquery-ui-1.11.4.js" />
-    <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
+    <Content Include="Scripts\dateformat_1.2.3.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
@@ -388,6 +389,7 @@
     <Content Include="Views\Supplier\PartialFilter.cshtml" />
     <Content Include="Views\Supplier\partialNew.cshtml" />
     <Content Include="Views\Tool\partialSetValue.cshtml" />
+    <Content Include="Views\Tool\partialTagExists.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tenaris.Tamsa.HRM.Fat2.DataAccess\Tenaris.Tamsa.HRM.Fat2.DataAccess.csproj">

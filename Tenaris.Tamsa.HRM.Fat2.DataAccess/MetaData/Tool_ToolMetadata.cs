@@ -27,7 +27,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.Models
             public Nullable<global::System.Int32> idSuplier;
 
         [Display(Name = "Tipo")]
-            public Nullable<global::System.Int32> idType;
+            public Nullable<global::System.Int32> IdType;
 
         [Display(Name = "Usuario Alta")]
             public Nullable<global::System.Int32> idUser;

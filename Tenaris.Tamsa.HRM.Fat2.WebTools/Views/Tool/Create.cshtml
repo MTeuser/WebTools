@@ -20,9 +20,7 @@
     for (int i = 0; i < numProperties; i++)
     {
         int local = i;
-        byte[] intBytes = BitConverter.GetBytes(Model.ElementAt(0).Properties[local].ViewUI);
-        if ((intBytes[0] & (1 << 1 - 1)) != 0)
-        {
+       
             if (addId == 0)
             {
                 //@<text><div id="@item.IdCatalog">@item.IdType</div></text>
@@ -45,7 +43,7 @@
                         ));
                 }
             }
-        }
+        
     }
 
 }
@@ -326,10 +324,10 @@
                 height: data.DialogHeight,
                 title: "Nuevo - Punta",
                 resizable: false,
-                autoOpen: false,
-                dialogClass: 'Tenaris',
+                autoOpen: false
+                //dialogClass: 'Tenaris',
             });
-            div.parent('.ui-dialog').appendTo('.myCustomScope');
+            div.parent('.ui-dialog').appendTo('.Tenaris');
             div.dialog('open');
 
         });
@@ -346,12 +344,11 @@
                 height: data.DialogHeight,
                 title: "Detalles - Punta",
                 resizable: false,
-                autoOpen: false,
-                dialogClass: 'Tenaris',
+                autoOpen: false
+                //dialogClass: 'Tenaris',
             });
-            div.parent('.ui-dialog').appendTo('.myCustomScope');
+            div.parent('.ui-dialog').appendTo('.Tenaris');
             div.dialog('open');
-
         });
 
     }
@@ -360,17 +357,17 @@
         var div = $("#DivToAppendPartialView");
         var idTool = $("#idTool").val();
         $.post("/Tool/Edit", { idTool: idTool, numCols: 2 }, function (data) {
-            div.html(data.dContent);
+            div.html(data.dContent);         
             div.dialog({
                 modal: true,
                 width: data.DialogWidth,
                 height: data.DialogHeight,
                 title: "Editar - Punta",
                 resizable: false,
-                autoOpen: false,
-                dialogClass: 'Tenaris',
+                autoOpen: false
+                //dialogClass: 'Tenaris',
             });
-            div.parent('.ui-dialog').appendTo('.myCustomScope');
+            div.parent('.ui-dialog').appendTo('.Tenaris');
             div.dialog('open');
         });
 
@@ -388,13 +385,13 @@
                 title: "Agregar - proveedores",
                 resizable: false,
                 autoOpen: false,
-                dialogClass: 'Tenaris',
+                //dialogClass: 'Tenaris',
                 buttons:   { "Aceptar": Add,
                      Cancel: function() {
                          div.dialog("close");
                 }}
             });
-            div.parent('.ui-dialog').appendTo('.myCustomScope');
+            div.parent('.ui-dialog').appendTo('.Tenaris');
             div.dialog('open');
         });
     }

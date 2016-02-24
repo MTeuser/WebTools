@@ -1,0 +1,51 @@
+﻿@model Tenaris.Tamsa.HRM.Fat2.WebTools.Models.Tool_vm
+@{
+    Layout = null;    
+}
+          
+<div>
+    <div class="messageheader">
+        La matricula ya se encuentra regiatrada.
+    </div>
+    <div>
+        <table>
+            <tr>
+                <td class="itemcell">Matricula:</td>
+                <td class="itemcellValue">@((string)ViewBag.Matricula)</td>
+            </tr>
+            <tr>
+                <td class="itemcell">Fecha de alta:</td>
+                <td class="itemcellValue">@(Model.InsDateTime)</td>
+            </tr>
+            <tr>
+                <td class="itemcell">Estado:</td>
+                <td class="itemcellValue">
+                    @((string)ViewBag.CurrentStatus)                   
+                </td>
+            </tr>
+        </table>        
+    </div>
+</div>
+<div>
+</div>
+<div style="border:1px solid gray; margin-top:25px;">
+    <div>
+        Desea actualizarla? Selecione un nuevo estado:
+    </div>
+    <div style="align-content:center">
+        <table>
+            <tr>
+                <td class="itemcell">Estado:</td>
+                <td class="itemcellValue"> 
+                  @using (Ajax.BeginForm("UpdStatus", "Tool", FormMethod.Post, new AjaxOptions { OnSuccess = "updStatus_CallBack(data)" }, new { @id = "frmUpdStatus" }))
+                  {                    
+                        @Html.DropDownList("Status", (SelectList)ViewBag.StatusList, "Seleccionar ->")
+                        @Html.Hidden("idProperty", (int)ViewBag.ProStsId)
+                        @Html.Hidden("idTool", (int)Model.idTool)   
+                  }                
+                </td>
+            </tr>           
+        </table>
+
+    </div>
+</div>

@@ -170,19 +170,24 @@
             $("#DivToAppendPartialView").dialog("close");
             $("#frmSearch").submit();
         }
-        else {
-            alert(data.Message);
-            if (data.Tool)
-            {
-                alert("Fecha de registro:" + Tool.insDatetime);
+        else {          
+            if (data.Success == 2) {
+                //var date = new Date(parseInt(data.Toolvm.InsDateTime.substr(6)));
+                //data.Toolvm.InsDateTime = date.format("yyyy-mm-dd  HH:MM:ss");
+                TagExists(data.dContent);
             }
-            $("[name='" + data.element + "']").focus();
+            else {
+                if (data.Message) {
+                    alert(data.Message);
+                    $("[name='" + data.element + "']").focus();
+                }
+            }
         }
     }
 
     $.datepicker.setDefaults($.datepicker.regional['es-MX']);
 
-    $(".tcFecha").val("@(DateTime.Now.ToString("yyy-MM-dd"))");
+    $(".tcFecha").val("@(DateTime.Now.ToString("yyy-MM-dd H:mm:ss"))");
     $(".tcFecha").datepicker();
     $("[name='1']").width(120);
     $('#ui-datepicker-div').wrap('<div class="Tenaris"></div>');
@@ -215,11 +220,11 @@
                     div.dialog({
                         modal: true,
                         width: 500,
-                        height: 270,
+                        height: 200,
                         title: "Agregar - valor",
                         resizable: false,
                         autoOpen: false,
-                        dialogClass: 'Tenaris',
+                        //dialogClass: 'Tenaris',
                         buttons: {
                             "Aceptar": function () { btnOk(oSelector, oType); },
                             Cancel: function () {
@@ -227,11 +232,42 @@
                             }
                         }
                     });
-                    div.parent('.ui-dialog').appendTo('.myCustomScope');
+                    div.parent('.ui-dialog').appendTo('.Tenaris');
                     div.dialog('open');
                 });
             });
+            function TagExists(data)
+            {
+                var div = $("#DivToAppendPartialView2");              
+                    div.html(data);
+                    div.dialog({
+                        modal: true,
+                        width: 500,
+                        height: 350,
+                        title: "Existe - Punta",
+                        resizable: false,
+                        autoOpen: false,
+                        //dialogClass: 'Tenaris',
+                        buttons: {
+                            "Aceptar": function () { $("#frmUpdStatus").submit(); },
+                            Cancel: function () {
+                                div.dialog("close");
+                            }
+                        }
+                    });
+                    div.parent('.ui-dialog').appendTo('.Tenaris');
+                    div.dialog('open');                
+            }
 
-           
-         
+            function updStatus_CallBack(data)
+            {
+                if (data.Success == 1) {
+                    $("#DivToAppendPartialView2").dialog("close");
+                    $("#DivToAppendPartialView").dialog("close");
+                }
+                else {
+                    alert(data.Message);
+                    $("#frmUpdStatus [name='" + data.key + "']").focus();
+                }
+            }
         </script>
