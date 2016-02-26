@@ -109,11 +109,16 @@
                         else
                         {
                             if (isDiameterField)
-                            {                                
+                            {
+                                <div style="float:left; width:120px;back">
                                     @Html.DropDownList(property.idProperty.ToString(), (SelectList)ViewBag.DiametroList, "Seleccionar -->")
+                                </div>                                    
+                                <div style="float:left">
+                                    <input type="button" id="btnNewDiameter" value="..." style="width:25px; height:25px" />
+                                </div>
                             }
                             else
-                            { 
+                            {
                             <div id="dText">
                                 @Html.TextBox(property.idProperty.ToString(), property.Value.ToString(), new { @class = tclass })
                             </div>
@@ -167,5 +172,31 @@
                 if (this.value != this.value.replace(/[^0-9\.]/g, '')) {
                     this.value = this.value.replace(/[^0-9\.]/g, '');
                 }
-            });            
+            });
+
+            $("#btnNewDiameter").button().click(function () {
+                var div = $("#DivToAppendPartialView2");
+                var oSelector = "[name='3']";
+                var oType = "select";
+                $.post("/Tool/SetValue", "", function (data) {
+                    div.html(data);
+                    div.dialog({
+                        modal: true,
+                        width: 500,
+                        height: 200,
+                        title: "Agregar - valor",
+                        resizable: false,
+                        autoOpen: false,
+                        //dialogClass: 'Tenaris',
+                        buttons: {
+                            "Aceptar": function () { btnOk(oSelector, oType); },
+                            Cancel: function () {
+                                div.dialog("close");
+                            }
+                        }
+                    });
+                    div.parent('.ui-dialog').appendTo('.Tenaris');
+                    div.dialog('open');
+                });
+            });
 </script>

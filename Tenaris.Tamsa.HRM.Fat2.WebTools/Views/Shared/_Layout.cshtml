@@ -42,6 +42,15 @@
             vertical-align: top;
             float:left;
         }
+        #dSitemap {
+            background-color:#009999; 
+            color:White;
+            font-weight:bold;
+        }
+        #dSitemap a {
+            color:yellow;
+            font-weight:normal;
+        }
     </style>
 </head>
 <body>
@@ -72,7 +81,7 @@
         </div>
     </header>
     <div id="body">
-        <div style="background-color:Green; color:White;">
+        <div id="dSitemap">
             <div  class="content-wrapper">@Html.MvcSiteMap().SiteMapPath()</div>
         </div>
         @RenderSection("featured", required: false)

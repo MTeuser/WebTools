@@ -23,7 +23,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
         public ActionResult Index()
         {
             
-            var tool_tool = db.GetTools();           
+            List<Tool_Type> tool_tool = db.GetToolTypes();           
 
             return View(tool_tool);
         }
@@ -67,8 +67,8 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
         public ActionResult Create(int idToolType)
         { 
             List<Tool_vm> ToolVmList = new List<Tool_vm>();
-            List<Tool_Tool> Tools = db.GetTools();
-            ToolVmList = GetToolsProperties(Tools.Where(t => (BitConverter.GetBytes(t.ViewUI)[0] & (1 << 4 - 1)) != 0).OrderByDescending(t => t.InsDateTime).ToList());
+            List<Tool_Tool> Tools = db.GetTools(new Tool_Tool {  IdType = idToolType });
+            ToolVmList = GetToolsProperties(Tools.Where(t => (BitConverter.GetBytes(t.ViewUI)[0] & (1 << 1 - 1)) != 0).OrderByDescending(t => t.InsDateTime).ToList());
 
             foreach(Tool_vm tool in ToolVmList)
             {
@@ -78,11 +78,10 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
                     tool.idUser = user.FirstName + " " + user.LastName;
                 }
             }
-            ViewBag.idType = 0;
-            if (ToolVmList.Count > 0)
-            {
-                ViewBag.idType = ToolVmList.FirstOrDefault().IdType;
-            }          
+
+            ViewBag.TypeName = db.GetToolTypes(new Tool_Type {  idType =  idToolType }).FirstOrDefault().Name;
+            ViewBag.idType = idToolType;
+                     
             return View(ToolVmList);
         }
 
@@ -114,6 +113,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
             List<Tool_Tool> Tools = db.GetTools(new Tool_Tool { idTool = idTool });
             Tool_vm tool_tool = GetToolsProperties(Tools).FirstOrDefault();
 
+            tool_tool.Properties.RemoveAll(noViewIUInEdit);
 
             SelectList sSuppliers = null;
             SelectList sStatus = null;
@@ -193,6 +193,12 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
                               JsonRequestBehavior.AllowGet);     
            
            // return View("partialEdit",tool_tool);
+        }
+
+        // Search predicate returns true if a string ends in "saurus".
+        private static bool noViewIUInEdit(Property_vm p)
+        {
+            return (BitConverter.GetBytes(p.ViewUI)[0] & (1 << 2 - 1)) == 0;
         }
 
         //
@@ -358,7 +364,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
 
 
             //return View("partialNewTool", PropertyList);
-            return Json(new { DialogWidth = dWitdh, DialogHeight = dHeight, dContent = RenderRazorViewToString("partialNewTool",PropertyList) }, JsonRequestBehavior.AllowGet);
+            return Json(new { PropertyCount = PropertyList.Count, DialogWidth = dWitdh, DialogHeight = dHeight, dContent = RenderRazorViewToString("partialNewTool",PropertyList) }, JsonRequestBehavior.AllowGet);
         }
 
        
@@ -446,7 +452,7 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
                     vmTool.InsDateTime = Tool.InsDateTime.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
                     vmTool.UpdDateTime = Tool.UpdDateTime.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
                 }                
-                    
+                   
              
                Property_vm Property = new Property_vm();
                Property.idProperty = Convert.ToInt32(Tool.idProperty);
@@ -455,8 +461,12 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
                Property.Name = Tool.Name;
                Property.ViewUI = Tool.ViewUI;
                Property.TypeName = Tool.TypeName;
-               vPropertyList.Add(Property);                
-               
+               vPropertyList.Add(Property);
+
+               if (Property.Name.ToUpper().Contains("FECHA DE ALTA"))
+               {
+                   Property.Value = vmTool.InsDateTime;
+               }
                 idCurrentTool = Tool.idTool;
             }
             vmTool.Properties = vPropertyList;
@@ -466,10 +476,10 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
             return vTools;
         }
 
-        public ActionResult Search(string Tag, string Status, string Stdkgtonslan, string Calibre)
+        public ActionResult Search(string Tag, string Status, string Stdkgtonslan, string Calibre, int idToolType)
         {
-            List<Tool_Tool> Tools = db.GetTools();
-            List<Tool_vm> ToolList = GetToolsProperties(Tools.Where(t => (BitConverter.GetBytes(t.ViewUI)[0] & (1 << 4 - 1)) != 0).OrderByDescending(t => t.InsDateTime).ToList());
+            List<Tool_Tool> Tools = db.GetTools(new Tool_Tool { IdType = idToolType });
+            List<Tool_vm> ToolList = GetToolsProperties(Tools.Where(t => (BitConverter.GetBytes(t.ViewUI)[0] & (1 << 1 - 1)) != 0).OrderByDescending(t => t.InsDateTime).ToList());
             List<Tool_vm> vToolList = new List<Tool_vm>();
             vToolList = ToolList;
             if(!string.IsNullOrEmpty(Tag))
@@ -495,10 +505,10 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
 
             vToolList = vToolList.OrderByDescending(t => t.InsDateTime).ToList();
             ViewBag.idCatalog = 0;
-            if (vToolList.Count > 0)
-            {
-                ViewBag.idType = vToolList.FirstOrDefault().IdType;
-            }
+
+            ViewBag.TypeName = db.GetToolTypes(new Tool_Type { idType = idToolType }).FirstOrDefault().Name;
+            ViewBag.idType = idToolType;
+          
             return View("Create", vToolList);
         }
 

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Tenaris.Tamsa.HRM.Fat2.WebTools.Models.Catalog_vm>
+﻿@model IEnumerable<Tenaris.Tamsa.HRM.Fat2.DataAccess.Models.Tool_Type>
 
 @{
     ViewBag.Title = "Create";
@@ -158,11 +158,11 @@
             $(this).addClass('selectRow');
             $('#gridCatalog tr').not(this).removeClass('selectRow');
             var rowId = $(this).find("div").eq(0).attr('id');
-            $("#IdCatalog").val(rowId);
+            $("#idType").val(rowId);
         });
 
-        if ($("#IdCatalog").val().length > 0) {
-            $("#IdCatalog").val("0");
+        if ($("#idType").val().length > 0) {
+            $("#idType").val("0");
         }
 
 
@@ -170,7 +170,7 @@
             .button()
             .click(function () {
                 if (this.id == "mnDetails") {
-                    location.href = "@Url.Action("Details", "Catalog")?IdCatalog=" + $("#idTemp").val();
+                    location.href = "@Url.Action("Details", "Catalog")?IdToolType=" + $("#idTemp").val();
                 }
                 if (this.id == "mnFindTool") {
                     location.href = "@Url.Action("Find","Tool")";
@@ -178,23 +178,20 @@
                 if (this.id == "mnCreateTool") {
                     location.href = "@Url.Action("Create","Tool")";
                 }
-
-                if (this.id == "mnTestView") {
-                    location.href = "@Url.Action("testView", "Home")";
-                }
+               
             });
 
         $("#btnDetails").button().click(function () {
-            var idTemp = $("#IdCatalog").val();
+            var idTemp = $("#idType").val();
             if (idTemp.length == 0 || idTemp == 0)
             { alert("Selecione un renglon."); return false; }
             frm = document.getElementById("frmGoAction");
             frm.action = "@Url.Action("Details", "Catalog")";
             frm.submit();
-            //location.href = "@Url.Action("Details", "Catalog")?IdCatalog=" + idTemp;
+            
         });
         $("#btnEdit").button().click(function () {
-            var idTemp = $("#IdCatalog").val();
+            var idTemp = $("#idType").val();
             if (idTemp.length == 0 || idTemp == 0)
             { alert("Selecione un renglon."); return false; }
             frm = document.getElementById("frmGoAction");
@@ -202,7 +199,7 @@
             frm.submit();
         });
         $("#btnDelete").button().click(function () {
-            var idTemp = $("#IdCatalog").val();
+            var idTemp = $("#idType").val();
             if (idTemp.length == 0 || idTemp == 0)
             { alert("Selecione un renglon."); return false; }
             frm = document.getElementById("frmGoAction");
@@ -235,7 +232,7 @@
                 alternatingRowStyle: "webgrid-alternating-row",
                 rowStyle: "webgrid-row-style",
                 columns: grid.Columns(
-                 grid.Column(columnName: "IdType", header: "Tipo", format: @<text><div id="@item.IdCatalog">@item.IdType</div></text>),
+                 grid.Column(columnName: "idType", header: "Tipo", format: @<text><div id="@item.idType">@item.IdType</div></text>),
                                                                                                      grid.Column(columnName: "Code", header: "Codigo"),
                                                                                                                              grid.Column(columnName: "Name", header: "Nombre"),
                                                                                                                              grid.Column(columnName: "Description", header: "Descripcion"),
@@ -271,7 +268,7 @@
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.FirstOrDefault().Active);
+        @Html.HiddenFor(model => model.FirstOrDefault().idType);
         <input type="hidden" name="fromDb" value="true" />
     }
 
@@ -280,7 +277,7 @@
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-    @Html.HiddenFor(model => model.FirstOrDefault().IdCatalog);
+    @Html.HiddenFor(model => model.FirstOrDefault().idType);
     <input type="hidden" name="fromDb" value="true" />
 }
 

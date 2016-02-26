@@ -254,17 +254,15 @@
         //    $("#txtidCatalog").val("0");
         //}
 
-      
+
 
         $("#btnDetails").button().click(function () {
             var idTool = $("#idTool").val();
             var id = 0;
-            if (idTool.length > 0)
-            {
+            if (idTool.length > 0) {
                 id = idTool * 1;
             }
-            if(id == 0)
-            {
+            if (id == 0) {
                 alert("Selecione un renglon.");
                 return false;
             }
@@ -314,15 +312,20 @@
     function OpenCreatePopup() {
         var div = $("#DivToAppendPartialView");
         var idType = $("#txtidType").val();
-        $.post("/Tool/New", { idType: idType,numCols : 2}, function (data) {
+        $.post("/Tool/New", { idType: idType, numCols: 2 }, function (data) {
+            if (data.PropertyCount == 0)
+            {
+                alert("No hay propiedades declaradas para este tipo de herramienta.");
+                return false;
+            }
             div.html(data.dContent);
-            
+
             div.dialog({
                 modal: true,
                 width: data.DialogWidth,
                 //width: 1100,
                 height: data.DialogHeight,
-                title: "Nuevo - Punta",
+                title: "Nuevo -  @(ViewBag.TypeName)",
                 resizable: false,
                 autoOpen: false
                 //dialogClass: 'Tenaris',
@@ -342,7 +345,7 @@
                 modal: true,
                 width: data.DialogWidth,
                 height: data.DialogHeight,
-                title: "Detalles - Punta",
+                title: "Detalles -  @(ViewBag.TypeName)",
                 resizable: false,
                 autoOpen: false
                 //dialogClass: 'Tenaris',
@@ -357,12 +360,12 @@
         var div = $("#DivToAppendPartialView");
         var idTool = $("#idTool").val();
         $.post("/Tool/Edit", { idTool: idTool, numCols: 2 }, function (data) {
-            div.html(data.dContent);         
+            div.html(data.dContent);
             div.dialog({
                 modal: true,
                 width: data.DialogWidth,
                 height: data.DialogHeight,
-                title: "Editar - Punta",
+                title: "Editar -  @(ViewBag.TypeName)",
                 resizable: false,
                 autoOpen: false
                 //dialogClass: 'Tenaris',
@@ -376,7 +379,7 @@
     function openProveedores(idProperty) {
         var div = $("#DivToAppendPartialView2");
         div.attr("background-color", "#009999");
-        $.post("/Supplier/New", { idProperty : idProperty }, function (data) {
+        $.post("/Supplier/New", { idProperty: idProperty }, function (data) {
             div.html(data);
             div.dialog({
                 modal: true,
@@ -386,10 +389,12 @@
                 resizable: false,
                 autoOpen: false,
                 //dialogClass: 'Tenaris',
-                buttons:   { "Aceptar": Add,
-                     Cancel: function() {
-                         div.dialog("close");
-                }}
+                buttons: {
+                    "Aceptar": Add,
+                    Cancel: function () {
+                        div.dialog("close");
+                    }
+                }
             });
             div.parent('.ui-dialog').appendTo('.Tenaris');
             div.dialog('open');
@@ -397,7 +402,7 @@
     }
 </script>
 <div class="col-md-12" style="font-size: 12pt;font-weight: bold; background-color:#009999; color:#FFFFFF; height:20px; text-align:center; vertical-align:middle; font-family: Verdana; margin-bottom:3px">
-    Herramientas -  Puntas
+    Herramientas -  @(ViewBag.TypeName)
 </div>
 
 @{Html.RenderPartial("PartialFilter");}

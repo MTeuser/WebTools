@@ -43,9 +43,9 @@
                 </td>
                 <td class="itemcellValue">
                     <input id="Calibre" name="Calibre" type="text" class="textBox" />
+                    @Html.Hidden("idToolType", (int)ViewBag.idType)
                 </td>
             </tr>
-
         </table>
     </div>
 }
@@ -57,7 +57,6 @@
             <input id="btnBuscar" type=button value="Buscar" class="csbutton" />                        
         </div>
     </div>
-
 </div> <!-- Fin del ROW del Botón Buscar -->
 <script>
     $.datepicker.setDefaults($.datepicker.regional['es-MX']);

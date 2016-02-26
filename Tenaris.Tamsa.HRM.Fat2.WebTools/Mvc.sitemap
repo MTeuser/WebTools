@@ -7,9 +7,14 @@
     <mvcSiteMapNode title="Acerca" controller="Home" action="About"/>
     <mvcSiteMapNode title="Contacto" controller="Home" action="Contact"/>
     <mvcSiteMapNode title="Añadir" controller="Tool" action="Index">
-      <mvcSiteMapNode title="Crear" controller="Tool" action="Create"/>
+      <mvcSiteMapNode title="Herramienta" controller="Tool" action="Create"/>
+      <mvcSiteMapNode title="Buscar" controller="Tool" action="Search"/>
     </mvcSiteMapNode>
-    <mvcSiteMapNode title="Buscar" controller="Tool" action="Find"/>
+    <mvcSiteMapNode title="Catalogo" controller="Catalog" action="Index">    
+     <mvcSiteMapNode title="Detalles" controller="Catalog" action="Details"/>   
+      </mvcSiteMapNode>
+    <mvcSiteMapNode title="Catalogo" controller="Catalog" action="Search"/>
+      
     <!-- mvcSiteMapNode title="Herramienta" controller="Tool" action="index">
       
     </mvcSiteMapNode -->

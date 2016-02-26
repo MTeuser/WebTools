@@ -16,40 +16,16 @@ namespace Tenaris.Tamsa.HRM.Fat2.WebTools.Controllers
         private DataAccess.DataAccess db = new DataAccess.DataAccess();
 
         public ActionResult Index()
-        {
-            List<Catalog_vm> ListCatalog = new List<Catalog_vm>();
-            var Catalog = db.GetToolCatalog();
-            var Types = db.GetToolTypes();
-            try
-            {
-                ListCatalog = (from item in Catalog
-                               join eType in Types on item.IdType equals eType.idType
-                               select new Catalog_vm
-                               {
-                                   IdCatalog = item.IdCatalog,
-                                   Active = item.Active,
-                                   Code = eType.Code,
-                                   IdType = eType.idType,
-                                   Description = eType.Description,
-                                   InsDateTime = item.InsDateTime,
-                                   Name = eType.Name,
-                                   UpdDateTime = item.UpdDateTime
-                               }).ToList();
-            }
-            catch (Exception e)
-            {
-                //ignore.
-            }
-
-
-            return View(ListCatalog);            
+        {            
+            List<Tool_Type> Types = db.GetToolTypes();
+            return View(Types);            
         }
 
         public ActionResult Details(int IdType)
         {
-            var Catalog = db.GetToolCatalog(new Tool_Catalog { IdType = IdType }).FirstOrDefault();
-            var ListProperties = db.GetTools(new Tool_Tool { IdType = IdType });
-            var Type = db.GetToolTypes(new Tool_Type { idType = Catalog.IdType });
+            
+            var ListProperties = db.GetPropertiesByTypeId(IdType);
+            var Type = db.GetToolTypes(new Tool_Type { idType = IdType });
 
             ViewBag.Properties = ListProperties;
             ViewBag.Type = Type;

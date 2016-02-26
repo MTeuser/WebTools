@@ -69,6 +69,18 @@ namespace Tenaris.Tamsa.HRM.Fat2.DataAccess.Models
             }
         }
         private global::System.String _Description;
+        private global::System.DateTimeOffset _InsDateTime;
+        public global::System.DateTimeOffset InsDateTime
+        {
+            get { return _InsDateTime; }
+            set { _InsDateTime = value; }
+        }
+        private global::System.DateTimeOffset _UpdDateTime;
+        public global::System.DateTimeOffset UpdDateTime
+        {
+            get { return _UpdDateTime; }
+            set { _UpdDateTime = value; }
+        }
 
         #endregion
     }
